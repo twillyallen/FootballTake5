@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NFL Get 5</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <main class="app">
+    <header class="header">
+      <h1>NFL Get 5</h1>
+      <div id="progress" class="progress">Question 1 / 5</div>
+      <div id="timer" class="timer" aria-live="polite">12s</div>
+    </header>
+
+    <section id="card" class="card">
+      <h2 id="question" class="question">Loading…</h2>
+      <div id="choices" class="choices"></div>
+
+      <div class="actions">
+        <button id="nextBtn" class="btn" disabled>Next ▶</button>
+      </div>
+    </section>
+
+    <section id="result" class="result hidden">
+      <h2>Your Score</h2>
+      <p id="scoreText"></p>
+      <div id="review" class="review"></div>
+      <button id="restartBtn" class="btn">Restart</button>
+    </section>
+  </main>
+
+  <script type="module" src="./main.js"></script>
+</body>
+</html>
