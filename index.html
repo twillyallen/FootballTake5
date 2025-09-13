@@ -3,32 +3,36 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>NFL Get 5</title>
-  <link rel="stylesheet" href="./style.css?v=20250913a" />
-  <script type="module" src="./main.js?v=20250913a"></script>
+  <title>NFL Take 5</title>
+  <link rel="stylesheet" href="./style.css" />
+  <script type="module" src="./main.js"></script>
 </head>
 <body>
   <main class="app">
-    <header class="header">
-      <h1>NFL Get 5</h1>
-      <div id="progress" class="progress">Question 1 / 5</div>
-      <div id="timer" class="timer" aria-live="polite">12s</div>
-    </header>
-
-    <section id="startScreen" class="card">
-      <h2>NFL Take 5</h2>
-      <p>5 questions. 12 seconds each. Auto-advance. Ready?</p>
-      <button id="startBtn" class="btn">Start Game</button>
+    <!-- Start Screen -->
+    <section id="startScreen" class="start-screen">
+      <div class="overlay">
+        <h1>NFL TAKE 5</h1>
+        <p>5 QUESTIONS. 12 SECONDS EACH.</p>
+        <button id="startBtn" class="btn">START</button>
+        <div class="byline">BY TWILLYALLEN</div>
+      </div>
     </section>
 
+    <!-- Quiz Screen -->
     <section id="card" class="card hidden">
-      <h2 id="question" class="question">Loading…</h2>
+      <header class="header">
+        <h2 id="question" class="question">Loading…</h2>
+        <div id="progress" class="progress">Question 1 / 5</div>
+        <div id="timer" class="timer" aria-live="polite">12s</div>
+      </header>
       <div id="choices" class="choices"></div>
       <div class="actions">
         <button id="nextBtn" class="btn" disabled>Next ▶</button>
       </div>
     </section>
 
+    <!-- Results Screen -->
     <section id="result" class="result hidden">
       <h2>Your Score</h2>
       <p id="scoreText"></p>
