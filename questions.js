@@ -28,11 +28,11 @@ export const CALENDAR = {
   ],
 
   "2025-09-13": [
-    { question: "Name one of the 3 players who are 6'5\" and ran a 4.3", choices: ["Davante Adams", "Donte Thornton", "Don Hutson", "Courtland Sutton"], answer: 1 },
-    { question: "Who was called 'Mr Butt Fumble'?", choices: ["Kurt Warner", "Derek Carr", "Tim Tebow", "Mark Sanchez"], answer: 3 },
-    { question: "How many teams has Peyton Manning played for?", choices: ["1", "3", "2", "1"], answer: 2 },
-    { question: "Which team was Drew Brees drafted by?", choices: ["Chargers", "Saints", "Bengals", "49ers"], answer: 0 },
-    { question: "DPOY 2023?", choices: ["Bosa", "Watt", "Garrett", "Parsons"], answer: 2 }
+    { question: "Which team drafted Eli Manning?", choices: ["Colts", "Giants", "Chargers", "Patriots"], answer: 2 },
+    { question: "How many Passing TDs did Dan Marino finish his career with?", choices: ["453", "420", "501", "381"], answer: 1 },
+    { question: "Who was Super Bowl XXXI MVP?", choices: ["Desmond Howard", "Brett Favre", "Terrell Davis", "Drew Bledsoe"], answer: 0 },
+    { question: "Which players SHARED the MVP Award?", choices: ["LaDainian Tomlinson & Tom Brady", "Steve Young & Brett Favre", "Emmitt Smith & Steve Young", "Peyton Manning & Steve McNair"], answer: 3 },
+    { question: "Which franchise was *formerly* a member of the AFC West?", choices: ["Chiefs", "Rams", "Seahawks", "Broncos"], answer: 2 }
   ]
 };
 
