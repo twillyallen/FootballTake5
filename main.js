@@ -1,6 +1,6 @@
 // main.js
 // --- Daily rollover mode: "UTC" or "LOCAL"
-const ROLLOVER = "LOCAL";
+const ROLLOVER = "UTC";
 
 // IMPORTANT: cache-bust for questions.js (bump when you change questions)
 import { CALENDAR } from "./questions.js?v=20250913a";
