@@ -16,7 +16,7 @@
 html, body {
   margin: 0;
   height: 100%;
-  overflow: hidden;               /* no page scroll */
+  body.no-scroll { overflow: hidden; }               /* no page scroll */
   font-family: 'Arial Black', sans-serif;
   color: #fff;
 }
