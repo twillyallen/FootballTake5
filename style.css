@@ -17,7 +17,7 @@ html, body {
   margin: 0;
   height: 100%;
   body.no-scroll { overflow: hidden; }               /* no page scroll */
-  font-family: 'Arial Black', sans-serif;
+  font-family: 'Bahnschrift', SemiBold;
   color: #fff;
 }
 
