@@ -250,7 +250,7 @@ function injectShareSummary() {
   shareBtn.style.cursor = "pointer";
 shareBtn.addEventListener("click", async () => {
   const squaresText = picks.map(p => (p.pick === p.correct ? "🟩" : "⬜")).join("");
-  const shareText = `I scored ${squaresText} in NFL Take 5!`;
+  const shareText = `I scored ${squaresText} in NFL Take 5! \n \n https://twillyallen.github.io/NFLTake5/`;
 
   try {
     // 1) Copy to clipboard first so paste is exactly what you want
