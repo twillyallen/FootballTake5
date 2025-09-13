@@ -15,7 +15,7 @@ html, body {
   margin: 0;
   height: 100%;
   body.no-scroll { overflow: hidden; }               
-  font-family: 'Bahnschrift', SemiBold;
+  font-family: 'Arial', sans-serif;
   color: #fff;
 }
 
