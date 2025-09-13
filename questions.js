@@ -1,4 +1,4 @@
-// questions.js
+
 // Exactly 5 questions per date. Each: { question, choices[4], answer(0..3), explanation? }
 export const CALENDAR = {
   "2025-09-10": [
@@ -31,7 +31,7 @@ export const CALENDAR = {
   ]
 };
 
-// Optional fallback if you ever choose to use it
+
 export const POOL = [
   { question: "Mile High team?", choices:["Broncos","Bills","Bears","Bengals"], answer:0 }
 ];

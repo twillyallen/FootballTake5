@@ -1,6 +1,5 @@
-// main.js
 
-// --- Import your scheduled questions (bump the v= when you edit questions.js)
+
 import { CALENDAR } from "./questions.js?v=20250914c";
 
 // --- Config
@@ -16,7 +15,7 @@ let picks = [];
 let timerId = null;
 let timeLeft = TIME_LIMIT;
 
-// --- DOM refs (assigned in init())
+// --- DOM refs
 let startScreen, startBtn, cardSec, resultSec, questionEl, choicesEl;
 let progressEl, timerEl, scoreText, reviewEl, restartBtn, headerEl;
 
@@ -26,7 +25,6 @@ function getRunDateISO() {
   const p = new URLSearchParams(window.location.search);
   if (p.has("date")) return p.get("date");
 
-  // default: local "today"
   const d = new Date();
   const y = d.getFullYear();
   const m = String(d.getMonth() + 1).padStart(2, "0");
@@ -48,14 +46,14 @@ function startTimer(seconds) {
     timerEl.textContent = `${timeLeft}s`;
     if (timeLeft <= 0) {
       stopTimer();
-      pickAnswer(null, QUESTIONS[current].answer); // timeout counts as no answer
+      pickAnswer(null, QUESTIONS[current].answer); 
     }
   }, 1000);
 }
 
 // ---------- Screen Switchers ----------
 function showStartScreen() {
-  document.body.classList.add("no-scroll"); // lock scroll on Start/Quiz
+  document.body.classList.add("no-scroll"); 
   startScreen.classList.remove("hidden");
   cardSec.classList.add("hidden");
   resultSec.classList.add("hidden");
@@ -65,7 +63,7 @@ function showStartScreen() {
 }
 
 function startGame() {
-  document.body.classList.add("no-scroll"); // keep locked during quiz
+  document.body.classList.add("no-scroll"); 
 
   RUN_DATE = getRunDateISO();
   QUESTIONS = CALENDAR[RUN_DATE];
@@ -76,7 +74,6 @@ function startGame() {
   picks = [];
 
   if (!Array.isArray(QUESTIONS) || QUESTIONS.length !== 5) {
-    // Friendly message if that date isn't scheduled
     startScreen.classList.add("hidden");
     cardSec.classList.add("hidden");
     resultSec.classList.remove("hidden");
@@ -97,7 +94,7 @@ function startGame() {
 }
 
 function showResult() {
-  document.body.classList.remove("no-scroll"); // allow scroll on Results (mobile)
+  document.body.classList.remove("no-scroll"); 
   cardSec.classList.add("hidden");
   resultSec.classList.remove("hidden");
   headerEl?.classList.add("hidden");
@@ -153,7 +150,7 @@ function renderQuestion() {
   questionEl.textContent = q.question;
   progressEl.textContent = `Question ${current + 1} / ${QUESTIONS.length}`;
 
-  // Build buttons (no A/B/C labels)
+  // Build buttons 
   choicesEl.innerHTML = "";
   q.choices.forEach((choice, i) => {
     const btn = document.createElement("button");
@@ -190,7 +187,7 @@ function pickAnswer(i, correct) {
   if (i === correct) score++;
   picks.push({ idx: current, pick: i, correct });
 
-  // Pause briefly so the user sees feedback, then advance
+  // Pause briefly so the user sees feedback
   setTimeout(() => {
     current++;
     if (current < QUESTIONS.length) {
@@ -219,7 +216,6 @@ function showToast(msg) {
 function injectShareSummary() {
   const resultTop = document.getElementById("result");
 
-  // Remove a previous header if we already added one (replay safe)
   const old = resultTop.querySelector(".share-header");
   if (old) old.remove();
 
@@ -253,11 +249,10 @@ shareBtn.addEventListener("click", async () => {
   const shareText = `I scored ${squaresText} in NFL Take 5! \n \n https://twillyallen.github.io/NFLTake5/`;
 
   try {
-    // 1) Copy to clipboard first so paste is exactly what you want
     if (navigator.clipboard && window.isSecureContext) {
       await navigator.clipboard.writeText(shareText);
     } else {
-      // Fallback for older browsers
+
       const ta = document.createElement("textarea");
       ta.value = shareText;
       ta.setAttribute("readonly", "");
@@ -269,10 +264,10 @@ shareBtn.addEventListener("click", async () => {
       ta.remove();
     }
 
-    // 2) Show toast feedback
+
     showToast("Copied to clipboard");
 
-    // 3) Optionally try native share sheet (non-blocking; clipboard already done)
+ 
     if (navigator.share) {
       navigator.share({ text: shareText }).catch(() => { /* ignore */ });
     }
@@ -292,7 +287,7 @@ shareBtn.addEventListener("click", async () => {
   // Insert at the very top of results
   resultTop.insertBefore(headerWrap, resultTop.firstChild);
 
-  // Optional date line above
+
   const dateLine = document.createElement("div");
   dateLine.style.fontWeight = "800";
   dateLine.style.marginBottom = "4px";
@@ -308,7 +303,7 @@ function computeAndSaveStreak(dateStr) {
   const last = localStorage.getItem(KEY_LAST);
 
   if (last !== dateStr) {
-    // Increment if perfect today; reset otherwise. (Adjust logic if you want.)
+    
     const perfect = picks.every(p => p.pick === p.correct);
     streak = perfect ? streak + 1 : 0;
     localStorage.setItem(KEY_STREAK, String(streak));
@@ -319,7 +314,7 @@ function computeAndSaveStreak(dateStr) {
 
 // ---------- Init ----------
 function init() {
-  // Grab refs AFTER DOM is ready
+
   startScreen = document.getElementById("startScreen");
   startBtn     = document.getElementById("startBtn");
   cardSec      = document.getElementById("card");
@@ -331,9 +326,9 @@ function init() {
   scoreText    = document.getElementById("scoreText");
   reviewEl     = document.getElementById("review");
   restartBtn   = document.getElementById("restartBtn");
-  headerEl     = document.querySelector(".header"); // header is a CLASS in your HTML
+  headerEl     = document.querySelector(".header"); 
 
-  // Wire events safely
+
   startBtn?.addEventListener("click", startGame);
   restartBtn?.addEventListener("click", showStartScreen);
 
@@ -341,7 +336,7 @@ function init() {
   showStartScreen();
 }
 
-// Ensure DOM is ready before wiring anything
+// Ensure DOM is ready
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", init);
 } else {

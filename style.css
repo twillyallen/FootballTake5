@@ -1,14 +1,12 @@
-/* =========================
-   Global reset + background
-   ========================= */
+/* Background */
 :root{
-  --bg-dim: 0.45;          /* darker background = raise this (e.g., 0.55) */
+  --bg-dim: 0.45;          
   --btn-cyan: #b7f7ff;
   --btn-cyan-hover: #a3f1ff;
   --ink: #0b1116;
 
-  /* 👇 Start title outline strength (edit this!) */
-  --title-stroke: 6px;     /* thicker outline: 8px; thinner: 4px */
+
+  --title-stroke: 6px;     
 }
 
 * { box-sizing: border-box; }
@@ -16,18 +14,18 @@
 html, body {
   margin: 0;
   height: 100%;
-  body.no-scroll { overflow: hidden; }               /* no page scroll */
+  body.no-scroll { overflow: hidden; }               
   font-family: 'Bahnschrift', SemiBold;
   color: #fff;
 }
 
-/* Field everywhere */
+/* Field background */
 body{
   background: url("./field.jpg") center/cover no-repeat fixed;
   position: relative;
 }
 
-/* global dimmer */
+
 body::before{
   content: "";
   position: fixed;
@@ -37,11 +35,11 @@ body::before{
   z-index: 0;
 }
 
-/* App layout = full viewport, top-aligned */
+/* App layout = full viewport */
 .app{
   position: relative;
   z-index: 1;
-  height: 100svh;                 /* viewport height, mobile-safe */
+  height: 100svh;                 /* viewport height */
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -53,9 +51,7 @@ body::before{
 /* Utility */
 .hidden { display: none !important; }
 
-/* =========================
-   Header (shown during quiz)
-   ========================= */
+/* Header during quiz */
 .header{
   width: min(900px, 94vw);
   display: flex;
@@ -67,23 +63,19 @@ body::before{
 .timer{ padding: 6px 10px; border-radius: 8px; background: rgba(255,255,255,.08); }
 .timer.warning{ background: rgba(255,0,0,.14); }
 
-/* =========================
-   Start screen (TOP-aligned)
-   ========================= */
+/* Start screen (TOP-aligned)*/
 .start-screen{
   width: min(900px, 94vw);
-  height: calc(100svh - 32px);      /* fill remaining viewport */
+  height: calc(100svh - 32px);  
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* 👇 TOP-aligned */
   justify-content: flex-start;
   text-align: center;
   gap: 10px;
   padding-top: clamp(18px, 6vh, 48px);
 }
 
-/* remove any translucent box */
 .start-screen .overlay{
   background: none !important;
   box-shadow: none !important;
@@ -91,13 +83,13 @@ body::before{
   border-radius: 0 !important;
 }
 
-/* Strong outline, minimal shadow (edit --title-stroke above) */
+/* Text outline */
 .start-screen h1{
   margin: 0 0 8px;
   font-size: clamp(38px, 11vw, 92px);
   font-weight: 900;
   color: #fff;
-  -webkit-text-stroke: var(--title-stroke) #000;  /* <-- edit this */
+  -webkit-text-stroke: var(--title-stroke) #000;  
   paint-order: stroke fill;
   text-shadow: 0 6px 22px rgba(0,0,0,.35);        /* soft glow only */
 }
@@ -134,11 +126,10 @@ body::before{
 }
 
 /* =========================
-   Quiz & Results (TOP-aligned)
+   Quiz & Results
    ========================= */
 .card, .result{
   width: min(900px, 94vw);
-  /* remove translucent box completely */
   background: transparent;
   box-shadow: none;
   backdrop-filter: none;
@@ -147,7 +138,7 @@ body::before{
   margin: 0;
 }
 
-/* keep everything snug so it fits viewport without scroll */
+/* keep everything snug */
 .question{
   font-size: clamp(20px, 2.6vw, 28px);
   font-weight: 900;
@@ -176,7 +167,7 @@ body::before{
 
 .actions{ margin-top: 8px; display:flex; justify-content:flex-end; }
 
-/* Results list tidy */
+/* Results list tidy uppp */
 .review{ display:grid; gap:10px; margin-top: 10px; }
 .rev{ background: rgba(0,0,0,.22); border-radius: 10px; padding: 10px; }
 .rev .q{ font-weight: 900; margin-bottom: 4px; }
@@ -204,7 +195,7 @@ body::before{
   box-shadow: 0 3px 10px rgba(0,0,0,.3);
 }
 
-/* Tiny toast for "Copied" feedback */
+/* "Copied" feedback */
 .toast {
   position: fixed;
   bottom: 16px;
