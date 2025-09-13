@@ -1,92 +1,61 @@
 // main.js
 
-// Dev/prod detection & rollover
-const DEV = location.hostname === "localhost" || location.hostname === "127.0.0.1";
-// Use local midnight so the live site always shows *your* current day's set
-const ROLLOVER = "UTC";
+// --- Import your scheduled questions (bump the v= when you edit questions.js)
+import { CALENDAR } from "./questions.js?v=20250914c";
 
-// In production, ignore any dev date overrides that might be lingering
-if (!DEV) localStorage.removeItem("nfl-quiz-date-override");
+// --- Config
+const TIME_LIMIT = 12; // seconds per question
 
-// IMPORTANT: cache-bust *statically* (must be a literal string in import)
-import { CALENDAR } from "./questions.js?v=20250914b";
-
-/* ---------------- Date helpers ---------------- */
-function todayISO_LOCAL(){ const d=new Date(); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`; }
-function todayISO_UTC(){ const d=new Date(); return `${d.getUTCFullYear()}-${String(d.getUTCMonth()+1).padStart(2,"0")}-${String(d.getUTCDate()).padStart(2,"0")}`; }
-function defaultTodayISO(){ return ROLLOVER === "LOCAL" ? todayISO_LOCAL() : todayISO_UTC(); }
-
-// URL ?date=YYYY-MM-DD > (dev-only) localStorage override > today
-function getRunDateISO(){
-  const u = new URL(window.location.href);
-  const q = u.searchParams.get("date");
-  const devOverride = DEV ? localStorage.getItem("nfl-quiz-date-override") : null;
-  const iso = q || devOverride || defaultTodayISO();
-  return /^\d{4}-\d{2}-\d{2}$/.test(iso) ? iso : defaultTodayISO();
-}
-
-// These are recomputed on Start
-let RUN_DATE = getRunDateISO();
-let QUESTIONS = CALENDAR[RUN_DATE];
-
-/* ---------------- DOM refs ---------------- */
-const headerEl   = document.querySelector(".header");
-const startScreen= document.getElementById("startScreen");
-const startBtn   = document.getElementById("startBtn");
-
-const cardSec    = document.getElementById("card");
-const progressEl = document.getElementById("progress");
-const questionEl = document.getElementById("question");
-const choicesEl  = document.getElementById("choices");
-const nextBtn    = document.getElementById("nextBtn");
-
-const resultSec  = document.getElementById("result");
-const scoreText  = document.getElementById("scoreText");
-const reviewEl   = document.getElementById("review");
-const restartBtn = document.getElementById("restartBtn");
-const timerEl    = document.getElementById("timer");
-
-/* ---------------- Timer ---------------- */
-const TIME_LIMIT = 12;
-const AUTO_ADVANCE_DELAY = 900;
-
-let timeLeft = TIME_LIMIT;
-let timerId = null;
-
-function updateTimerUI(){ timerEl.textContent = `${timeLeft}s`; if (timeLeft <= 5) timerEl.classList.add("warning"); else timerEl.classList.remove("warning"); }
-function stopTimer(){ if (timerId){ clearInterval(timerId); timerId=null; } }
-function resetTimer(){ stopTimer(); timeLeft=TIME_LIMIT; updateTimerUI(); }
-function startTimer(){
-  stopTimer();
-  timerId = setInterval(() => {
-    timeLeft--; updateTimerUI();
-    if (timeLeft <= 0){ stopTimer(); handleTimeout(); }
-  }, 1000);
-}
-
-/* ---------------- State ---------------- */
+// --- State
+let RUN_DATE = null;
+let QUESTIONS = [];
 let current = 0;
 let score = 0;
 let answered = false;
-const picks = [];
+let picks = [];
+let timerId = null;
+let timeLeft = TIME_LIMIT;
 
-/* ---------------- Init ---------------- */
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", init);
-} else {
-  init();
+// --- DOM refs (assigned in init())
+let startScreen, startBtn, cardSec, resultSec, questionEl, choicesEl;
+let progressEl, timerEl, scoreText, reviewEl, restartBtn, headerEl;
+
+// ---------- Utilities ----------
+function getRunDateISO() {
+  // URL ?date=YYYY-MM-DD takes priority for testing
+  const p = new URLSearchParams(window.location.search);
+  if (p.has("date")) return p.get("date");
+
+  // default: local "today"
+  const d = new Date();
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${y}-${m}-${day}`;
 }
 
-function init(){
-  hideNextButton();
-  showStartScreen();
-  startBtn?.addEventListener("click", startGame);
-  restartBtn?.addEventListener("click", showStartScreen);
+function stopTimer() {
+  if (timerId) clearInterval(timerId);
+  timerId = null;
 }
 
-/* ---------------- Start / Quiz ---------------- */
-function showStartScreen(){
-  document.body.classList.add("starting");   // no scroll on hero
+function startTimer(seconds) {
+  stopTimer();
+  timeLeft = seconds;
+  timerEl.textContent = `${timeLeft}s`;
+  timerId = setInterval(() => {
+    timeLeft--;
+    timerEl.textContent = `${timeLeft}s`;
+    if (timeLeft <= 0) {
+      stopTimer();
+      pickAnswer(null, QUESTIONS[current].answer); // timeout counts as no answer
+    }
+  }, 1000);
+}
+
+// ---------- Screen Switchers ----------
+function showStartScreen() {
+  document.body.classList.add("no-scroll"); // lock scroll on Start/Quiz
   startScreen.classList.remove("hidden");
   cardSec.classList.add("hidden");
   resultSec.classList.add("hidden");
@@ -95,13 +64,19 @@ function showStartScreen(){
   stopTimer();
 }
 
-function startGame(){
-  document.body.classList.remove("starting");
+function startGame() {
+  document.body.classList.add("no-scroll"); // keep locked during quiz
+
   RUN_DATE = getRunDateISO();
   QUESTIONS = CALENDAR[RUN_DATE];
-  current=0; score=0; answered=false; picks.length=0;
 
-  if (!Array.isArray(QUESTIONS) || QUESTIONS.length !== 5){
+  current = 0;
+  score = 0;
+  answered = false;
+  picks = [];
+
+  if (!Array.isArray(QUESTIONS) || QUESTIONS.length !== 5) {
+    // Friendly message if that date isn't scheduled
     startScreen.classList.add("hidden");
     cardSec.classList.add("hidden");
     resultSec.classList.remove("hidden");
@@ -121,78 +96,16 @@ function startGame(){
   renderQuestion();
 }
 
-function renderQuestion(){
-  progressEl.textContent = `Question ${current + 1} / ${QUESTIONS.length}`;
-
-  const q = QUESTIONS[current];
-  questionEl.textContent = q.question;
-
-  choicesEl.innerHTML = "";
-  q.choices.forEach((text, i) => {
-    const btn = document.createElement("button");
-    btn.className = "choice";
-    // was: btn.innerHTML = `<span class="letter">${letters[i]}</span>${text}`;
-    btn.textContent = text;               // 👈 just the answer text
-    btn.addEventListener("click", () => onPick(i, btn));
-    choicesEl.appendChild(btn);
-  });
-
-  choicesEl.dataset.answerIdx = String(q.answer);
-  answered = false;
-  resetTimer();
-  startTimer();
-}
-
-
-
-
-function onPick(choiceIndex, btnEl){
-  if (answered) return;
-  answered = true; stopTimer();
-
-  const q = QUESTIONS[current];
-  [...document.querySelectorAll(".choice")].forEach((b,i)=>{
-    b.disabled = true;
-    if (i === q.answer) b.classList.add("correct");
-  });
-  if (choiceIndex !== q.answer) btnEl.classList.add("wrong"); else score++;
-  picks.push({ idx: current, pick: choiceIndex, correct: q.answer });
-
-  setTimeout(goNext, AUTO_ADVANCE_DELAY);
-}
-
-function handleTimeout(){
-  if (answered) return;
-  answered = true;
-  const answerIdx = Number(choicesEl.dataset.answerIdx);
-  [...document.querySelectorAll(".choice")].forEach((b,i)=>{
-    b.disabled = true;
-    if (i === answerIdx) b.classList.add("correct");
-  });
-  picks.push({ idx: current, pick: null, correct: answerIdx });
-  setTimeout(goNext, AUTO_ADVANCE_DELAY);
-}
-
-function goNext(){
-  stopTimer();
-  if (current < QUESTIONS.length - 1){ current++; renderQuestion(); }
-  else showResult();
-}
-
-/* ---------------- Results ---------------- */
-function showResult(){
-  // swap to results
+function showResult() {
+  document.body.classList.remove("no-scroll"); // allow scroll on Results (mobile)
   cardSec.classList.add("hidden");
   resultSec.classList.remove("hidden");
   headerEl?.classList.add("hidden");
   timerEl.style.display = "none";
 
-  // top summary
   scoreText.textContent = `You got ${score} / ${QUESTIONS.length} correct.`;
 
-  // per-question review
   reviewEl.innerHTML = "";
-
   picks.forEach(({ idx, pick, correct }) => {
     const q = QUESTIONS[idx];
 
@@ -203,8 +116,7 @@ function showResult(){
     qEl.className = "q";
     qEl.textContent = q.question;
 
-    const yourAnswerText = (pick === null) ? "No answer" : q.choices[pick];
-
+    const yourAnswerText = pick === null ? "No answer" : q.choices[pick];
     const you = document.createElement("div");
     you.innerHTML = `Your answer: <strong>${yourAnswerText}</strong>`;
 
@@ -215,15 +127,15 @@ function showResult(){
     ex.className = "ex";
     ex.textContent = q.explanation ?? "";
 
-    // ✅ style per result (green for correct, red for wrong)
+    // Color the review card clearly based on correctness
     if (pick === correct) {
-      you.style.color = "#28a745";                             // bright green text
-      div.style.background = "rgba(40, 167, 69, 0.22)";        // light green bg
-      div.style.border = "1px solid rgba(40, 167, 69, 0.45)";  // optional border
+      you.style.color = "#28a745";                              // green text
+      div.style.background = "rgba(40, 167, 69, 0.22)";         // light green bg
+      div.style.border = "1px solid rgba(40, 167, 69, 0.45)";   // optional border
     } else {
-      you.style.color = "#ff4b6b";                             // pink/red text
-      div.style.background = "rgba(255, 75, 107, 0.13)";       // light red bg
-      div.style.border = "1px solid rgba(255, 75, 107, 0.4)";  // optional border
+      you.style.color = "#ff4b6b";                              // red text
+      div.style.background = "rgba(255, 75, 107, 0.13)";        // light red bg
+      div.style.border = "1px solid rgba(255, 75, 107, 0.4)";   // optional border
     }
 
     div.append(qEl, you, cor, ex);
@@ -233,50 +145,157 @@ function showResult(){
   injectShareSummary();
 }
 
+// ---------- Quiz Flow ----------
+function renderQuestion() {
+  answered = false;
 
-/* ---------------- Share summary & streak ---------------- */
-function injectShareSummary(){
-  const title = document.createElement("div");
-  title.style.fontWeight = "800";
-  title.style.marginBottom = "6px";
-  title.textContent = `NFL Daily 5 – ${RUN_DATE}`;
+  const q = QUESTIONS[current];
+  questionEl.textContent = q.question;
+  progressEl.textContent = `Question ${current + 1} / ${QUESTIONS.length}`;
 
-  const emoji = document.createElement("div");
-  emoji.style.fontSize = "22px";
-  emoji.style.letterSpacing = "2px";
-  emoji.style.margin = "4px 0";
-  emoji.textContent = picks.map(p => p.pick === p.correct ? "🟩" : "⬜").join("");
+  // Build buttons (no A/B/C labels)
+  choicesEl.innerHTML = "";
+  q.choices.forEach((choice, i) => {
+    const btn = document.createElement("button");
+    btn.textContent = choice;
+    btn.addEventListener("click", () => pickAnswer(i, q.answer));
+    choicesEl.appendChild(btn);
+  });
+
+  startTimer(TIME_LIMIT);
+}
+
+function pickAnswer(i, correct) {
+  if (answered) return;
+  answered = true;
+  stopTimer();
+
+  if (i === correct) score++;
+  picks.push({ idx: current, pick: i, correct });
+
+  current++;
+  if (current < QUESTIONS.length) {
+    setTimeout(renderQuestion, 700);
+  } else {
+    setTimeout(showResult, 700);
+  }
+}
+
+// ---------- Share + Streak ----------
+function injectShareSummary() {
+  const resultTop = document.getElementById("result");
+
+  // Remove a previous header if we already added one (replay safe)
+  const old = resultTop.querySelector(".share-header");
+  if (old) old.remove();
+
+  const headerWrap = document.createElement("div");
+  headerWrap.className = "share-header";
+  headerWrap.style.display = "flex";
+  headerWrap.style.alignItems = "center";
+  headerWrap.style.gap = "10px";
+  headerWrap.style.marginBottom = "8px";
+
+  const squaresText = picks.map(p => (p.pick === p.correct ? "🟩" : "⬜")).join("");
+
+  const emojiLine = document.createElement("div");
+  emojiLine.style.fontSize = "22px";
+  emojiLine.style.letterSpacing = "2px";
+  emojiLine.style.userSelect = "text";
+  emojiLine.textContent = squaresText;
+
+  const shareBtn = document.createElement("button");
+  shareBtn.id = "shareBtn";
+  shareBtn.textContent = "Share";
+  shareBtn.style.padding = "6px 12px";
+  shareBtn.style.border = "none";
+  shareBtn.style.borderRadius = "8px";
+  shareBtn.style.background = "#b7f7ff";
+  shareBtn.style.color = "#0b1116";
+  shareBtn.style.fontWeight = "800";
+  shareBtn.style.cursor = "pointer";
+  shareBtn.addEventListener("click", async () => {
+    try {
+      if (navigator.share) {
+        await navigator.share({ text: squaresText });
+      } else if (navigator.clipboard) {
+        await navigator.clipboard.writeText(squaresText);
+        alert("Copied results to clipboard!");
+      } else {
+        const ta = document.createElement("textarea");
+        ta.value = squaresText;
+        document.body.appendChild(ta);
+        ta.select(); document.execCommand("copy");
+        ta.remove();
+        alert("Copied results to clipboard!");
+      }
+    } catch (e) {
+      console.error("Share failed:", e);
+      alert("Could not share. Try copying manually.");
+    }
+  });
 
   const streakDiv = document.createElement("div");
-  streakDiv.style.marginTop = "4px";
+  streakDiv.style.marginLeft = "auto";
   streakDiv.textContent = `Streak: ${computeAndSaveStreak(RUN_DATE)}`;
 
-  resultSec.prepend(streakDiv);
-  resultSec.prepend(emoji);
-  resultSec.prepend(title);
+  headerWrap.append(emojiLine, shareBtn, streakDiv);
+
+  // Insert at the very top of results
+  resultTop.insertBefore(headerWrap, resultTop.firstChild);
+
+  // Optional date line above
+  const dateLine = document.createElement("div");
+  dateLine.style.fontWeight = "800";
+  dateLine.style.marginBottom = "4px";
+  dateLine.textContent = `NFL Daily 5 – ${RUN_DATE}`;
+  resultTop.insertBefore(dateLine, headerWrap);
 }
 
-function computeAndSaveStreak(runDateISO){
-  const LAST="nfl-quiz-last-date", STRK="nfl-quiz-streak";
-  const last = localStorage.getItem(LAST);
-  let s = parseInt(localStorage.getItem(STRK) || "0", 10);
-  if (!last) s = 1;
-  else {
-    const d = daysBetweenISO(last, runDateISO);
-    if (d === 0) { /* same day */ }
-    else if (d === 1) s += 1;
-    else s = 1;
+function computeAndSaveStreak(dateStr) {
+  const KEY_STREAK = "nflStreak";
+  const KEY_LAST = "nflLastDate";
+
+  let streak = parseInt(localStorage.getItem(KEY_STREAK) || "0", 10);
+  const last = localStorage.getItem(KEY_LAST);
+
+  if (last !== dateStr) {
+    // Increment if perfect today; reset otherwise. (Adjust logic if you want.)
+    const perfect = picks.every(p => p.pick === p.correct);
+    streak = perfect ? streak + 1 : 0;
+    localStorage.setItem(KEY_STREAK, String(streak));
+    localStorage.setItem(KEY_LAST, dateStr);
   }
-  localStorage.setItem(LAST, runDateISO);
-  localStorage.setItem(STRK, String(s));
-  return s;
+  return streak;
 }
 
-function daysBetweenISO(a,b){
-  const [y1,m1,d1]=a.split("-").map(Number);
-  const [y2,m2,d2]=b.split("-").map(Number);
-  return Math.round((Date.UTC(y2,m2-1,d2)-Date.UTC(y1,m1-1,d1))/(1000*60*60*24));
+// ---------- Init ----------
+function init() {
+  // Grab refs AFTER DOM is ready
+  startScreen = document.getElementById("startScreen");
+  startBtn     = document.getElementById("startBtn");
+  cardSec      = document.getElementById("card");
+  resultSec    = document.getElementById("result");
+  questionEl   = document.getElementById("question");
+  choicesEl    = document.getElementById("choices");
+  progressEl   = document.getElementById("progress");
+  timerEl      = document.getElementById("timer");
+  scoreText    = document.getElementById("scoreText");
+  reviewEl     = document.getElementById("review");
+  restartBtn   = document.getElementById("restartBtn");
+  headerEl     = document.querySelector(".header"); // header is a CLASS in your HTML
+
+  // Wire events safely
+  startBtn?.addEventListener("click", startGame);
+  restartBtn?.addEventListener("click", showStartScreen);
+
+  // Start on the start screen
+  showStartScreen();
 }
 
-/* ---------------- Utils ---------------- */
-function hideNextButton(){ if (nextBtn) nextBtn.style.display = "none"; }
+// Ensure DOM is ready before wiring anything
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", init);
+} else {
+  init();
+}
