@@ -3,7 +3,7 @@
 // Dev/prod detection & rollover
 const DEV = location.hostname === "localhost" || location.hostname === "127.0.0.1";
 // Use local midnight so the live site always shows *your* current day's set
-const ROLLOVER = "LOCAL";
+const ROLLOVER = "UTC";
 
 // In production, ignore any dev date overrides that might be lingering
 if (!DEV) localStorage.removeItem("nfl-quiz-date-override");
