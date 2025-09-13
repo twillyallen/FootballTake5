@@ -28,6 +28,20 @@ export const CALENDAR = {
     { question: "Which team drafted Eli Manning?", choices: ["Colts", "Giants", "Chargers", "Broncos"], answer: 2 },
     { question: "Which franchise was *formerly* a part of the AFC West?", choices: ["Seahawks", "Chiefs", "Rams", "Raiders"], answer: 0 },
     { question: "How many career TD Passes did Dan Marino finish with?", choices: ["487", "392", "420", "438"], answer: 2 }
+  ],
+    "2025-09-14": [
+    { question: "Which Head Coach is responsible for the largest blown lead in NFL History?", choices: ["Jack Pardee", "Dan Quinn", "Jeff Saturday", "Brandon Staley"], answer: 2 },
+    { question: "Which team has the longest Playoff Win Drought?", choices: ["Jets", "Dolphins", "Raiders", "Cardinals"], answer: 1 },
+    { question: "Which team has had the most 1st Overall Draft Picks?", choices: ["Colts", "Browns", "Buccaneers", "Bengals"], answer: 0 },
+    { question: "Which two players SHARED the MVP Award?", choices: ["Brett Favre & Steve Young", "Barry Sanders & Kurt Warner", "Peyton Manning & Steve McNair", "LaDainian Tomlinson & Tom Brady"], answer: 2 },
+    { question: "_____ has 208 Career Touchdowns", choices: ["Emmitt Smith", "Walter Payton", "Jerry Rice", "LaDainian Tomlinson"], answer: 2 }
+  ],
+    "2025-09-15": [
+    { question: "Which is the oldest NFL Franchise", choices: ["Bears/Staleys", "Packers", "Cardinals", "Lions"], answer: 2 },
+    { question: "Most Super Bowl losses?", choices: ["Broncos", "Vikings", "Bills", "Chiefs"], answer: 0 },
+    { question: "Brett Favre played for how many NFL teams?", choices: ["2", "5", "3", "4"], answer: 3 },
+    { question: "How many career TD Passes does Ryan Fitzpatrick have?", choices: ["189", "342", "223", "96"], answer: 2 },
+    { question: "How many different starting QBs have the Browns had since 1999", choices: ["32", "17", "40", "11"], answer: 2 }
   ]
 };
 
