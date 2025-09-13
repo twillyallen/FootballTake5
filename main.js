@@ -170,15 +170,49 @@ function pickAnswer(i, correct) {
   answered = true;
   stopTimer();
 
+  // Get all choice buttons for this question
+  const buttons = Array.from(choicesEl.querySelectorAll("button"));
+
+  // Disable all buttons to lock the question
+  buttons.forEach(b => { b.disabled = true; });
+
+  // Always show the correct one in green
+  if (typeof correct === "number" && buttons[correct]) {
+    buttons[correct].classList.add("correct");
+  }
+
+  // If the user picked a wrong answer (i !== null), mark it red
+  if (i !== null && i !== correct && typeof i === "number" && buttons[i]) {
+    buttons[i].classList.add("wrong");
+  }
+
+  // Score + record
   if (i === correct) score++;
   picks.push({ idx: current, pick: i, correct });
 
-  current++;
-  if (current < QUESTIONS.length) {
-    setTimeout(renderQuestion, 700);
-  } else {
-    setTimeout(showResult, 700);
-  }
+  // Pause briefly so the user sees feedback, then advance
+  setTimeout(() => {
+    current++;
+    if (current < QUESTIONS.length) {
+      renderQuestion();
+    } else {
+      showResult();
+    }
+  }, 700);
+}
+
+function showToast(msg) {
+  const t = document.createElement("div");
+  t.className = "toast";
+  t.textContent = msg;
+  document.body.appendChild(t);
+  // animate in
+  requestAnimationFrame(() => t.classList.add("show"));
+  // remove after 1.6s
+  setTimeout(() => {
+    t.classList.remove("show");
+    setTimeout(() => t.remove(), 200);
+  }, 1600);
 }
 
 // ---------- Share + Streak ----------
@@ -214,26 +248,40 @@ function injectShareSummary() {
   shareBtn.style.color = "#0b1116";
   shareBtn.style.fontWeight = "800";
   shareBtn.style.cursor = "pointer";
-  shareBtn.addEventListener("click", async () => {
-    try {
-      if (navigator.share) {
-        await navigator.share({ text: squaresText });
-      } else if (navigator.clipboard) {
-        await navigator.clipboard.writeText(squaresText);
-        alert("Copied results to clipboard!");
-      } else {
-        const ta = document.createElement("textarea");
-        ta.value = squaresText;
-        document.body.appendChild(ta);
-        ta.select(); document.execCommand("copy");
-        ta.remove();
-        alert("Copied results to clipboard!");
-      }
-    } catch (e) {
-      console.error("Share failed:", e);
-      alert("Could not share. Try copying manually.");
+shareBtn.addEventListener("click", async () => {
+  const squaresText = picks.map(p => (p.pick === p.correct ? "🟩" : "⬜")).join("");
+  const shareText = `I scored ${squaresText} in NFL Take 5!`;
+
+  try {
+    // 1) Copy to clipboard first so paste is exactly what you want
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(shareText);
+    } else {
+      // Fallback for older browsers
+      const ta = document.createElement("textarea");
+      ta.value = shareText;
+      ta.setAttribute("readonly", "");
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand("copy");
+      ta.remove();
     }
-  });
+
+    // 2) Show toast feedback
+    showToast("Copied to clipboard");
+
+    // 3) Optionally try native share sheet (non-blocking; clipboard already done)
+    if (navigator.share) {
+      navigator.share({ text: shareText }).catch(() => { /* ignore */ });
+    }
+  } catch (e) {
+    console.error("Share failed:", e);
+    showToast("Could not copy. Try manual paste.");
+  }
+});
+
 
   const streakDiv = document.createElement("div");
   streakDiv.style.marginLeft = "auto";
