@@ -31,6 +31,13 @@ export const CALENDAR = {
     { question: "Which team was Drew Brees Drafted by", choices: ["Chargers","Saints","Bengals","49ers"], answer: 0 },
     { question: "DPOY 2023?", choices: ["Bosa","Watt","Garrett","Parsons"], answer: 2 }
   ],
+      "2025-09-14": [
+    { question: "Name one of the 3 players who are 6'5 and ran a 4.3", choices: ["Davante Adams","Donte Thornton","Don Hutson","Courtland Sutton"], answer: 1 },
+    { question: "Who was called Mr Butt Fumble", choices: ["Kurt Warner","Derek Carr","Tim Tebow","Mark Sanchez"], answer: 3 },
+    { question: "How many teams has Peyton Manning played for?", choices: ["1","3","2","1"], answer: 2 },
+    { question: "Which team was Drew Brees Drafted by", choices: ["Chargers","Saints","Bengals","49ers"], answer: 0 },
+    { question: "DPOY 2023?", choices: ["Bosa","Watt","Garrett","Parsons"], answer: 2 }
+  ],
   // add m
   // add more dates here…
 };
