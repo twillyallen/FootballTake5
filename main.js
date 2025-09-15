@@ -246,7 +246,7 @@ function injectShareSummary() {
   shareBtn.style.cursor = "pointer";
 shareBtn.addEventListener("click", async () => {
   const squaresText = picks.map(p => (p.pick === p.correct ? "🟩" : "⬜")).join("");
-  const shareText = `I scored ${squaresText} in NFL Take 5! \n \n https://twillyallen.github.io/NFLTake5/`;
+  const shareText = `I scored ${squaresText} in Football Take-5! \n \n https://twillyallen.github.io/FootballTake5/`;
 
   try {
     if (navigator.clipboard && window.isSecureContext) {
@@ -291,7 +291,7 @@ shareBtn.addEventListener("click", async () => {
   const dateLine = document.createElement("div");
   dateLine.style.fontWeight = "800";
   dateLine.style.marginBottom = "4px";
-  dateLine.textContent = `NFL Daily 5 – ${RUN_DATE}`;
+  dateLine.textContent = `Football Take-5 – ${RUN_DATE}`;
   resultTop.insertBefore(dateLine, headerWrap);
 }
 
