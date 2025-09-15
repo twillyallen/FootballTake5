@@ -42,6 +42,20 @@ export const CALENDAR = {
     { question: "Brett Favre played for how many NFL teams?", choices: ["2", "5", "3", "4"], answer: 3 },
     { question: "How many career TD Passes does Ryan Fitzpatrick have?", choices: ["189", "342", "223", "96"], answer: 2 },
     { question: "How many different starting QBs have the Browns had since 1999", choices: ["32", "17", "40", "11"], answer: 2 }
+  ],
+    "2025-09-16": [
+    { question: "1st Overall Pick in the 2022 NFL Draft?", choices: ["Bryce Young", "Travon Walker", "CJ Stroud", "Will Anderson"], answer: 1 },
+    { question: "Which franchise was *formerly* a part of the AFC West?", choices: ["Seahawks", "Chiefs", "Rams", "Raiders"], answer: 0 },
+    { question: "Current Season Leader in Rushing Yards?", choices: ["Derrick Henry", "Lamar Jackson", "James Cook", "Jonathan Taylor"], answer: 3 },
+    { question: "In what CALENDAR YEAR was Super Bowl I played?", choices: ["1970", "1965", "1967", "1969"], answer: 2 },
+    { question: "DPOY 2023?", choices: ["Bosa", "Watt", "Garrett", "Parsons"], answer: 2 }
+  ],
+      "2025-09-17": [
+    { question: "Who was the Steelers Head Coach before Mike Tomlin?", choices: ["Bill Belichik", "Mike Shanahan", "Tony Dungy", "Bill Cowher"], answer: 3 },
+    { question: "Which city is hosting Super Bowl LX", choices: ["Los Angeles", "Santa Clara", "Glendale", "Las Vegas"], answer: 1 },
+    { question: "Who ran the fastest 40yd Dash in Combine History?", choices: ["Xavier Worthy", "John Ross III", "Tyreek Hill", "Chris Johnson"], answer: 0 },
+    { question: "Who won Super Bowl XXXI MVP?", choices: ["Kurt Warner", "Terrell Davis", "Desmond Howard", "Steve Young"], answer: 2 },
+    { question: "All-time NFL Sack Leader?", choices: ["Bruce Smith", "Reggie White", "JJ Watt", "Terrell Suggs"], answer: 0 }
   ]
 };
 
