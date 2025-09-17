@@ -215,3 +215,14 @@ body::before{
   opacity: 0.95;
   transform: translateX(-50%) translateY(0);
 }
+
+/* stop header jumping when 12s -> 9s */
+.timer{
+  display: inline-block;
+  min-width: 3.5ch;              
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1, "lnum" 1; /* broader browser support */
+}
+.header{ gap: 12px; }            
+

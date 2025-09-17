@@ -148,7 +148,7 @@ function renderQuestion() {
 
   const q = QUESTIONS[current];
   questionEl.textContent = q.question;
-  progressEl.textContent = `Question ${current + 1} / ${QUESTIONS.length}`;
+  progressEl.textContent = `Question\n ${current + 1} / ${QUESTIONS.length}`;
 
   // Build buttons 
   choicesEl.innerHTML = "";
