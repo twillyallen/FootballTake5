@@ -58,7 +58,7 @@ export const CALENDAR = {
     { question: "All-time NFL Sack Leader?", choices: ["Bruce Smith", "Reggie White", "JJ Watt", "Terrell Suggs"], answer: 0 }
   ],
   "2025-09-18": [
-    { question: "What was the original name of the New York Jets?", choices: ["Giants", "Football Yankees", "Titans", "Flyers"], answer: 3 },
+    { question: "What was the original name of the New York Jets?", choices: ["Giants", "Football Yankees", "Titans", "Flyers"], answer: 2 },
     { question: "Who threw the most Passing TDs in the 2023 NFL Season?", choices: ["Dak Prescott", "Josh Allen", "Lamar Jackson", "Jordan Love"], answer: 0 },
     { question: "Which team was Drew Brees drafted by?", choices: ["Chargers", "Saints", "Bengals", "49ers"], answer: 0 },
     { question: "Who scored the most TDs in 2024?", choices: ["Derrick Henry", "Ja'Marr Chase", "Saquon Barkley", "Lamar Jackson"], answer: 1 },
