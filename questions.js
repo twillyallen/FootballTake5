@@ -65,7 +65,7 @@ export const CALENDAR = {
     { question: "Longest Field Goal in Regular Season History?", choices: ["64 Yards", "70 Yards", "66 Yards", "68 Yards"], answer: 2 }
   ],
   "2025-09-19": [
-    { question: "How many different teams has Ryan Fitzgerald started for?", choices: ["9", "13", "7", "11"], answer: 0 },
+    { question: "How many different teams has Ryan Fitzpatrick started for?", choices: ["9", "13", "7", "11"], answer: 0 },
     { question: "How many MVP Votes does Russell Wilson have in his Legendary Career?", choices: ["37", "0", "7", "24"], answer: 1 },
     { question: "Which of these teams has the most Super Bowl Losses?", choices: ["Bills", "Vikings", "Bengals", "Broncos"], answer: 3 },
     { question: "Which Position more recently won NFL League MVP?", choices: ["Offensive Left Tackle", "Wide Receiver", "Kicker", "Safety"], answer: 2 },
