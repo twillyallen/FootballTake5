@@ -97,7 +97,7 @@ export const CALENDAR = {
     { question: "Which team originally drafted Bo Jackson?", choices: ["Browns", "Buccaneers", "Raiders", "Chiefs"], answer: 1 },
     { question: "Who has the most MVP Awards?", choices: ["Aaron Rodgers", "Tom Brady", "Brett Favre", "Peyton Manning"], answer: 3 },
     { question: "Which team has the longest Playoff Win Drought?", choices: ["Jets", "Dolphins", "Raiders", "Cardinals"], answer: 1 },
-    { question: "How many career TD Passes did Dan Marino retire with?", choices: ["487", "392", "420", "438"], answer: 2 }
+    { question: "How many career TD Passes did Dan Marino finish with?", choices: ["487", "392", "420", "438"], answer: 2 }
   ]
 };
 
