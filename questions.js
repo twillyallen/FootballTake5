@@ -58,14 +58,14 @@ export const CALENDAR = {
     { question: "All-time NFL Sack Leader?", choices: ["Bruce Smith", "Reggie White", "JJ Watt", "Terrell Suggs"], answer: 0 }
   ],
   "2025-09-18": [
-    { question: "What was the original name of the New York Jets?", choices: ["Giants", "Football Yankees", "Titans", "Flyers"], answer: 3 },
+    { question: "What was the original name of the New York Jets?", choices: ["Giants", "Football Yankees", "Titans", "Flyers"], answer: 2 },
     { question: "Who threw the most Passing TDs in the 2023 NFL Season?", choices: ["Dak Prescott", "Josh Allen", "Lamar Jackson", "Jordan Love"], answer: 0 },
     { question: "Which team was Drew Brees drafted by?", choices: ["Chargers", "Saints", "Bengals", "49ers"], answer: 0 },
     { question: "Who scored the most TDs in 2024?", choices: ["Derrick Henry", "Ja'Marr Chase", "Saquon Barkley", "Lamar Jackson"], answer: 1 },
     { question: "Longest Field Goal in Regular Season History?", choices: ["64 Yards", "70 Yards", "66 Yards", "68 Yards"], answer: 2 }
   ],
   "2025-09-19": [
-    { question: "How many different teams has Ryan Fitzgerald started for?", choices: ["9", "13", "7", "11"], answer: 0 },
+    { question: "How many different teams has Ryan Fitzpatrick started for?", choices: ["9", "13", "7", "11"], answer: 0 },
     { question: "How many MVP Votes does Russell Wilson have in his Legendary Career?", choices: ["37", "0", "7", "24"], answer: 1 },
     { question: "Which of these teams has the most Super Bowl Losses?", choices: ["Bills", "Vikings", "Bengals", "Broncos"], answer: 3 },
     { question: "Which Position more recently won NFL League MVP?", choices: ["Offensive Left Tackle", "Wide Receiver", "Kicker", "Safety"], answer: 2 },
