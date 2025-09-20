@@ -77,6 +77,27 @@ export const CALENDAR = {
     { question: "Who threw the most Passing Yards in a single season?", choices: ["Peyton Manning", "Drew Brees", "Tom Brady", "Jameis Winston"], answer: 0 },
     { question: "Most Career TDs by a Running Back?", choices: ["Marcus Allen", "Emmitt Smith", "Jim Brown", "LaDainian Tomlinson"], answer: 1 },
     { question: "Current League-Leader in Passer Rating?", choices: ["Lamar Jackson", "Jordan Love", "Justin Herbert", "Daniel Jones"], answer: 0 }
+  ],
+  "2025-09-21": [
+    { question: "Who was the first Wild Card team to win the Super Bowl?", choices: ["2010 Packers", "1988 Redskins", "1980 Raiders", "2007 Patriots"], answer: 2 },
+    { question: "All-Time Career Rushing Yards Leader?", choices: ["Frank Gore", "Emmitt Smith", "LaDainian Tomlinson", "Barry Sanders"], answer: 1 },
+    { question: "Who holds the record for most consecutive starts at QB?", choices: ["Peyton Manning", "Philip Rivers", "Eli Manning", "Brett Favre"], answer: 3 },
+    { question: "Which school has produced the most #1 Overall Draft Picks?", choices: ["USC", "Alabama", "Georgia", "LSU"], answer: 0 },
+    { question: "Which WR holds the record for most receptions in a season?", choices: ["Antonio Brown", "Cooper Kupp", "Jerry Rice", "Michael Thomas"], answer: 3 }
+  ],
+  "2025-09-22": [
+    { question: "Who legally changed their name to match their football number?", choices: ["Tom Brady", "Antonio Brown", "Chad Johsnon", "Curly Lambeau"], answer: 2 },
+    { question: "Which kicker won MVP?", choices: ["Gary Anderson", "Morten Anderson", "Matt Bahr", "Mark Moseley"], answer: 3 },
+    { question: "First QB to throw for 5,000 Yards?", choices: ["Drew Brees", "Steve Young", "Dan Marino", "Brett Favre"], answer: 2 },
+    { question: "Before moving to Indianapolis, where did the Colts play?", choices: ["Fort Wayne", "Baltimore", "Omaha", "Richmond"], answer: 1 },
+    { question: "Who is the All-Time leader in Fumbles?", choices: ["Twillyallen (TwillysTakes)", "Eli Manning", "Matt Ryan", "Frank Gore"], answer: 1 }
+  ],
+  "2025-09-23": [
+    { question: "Who was the first QB to throw for 4,000 Yards on the Chicago Bears?", choices: ["Jim McMahon", "Jay Cutler", "Jim Harbaugh", "N/A"], answer: 3 },
+    { question: "Which team originally drafted Bo Jackson?", choices: ["Browns", "Buccaneers", "Raiders", "Chiefs"], answer: 1 },
+    { question: "Who has the most MVP Awards?", choices: ["Aaron Rodgers", "Tom Brady", "Brett Favre", "Peyton Manning"], answer: 3 },
+    { question: "Which team has the longest Playoff Win Drought?", choices: ["Jets", "Dolphins", "Raiders", "Cardinals"], answer: 1 },
+    { question: "How many career TD Passes did Dan Marino finish with?", choices: ["487", "392", "420", "438"], answer: 2 }
   ]
 };
 
