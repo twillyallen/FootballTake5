@@ -86,7 +86,7 @@ export const CALENDAR = {
     { question: "Which WR holds the record for most receptions in a season?", choices: ["Antonio Brown", "Cooper Kupp", "Jerry Rice", "Michael Thomas"], answer: 3 }
   ],
   "2025-09-22": [
-    { question: "Who legally changed their name to match their football number?", choices: ["Tom Brady", "Antonio Brown", "Chad Johsnon", "Curly Lambeau"], answer: 2 },
+    { question: "Who legally changed their name to match their football number?", choices: ["Tom Brady", "Antonio Brown", "Chad Johnson", "Curly Lambeau"], answer: 2 },
     { question: "Which kicker won MVP?", choices: ["Gary Anderson", "Morten Anderson", "Matt Bahr", "Mark Moseley"], answer: 3 },
     { question: "First QB to throw for 5,000 Yards?", choices: ["Drew Brees", "Steve Young", "Dan Marino", "Brett Favre"], answer: 2 },
     { question: "Before moving to Indianapolis, where did the Colts play?", choices: ["Fort Wayne", "Baltimore", "Omaha", "Richmond"], answer: 1 },
