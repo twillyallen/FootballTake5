@@ -98,6 +98,55 @@ export const CALENDAR = {
     { question: "Who has the most MVP Awards?", choices: ["Aaron Rodgers", "Tom Brady", "Brett Favre", "Peyton Manning"], answer: 3 },
     { question: "Which team has the longest Playoff Win Drought?", choices: ["Jets", "Dolphins", "Raiders", "Cardinals"], answer: 1 },
     { question: "How many career TD Passes did Dan Marino finish with?", choices: ["487", "392", "420", "438"], answer: 2 }
+  ],
+  "2025-09-24": [
+    { question: "Who leads the current 2025 league leader in Sacks?", choices: ["Rashan Gary", "Micah Parsons", "Harold Landry III", "Myles Garrett"], answer: 0 },
+    { question: "What city did the Chargers first belong to?", choices: ["Pasadena", "San Diego", "Los Angeles", "San Fransisco"], answer: 2 },
+    { question: "Which two players SHARED the MVP Award?", choices: ["Brett Favre & Barry Sanders", "Steve Young & Kurt Warner", "Peyton Manning & Brett Favre", "LaDainian Tomlinson & Steve McNair"], answer: 0 },
+    { question: "What was the original name of the Chicago Bears?", choices: ["Bears", "Cubs", "Pounders", "Staleys"], answer: 3 },
+    { question: "Who leads the league in Touchdown Passes?", choices: ["Jared Goff", "Lamar Jackson", "Baker Mayfield", "Justin Herbert"], answer: 1 }
+  ],
+  "2025-09-25": [
+    { question: "Which NFL player once celebrated a TD by putting a cell phone under the goalpost?", choices: ["Terrell Owens", "Chad Johnson", "Randy Moss", "Joe Horn"], answer: 3 },
+    { question: "What year did the AFL and NFL officially merge?", choices: ["1966", "1970", "1975", "1980"], answer: 1 },
+    { question: "Which QB is the all-time leader in fourth-quarter comebacks?", choices: ["Tom Brady", "Drew Brees", "Patrick Mahomes", "Peyton Manning"], answer: 0 },
+    { question: "Who is the all-time leader in career interceptions (as a defender)?", choices: ["Rod Woodson", "Paul Krause", "Ed Reed", "Deion Sanders"], answer: 1 },
+    { question: "Who plays tonight?", choices: ["Seahawks vs 49ers", "Cardinals vs Titans", "Seahawks vs Cardinals", "49ers vs Rams"], answer: 2 }
+  ],
+  "2025-09-26": [
+    { question: "Who was the first player to rush for 2,000 yards in a season?", choices: ["Barry Sanders", "Eric Dickerson", "O.J. Simpson", "Adrian Peterson"], answer: 2 },
+    { question: "What is the shortest overtime game in NFL history?", choices: ["59 seconds", "11 seconds", "18 seconds", "26 seconds"], answer: 1 },
+    { question: "Who threw 7 TD passes in a game in 2013?", choices: ["Peyton Manning", "Drew Brees", "Nick Foles", "Aaron Rodgers"], answer: 2 },
+    { question: "Who was the last non-QB to win MVP?", choices: ["Adrian Peterson", "Marshall Faulk", "LaDainian Tomlinson", "Derrick Henry"], answer: 0 },
+    { question: "Which city did the Rams originally play in?", choices: ["Cleveland", "Los Angeles", "St. Louis", "Anaheim"], answer: 0 },
+  ],
+  "2025-09-27": [
+    { question: "Which WR pretended to moon the crowd in Green Bay?", choices: ["Randy Moss", "Terrell Owens", "Antonio Brown", "Chad Johnson"], answer: 0 },
+    { question: "Who leads the league in Rushing TDs?", choices: ["Daniel Jones", "Derrick Henry", "Jonathon Taylor", "Jalen Hurts"], answer: 3 },
+    { question: "Who was the first TE with 1,000 receiving yards in a season?", choices: ["Tony Gonzalez", "Kellen Winslow", "Mike Ditka", "Shannon Sharpe"], answer: 2 },
+    { question: "Which player was nicknamed 'Night Train'?", choices: ["Deacon Jones", "Dick Lane", "Lenny Moore", "Ray Nitschke"], answer: 1 },
+    { question: "Who holds the single-season rushing TD record?", choices: ["Shaun Alexander", "Emmitt Smith", "LaDainian Tomlinson", "Adrian Peterson"], answer: 2 },
+  ],
+  "2025-09-28": [
+    { question: "Who won the first-ever Super Bowl?", choices: ["Packers", "Chiefs", "Colts", "Jets"], answer: 0 },
+    { question: "Which player returned a missed field goal 109 yards for a TD?", choices: ["Cordarrelle Patterson", "Antonio Cromartie", "Devin Hester", "Jamal Agnew"], answer: 1 },
+    { question: "Which player has the most career safeties?", choices: ["Ted Hendricks", "Jared Allen", "Justin Houston", "Dwight Freeney"], answer: 0 },
+    { question: "All-time NFL Sack Leader?", choices: ["Bruce Smith", "Reggie White", "JJ Watt", "Terrell Suggs"], answer: 0 },
+    { question: "Which RB is second all-time in rushing yards?", choices: ["Walter Payton", "Frank Gore", "Barry Sanders", "LaDainian Tomlinson"], answer: 0 },
+  ],
+  "2025-09-29": [
+    { question: "Which Head Coach is responsible for the largest blown lead in NFL History?", choices: ["Jack Pardee", "Dan Quinn", "Jeff Saturday", "Brandon Staley"], answer: 2 },
+    { question: "Which team has the longest Playoff Win Drought?", choices: ["Jets", "Dolphins", "Raiders", "Cardinals"], answer: 1 },
+    { question: "Which team has had the most 1st Overall Draft Picks?", choices: ["Colts", "Browns", "Buccaneers", "Bengals"], answer: 0 },
+    { question: "Which two players SHARED the MVP Award?", choices: ["Brett Favre & Steve Young", "Barry Sanders & Kurt Warner", "Peyton Manning & Steve McNair", "LaDainian Tomlinson & Tom Brady"], answer: 2 },
+    { question: "_____ has 208 Career Touchdowns", choices: ["Emmitt Smith", "Walter Payton", "Jerry Rice", "LaDainian Tomlinson"], answer: 2 }
+  ],
+  "2025-09-30": [
+    { question: "Which team has the most Hall of Famers?", choices: ["Packers", "Bears", "Steelers", "Cowboys"], answer: 1 },
+    { question: "Which QB famously 'guaranteed' a Super Bowl win?", choices: ["Joe Namath", "Tom Brady", "Terry Bradshaw", "Kurt Warner"], answer: 0 },
+    { question: "Which QB has the most pick-sixes thrown all-time?", choices: ["Brett Favre", "Tom Brady", "Vinny Testaverde", "Drew Brees"], answer: 0 },
+    { question: "Which coach has the most all-time wins?", choices: ["Bill Belichick", "Don Shula", "George Halas", "Tom Landry"], answer: 1 },
+    { question: "Who is the youngest QB to start a Super Bowl?", choices: ["Patrick Mahomes", "Dan Marino", "Ben Roethlisberger", "Jalen Hurts"], answer: 2 }
   ]
 };
 
