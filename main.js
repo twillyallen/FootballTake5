@@ -1,13 +1,12 @@
-
 import { CALENDAR } from "./questions.js?v=20250914c";
 
 // ==============================
 // Config 
 // ==============================
-const TIME_LIMIT = 12; // seconds per question
+const TIME_LIMIT = 15; // seconds per question
 const KEY_ATTEMPT_PREFIX = "ft5_attempt_";
 const KEY_RESULT_PREFIX  = "ft5_result_"; // stores {score, picks}
-const PROD_HOSTS = ["twillyallen.github.io", "footballtake5.com"]; // add custom domain when ready
+const PROD_HOSTS = ["twillyallen.github.io", "pigskin5.com"]; 
 
 function isProd() {
   return PROD_HOSTS.includes(location.hostname);
@@ -91,7 +90,24 @@ function computeAndSaveStreak(dateStr) {
   return streak;
 }
 
-// ---------- Locked Result (persisted) ----------
+// ---------- Touchdown Streak (5/5 days) ----------
+function computeAndSaveTouchdownStreak(dateStr) {
+  const KEY_TD_STREAK = "tdStreak";
+  const KEY_TD_LAST   = "tdLastDate";
+
+  let streak = parseInt(localStorage.getItem(KEY_TD_STREAK) || "0", 10);
+  const last = localStorage.getItem(KEY_TD_LAST);
+
+  // Only increment once per date when you actually hit a perfect score
+  if (last !== dateStr) {
+    streak = streak + 1;
+    localStorage.setItem(KEY_TD_STREAK, String(streak));
+    localStorage.setItem(KEY_TD_LAST, dateStr);
+  }
+  return streak;
+}
+
+// ---------- Locked Result ----------
 function renderPersistedResult(dateStr, persisted) {
   RUN_DATE = dateStr;
   QUESTIONS = CALENDAR[RUN_DATE] || [];
@@ -146,7 +162,7 @@ function renderPersistedResult(dateStr, persisted) {
 
   if (restartBtn) {
     restartBtn.style.display = "inline-block";
-    restartBtn.textContent = "COME BACK TOMORROW";
+    restartBtn.textContent = "COME BACK TOMORROW!";
     restartBtn.disabled = true;
     restartBtn.style.cursor = "default";
     restartBtn.style.opacity = "0.7";
@@ -155,7 +171,7 @@ function renderPersistedResult(dateStr, persisted) {
   injectShareSummary();
 }
 
-// ---------- Locked Gate (fallback) ----------
+// ---------- Locked Gate ----------
 function showLockedGate(dateStr) {
   const persisted = loadResult(dateStr);
   if (persisted) {
@@ -224,7 +240,7 @@ function startGame() {
     headerEl?.classList.add("hidden");
     timerEl.style.display = "none";
     scoreText.textContent = `No quiz scheduled for ${RUN_DATE}.`;
-    reviewEl.innerHTML = `<div class="rev"><div class="q">Add a set for ${RUN_DATE} in questions.js</div></div>`;
+    reviewEl.innerHTML = `<div class=\"rev\"><div class=\"q\">Add a set for ${RUN_DATE} in questions.js</div></div>`;
     return;
   }
 
@@ -245,7 +261,19 @@ function showResult() {
   headerEl?.classList.add("hidden");
   timerEl.style.display = "none";
 
-  scoreText.textContent = `You got ${score} / ${QUESTIONS.length} correct.`;
+  if (score === QUESTIONS.length) {
+    scoreText.textContent = `TOUCHDOWN! You got ${score} / ${QUESTIONS.length}!`;
+
+    // Save/advance Touchdown Streak (5/5 days)
+    computeAndSaveTouchdownStreak(RUN_DATE);
+
+    // Confetti (requires canvas-confetti script on the page)
+    if (typeof confetti === "function") {
+      confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+    }
+  } else {
+    scoreText.textContent = `You got ${score} / ${QUESTIONS.length} correct.`;
+  }
 
   reviewEl.innerHTML = "";
   picks.forEach(({ idx, pick, correct }) => {
@@ -296,7 +324,7 @@ function showResult() {
   injectShareSummary();
 }
 
-// ---------- Quiz Flow ----------
+// ---------- Quiz Shit ----------
 function renderQuestion() {
   answered = false;
   const q = QUESTIONS[current];
@@ -347,36 +375,41 @@ function showToast(msg) {
 // ---------- Share + Streak ----------
 function injectShareSummary() {
   const resultTop = document.getElementById("result");
-  const old = resultTop.querySelector(".share-header");
-  if (old) old.remove();
+  if (!resultTop) return;
 
+  resultTop.querySelectorAll(".share-header,.date-line").forEach(n => n.remove());
+
+  const dateLine = document.createElement("div");
+  dateLine.className = "date-line";
+  dateLine.textContent = `Pigskin 5 — ${RUN_DATE}`;
+  resultTop.insertBefore(dateLine, resultTop.firstChild);
+
+  // Build header (sits under "Your Score")
   const headerWrap = document.createElement("div");
-  headerWrap.className = "share-header";
-  headerWrap.style.display = "flex";
-  headerWrap.style.alignItems = "center";
-  headerWrap.style.gap = "10px";
-  headerWrap.style.marginBottom = "8px";
+  headerWrap.className = "share-header under-score";
 
-  const squaresText = picks.map(p => (p.pick === p.correct ? "🟩" : "⬜")).join("");
-  const emojiLine = document.createElement("div");
-  emojiLine.style.fontSize = "22px";
-  emojiLine.style.letterSpacing = "2px";
-  emojiLine.style.userSelect = "text";
-  emojiLine.textContent = squaresText;
+  
+  const leftRow = document.createElement("div");
+  leftRow.className = "share-left-row";
+
+  const squares = picks.map(p => (p.pick === p.correct ? "🟩" : "⬜")).join("");
+  const grid = document.createElement("div");
+  grid.className = "share-grid";
+  grid.textContent = squares;
 
   const shareBtn = document.createElement("button");
   shareBtn.id = "shareBtn";
+  shareBtn.className = "share-btn";
   shareBtn.textContent = "Share";
-  shareBtn.style.padding = "6px 12px";
-  shareBtn.style.border = "none";
-  shareBtn.style.borderRadius = "8px";
-  shareBtn.style.background = "#b7f7ff";
-  shareBtn.style.color = "#0b1116";
-  shareBtn.style.fontWeight = "800";
-  shareBtn.style.cursor = "pointer";
   shareBtn.addEventListener("click", async () => {
-    const squaresText = picks.map(p => (p.pick === p.correct ? "🟩" : "⬜")).join("");
-    const shareText = `I scored ${squaresText} in Football Take-5! \n \n https://twillyallen.github.io/FootballTake5/\n\n@TwillysTakes on X!`;
+    const squaresNow = picks.map(p => (p.pick === p.correct ? "🟩" : "⬜")).join("");
+    // Check for 5/5
+    let shareText;
+    if (score === QUESTIONS.length) {
+      shareText = `I Scored a Touchdown! ${squaresNow}\n\nhttps://twillyallen.github.io/FootballTake5/\n\n@TwillysTakes on X!`;
+    } else {
+      shareText = `I scored ${squaresNow} in Pigskin 5!\n\nhttps://twillyallen.github.io/FootballTake5/\n\n@TwillysTakes on X!`;
+    }
     try {
       if (navigator.clipboard && window.isSecureContext) {
         await navigator.clipboard.writeText(shareText);
@@ -399,18 +432,39 @@ function injectShareSummary() {
     }
   });
 
-  const streakDiv = document.createElement("div");
-  streakDiv.style.marginLeft = "auto";
-  streakDiv.textContent = `Daily Streak: ${computeAndSaveStreak(RUN_DATE)}`;
+  leftRow.append(grid, shareBtn);
 
-  headerWrap.append(emojiLine, shareBtn, streakDiv);
-  resultTop.insertBefore(headerWrap, resultTop.firstChild);
-  const dateLine = document.createElement("div");
-  dateLine.style.fontWeight = "800";
-  dateLine.style.marginBottom = "4px";
-  dateLine.textContent = `Football Take-5 – ${RUN_DATE}`;
-  resultTop.insertBefore(dateLine, headerWrap);
+  // Streaks Tags
+  const rightCol = document.createElement("div");
+  rightCol.className = "share-right";
+
+  const daily = document.createElement("div");
+  daily.className = "pill";
+  daily.textContent = `Daily Streak: ${computeAndSaveStreak(RUN_DATE)}`;
+
+  const td = document.createElement("div");
+  td.className = "pill";
+  td.textContent = `Touchdown Streak: ${localStorage.getItem("tdStreak") || 0}`;
+
+  rightCol.append(daily, td);
+
+  headerWrap.append(leftRow, rightCol);
+
+  // ---- Insert header directly under the "Your Score" line ----
+  const anchor = document.getElementById("scoreText");
+  if (anchor && anchor.parentNode) {
+    anchor.parentNode.insertBefore(headerWrap, anchor.nextSibling);
+  } else {
+    const review = document.getElementById("review");
+    if (review && review.parentNode) {
+      review.parentNode.insertBefore(headerWrap, review);
+    } else {
+      resultTop.appendChild(headerWrap);
+    }
+  }
 }
+
+
 
 // ---------- Init ----------
 function init() {
@@ -432,12 +486,10 @@ function init() {
   showStartScreen();
 
   const menuBtn = document.getElementById("menu-toggle");
-const menu = document.getElementById("menu");
-
-menuBtn?.addEventListener("click", () => {
-  menu.classList.toggle("hidden");
-});
-
+  const menu = document.getElementById("menu");
+  menuBtn?.addEventListener("click", () => {
+    menu.classList.toggle("hidden");
+  });
 }
 
 if (document.readyState === "loading") {

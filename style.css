@@ -4,8 +4,6 @@
   --btn-cyan: #b7f7ff;
   --btn-cyan-hover: #a3f1ff;
   --ink: #0b1116;
-
-
   --title-stroke: 6px;     
 }
 
@@ -25,7 +23,6 @@ body{
   position: relative;
 }
 
-
 body::before{
   content: "";
   position: fixed;
@@ -39,7 +36,7 @@ body::before{
 .app{
   position: relative;
   z-index: 1;
-  height: 100svh;                 /* viewport height */
+  height: 100svh;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -57,16 +54,24 @@ body::before{
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 12px;
 }
 .header.hidden { display: none !important; }
 .progress { opacity: .92; font-weight: 800; }
 .timer{ padding: 6px 10px; border-radius: 8px; background: rgba(255,255,255,.08); }
 .timer.warning{ background: rgba(255,0,0,.14); }
+.timer{
+  display: inline-block;
+  min-width: 3.5ch;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1, "lnum" 1;
+}
 
-/* Start screen (TOP-aligned)*/
+/* Start screen */
 .start-screen{
   width: min(900px, 94vw);
-  height: calc(100svh - 32px);  
+  height: calc(100svh - 32px);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -75,15 +80,6 @@ body::before{
   gap: 10px;
   padding-top: clamp(18px, 6vh, 48px);
 }
-
-.start-screen .overlay{
-  background: none !important;
-  box-shadow: none !important;
-  padding: 0 !important;
-  border-radius: 0 !important;
-}
-
-/* Text outline */
 .start-screen h1{
   margin: 0 0 8px;
   font-size: clamp(38px, 11vw, 92px);
@@ -91,9 +87,8 @@ body::before{
   color: #fff;
   -webkit-text-stroke: var(--title-stroke) #000;  
   paint-order: stroke fill;
-  text-shadow: 0 6px 22px rgba(0,0,0,.35);        /* soft glow only */
+  text-shadow: 0 6px 22px rgba(0,0,0,.35);
 }
-
 .start-screen p{
   margin: 0 0 14px;
   font-size: clamp(14px, 2.6vw, 22px);
@@ -101,7 +96,6 @@ body::before{
   letter-spacing: .08em;
   text-shadow: 0 2px 0 #000, 0 8px 20px rgba(0,0,0,.35);
 }
-
 .start-screen .btn{
   background: var(--btn-cyan);
   color: var(--ink);
@@ -116,7 +110,6 @@ body::before{
 }
 .start-screen .btn:hover { background: var(--btn-cyan-hover); transform: translateY(-1px); }
 .start-screen .btn:active { transform: translateY(1px); box-shadow: 0 8px 20px rgba(0,0,0,.28), inset 0 2px 0 rgba(0,0,0,.10); }
-
 .start-screen .byline{
   margin-top: 8px;
   font-size: clamp(10px, 2.4vw, 14px);
@@ -125,9 +118,7 @@ body::before{
   letter-spacing: .04em;
 }
 
-/* *************************
-   Quiz & Results
-   ************************* */
+/* Quiz & Results */
 .card, .result{
   width: min(900px, 94vw);
   background: transparent;
@@ -137,17 +128,12 @@ body::before{
   padding: 0;
   margin: 0;
 }
-
-/* keep everything snug */
 .question{
   font-size: clamp(20px, 2.6vw, 28px);
   font-weight: 900;
   margin: 4px 0 10px;
 }
-
 .choices{ display: grid; gap: 10px; }
-
-/* light buttons over the dimmed field */
 .choices button{
   width: 100%;
   padding: 12px 14px;
@@ -164,10 +150,8 @@ body::before{
 .choices button[disabled]{ opacity: .9; cursor: default; }
 .correct{ background: #c7f5d8 !important; outline: 2px solid #36c46a; }
 .wrong  { background: #ffd2d9 !important; outline: 2px solid #ff4b6b; }
-
 .actions{ margin-top: 8px; display:flex; justify-content:flex-end; }
 
-/* Results list tidy uppp */
 .review{ display:grid; gap:10px; margin-top: 10px; }
 .rev{ background: rgba(0,0,0,.22); border-radius: 10px; padding: 10px; }
 .rev .q{ font-weight: 900; margin-bottom: 4px; }
@@ -186,16 +170,10 @@ body::before{
   box-shadow: 0 6px 16px rgba(0,0,0,.25);
   transition: transform .12s ease, background-color .12s ease;
 }
-#restartBtn:hover {
-  background: var(--btn-cyan-hover);
-  transform: translateY(-1px);
-}
-#restartBtn:active {
-  transform: translateY(1px);
-  box-shadow: 0 3px 10px rgba(0,0,0,.3);
-}
+#restartBtn:hover { background: var(--btn-cyan-hover); transform: translateY(-1px); }
+#restartBtn:active { transform: translateY(1px); box-shadow: 0 3px 10px rgba(0,0,0,.3); }
 
-/* "Copied" feedback */
+/* Toast */
 .toast {
   position: fixed;
   bottom: 16px;
@@ -216,32 +194,18 @@ body::before{
   transform: translateX(-50%) translateY(0);
 }
 
-/* stop header jumping when 12s -> 9s */
-.timer{
-  display: inline-block;
-  min-width: 3.5ch;              
-  text-align: center;
-  font-variant-numeric: tabular-nums;
-  font-feature-settings: "tnum" 1, "lnum" 1; /* broader browser support */
-}
-.header{ gap: 12px; }            
-
-
-
 /* Hamburger button */
 .menu-btn {
   background: none;
   border: none;
   font-size: 28px;
   cursor: pointer;
-  color: #fff;  /* match header text */
+  color: #fff;
   margin-right: 12px;
 }
-
-/* Menu drawer */
 .menu {
   position: absolute;
-  top: 60px;      /* below header */
+  top: 60px;
   left: 0;
   background: #0b1116;
   width: 200px;
@@ -252,18 +216,140 @@ body::before{
   border-radius: 0 0 8px 0;
   z-index: 1000;
 }
+.menu a { color: #fff; text-decoration: none; font-weight: 600; }
+.menu a:hover { text-decoration: underline; }
+.hidden { display: none; }
 
-.menu a {
-  color: #fff;
-  text-decoration: none;
-  font-weight: 600;
+/* Results header layout */
+.share-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 8px 0 12px;
 }
 
-.menu a:hover {
-  text-decoration: underline;
+.date-line { font-weight: 800; margin-bottom: 4px; }
+
+.share-left { display: flex; flex-direction: column; gap: 6px; }
+.share-grid { font-size: 22px; letter-spacing: 2px; }
+
+/* Middle (share) */
+.share-btn {
+  display: inline-block;   
+  padding: 6px 10px;
+  border: 0;
+  border-radius: 8px;
+  background: #b7f7ff;
+  color: #0b1116;
+  font-weight: 800;
+  font-size: 14px;
+  cursor: pointer;
+  white-space: nowrap;     
+  max-width: fit-content;  
 }
 
-/* Hidden state */
-.hidden {
-  display: none;
+
+.share-right {
+  margin-left: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+}
+
+.pill {
+  font-size: 12px;
+  background: rgba(255,255,255,0.2);
+  border: 1px solid rgba(255,255,255,0.35);
+  backdrop-filter: blur(2px);
+  padding: 4px 8px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+/* ---------- Mobile SHIT ---------- */
+@media (max-width: 520px) {
+  .share-btn {
+    font-size: 13px;
+    padding: 5px 9px;
+    align-self: flex-start;  /* sits under squares, left aligned */
+  }
+}
+
+  .share-grid { font-size: 18px; letter-spacing: 1px; }
+
+  /* Share button smaller, under squares */
+  .share-btn {
+    width: auto;
+    align-self: flex-start;
+    font-size: 14px;
+    padding: 6px 10px;
+  }
+
+  /* Streaks stacked vertically under button */
+  .share-right {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .pill {
+    font-size: 12px;
+    padding: 3px 8px;
+  }
+
+/* new helper so the under-score header lays out nicely */
+.share-header.under-score {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 8px 0 12px;
+}
+
+.share-left-row {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* space between squares and Share button */
+}
+
+/* Keep the Share button compact on all site sizes */
+.share-btn {
+  display: inline-block;
+  padding: 6px 10px;
+  border: 0;
+  border-radius: 8px;
+  background: #b7f7ff;
+  color: #0b1116;
+  font-weight: 800;
+  font-size: 14px;
+  cursor: pointer;
+  white-space: nowrap;
+  max-width: fit-content;
+}
+
+/* mobile tweaks still apply */
+@media (max-width: 520px) {
+.share-header.under-score {
+  display: grid;
+  grid-template-columns: 1fr auto;  
+  align-items: start;               
+  gap: 10px;
+  margin: 8px 0 12px;
+}
+
+  .share-left-row {
+    gap: 8px;
+  }
+  .share-btn {
+    font-size: 13px;
+    padding: 5px 9px;
+  }
+  
+  /* Share button position */
+  .share-right {
+    align-items: flex-start;    
+    flex-direction: column;
+    gap: 6px;
+  }
 }
