@@ -100,7 +100,7 @@ export const CALENDAR = {
     { question: "How many career TD Passes did Dan Marino finish with?", choices: ["487", "392", "420", "438"], answer: 2 }
   ],
   "2025-09-24": [
-    { question: "Who leads the current 2025 league leader in Sacks?", choices: ["Rashan Gary", "Micah Parsons", "Harold Landry III", "Myles Garrett"], answer: 0 },
+    { question: "Who is the 2025 leader in Sacks?", choices: ["Rashan Gary", "Micah Parsons", "Harold Landry III", "Myles Garrett"], answer: 0 },
     { question: "What city did the Chargers first belong to?", choices: ["Pasadena", "San Diego", "Los Angeles", "San Fransisco"], answer: 2 },
     { question: "Which two players SHARED the MVP Award?", choices: ["Brett Favre & Barry Sanders", "Steve Young & Kurt Warner", "Peyton Manning & Brett Favre", "LaDainian Tomlinson & Steve McNair"], answer: 0 },
     { question: "What was the original name of the Chicago Bears?", choices: ["Bears", "Cubs", "Pounders", "Staleys"], answer: 3 },
