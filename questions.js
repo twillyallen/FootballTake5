@@ -115,14 +115,14 @@ export const CALENDAR = {
   ],
   "2025-09-26": [
     { question: "Who was the first player to rush for 2,000 yards in a season?", choices: ["Barry Sanders", "Eric Dickerson", "O.J. Simpson", "Adrian Peterson"], answer: 2 },
-    { question: "What is the shortest overtime game in NFL history?", choices: ["59 seconds", "11 seconds", "18 seconds", "26 seconds"], answer: 1 },
+    { question: "How long was the shortest overtime in NFL History?", choices: ["59 seconds", "11 seconds", "18 seconds", "26 seconds"], answer: 1 },
     { question: "Who threw 7 TD passes in a game in 2013?", choices: ["Peyton Manning", "Drew Brees", "Nick Foles", "Aaron Rodgers"], answer: 2 },
     { question: "Who was the last non-QB to win MVP?", choices: ["Adrian Peterson", "Marshall Faulk", "LaDainian Tomlinson", "Derrick Henry"], answer: 0 },
     { question: "Which city did the Rams originally play in?", choices: ["Cleveland", "Los Angeles", "St. Louis", "Anaheim"], answer: 0 },
   ],
   "2025-09-27": [
-    { question: "Which WR pretended to moon the crowd in Green Bay?", choices: ["Randy Moss", "Terrell Owens", "Antonio Brown", "Chad Johnson"], answer: 0 },
-    { question: "Who leads the league in Rushing TDs?", choices: ["Daniel Jones", "Derrick Henry", "Jonathon Taylor", "Jalen Hurts"], answer: 3 },
+    { question: "Which WR performed a DISGUSTING act and pretended to moon the crowd in Green Bay?", choices: ["Randy Moss", "Terrell Owens", "Antonio Brown", "Chad Johnson"], answer: 0 },
+    { question: "Who leads the 2025 Season in Rushing TDs?", choices: ["Daniel Jones", "Derrick Henry", "Jonathon Taylor", "Jalen Hurts"], answer: 3 },
     { question: "Who was the first TE with 1,000 receiving yards in a season?", choices: ["Tony Gonzalez", "Kellen Winslow", "Mike Ditka", "Shannon Sharpe"], answer: 2 },
     { question: "Which player was nicknamed 'Night Train'?", choices: ["Deacon Jones", "Dick Lane", "Lenny Moore", "Ray Nitschke"], answer: 1 },
     { question: "Who holds the single-season rushing TD record?", choices: ["Shaun Alexander", "Emmitt Smith", "LaDainian Tomlinson", "Adrian Peterson"], answer: 2 },
@@ -131,7 +131,7 @@ export const CALENDAR = {
     { question: "Who won the first-ever Super Bowl?", choices: ["Packers", "Chiefs", "Colts", "Jets"], answer: 0 },
     { question: "Which player returned a missed field goal 109 yards for a TD?", choices: ["Cordarrelle Patterson", "Antonio Cromartie", "Devin Hester", "Jamal Agnew"], answer: 1 },
     { question: "Which player has the most career safeties?", choices: ["Ted Hendricks", "Jared Allen", "Justin Houston", "Dwight Freeney"], answer: 0 },
-    { question: "All-time NFL Sack Leader?", choices: ["Bruce Smith", "Reggie White", "JJ Watt", "Terrell Suggs"], answer: 0 },
+    { question: "All-time NFL Sack Leader?", choices: ["JJ Watt", "Reggie White", "Bruce Smith", "Terrell Suggs"], answer: 2 },
     { question: "Which RB is second all-time in rushing yards?", choices: ["Walter Payton", "Frank Gore", "Barry Sanders", "LaDainian Tomlinson"], answer: 0 },
   ],
   "2025-09-29": [
@@ -144,7 +144,7 @@ export const CALENDAR = {
   "2025-09-30": [
     { question: "Which team has the most Hall of Famers?", choices: ["Packers", "Bears", "Steelers", "Cowboys"], answer: 1 },
     { question: "Which QB famously 'guaranteed' a Super Bowl win?", choices: ["Joe Namath", "Tom Brady", "Terry Bradshaw", "Kurt Warner"], answer: 0 },
-    { question: "Which QB has the most pick-sixes thrown all-time?", choices: ["Brett Favre", "Tom Brady", "Vinny Testaverde", "Drew Brees"], answer: 0 },
+    { question: "Which QB has the most pick-sixes thrown all-time?", choices: ["Drew Brees", "Tom Brady", "Vinny Testaverde", "Brett Favre"], answer: 3 },
     { question: "Which coach has the most all-time wins?", choices: ["Bill Belichick", "Don Shula", "George Halas", "Tom Landry"], answer: 1 },
     { question: "Who is the youngest QB to start a Super Bowl?", choices: ["Patrick Mahomes", "Dan Marino", "Ben Roethlisberger", "Jalen Hurts"], answer: 2 }
   ]
