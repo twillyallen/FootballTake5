@@ -406,9 +406,9 @@ function injectShareSummary() {
     // Check for 5/5
     let shareText;
     if (score === QUESTIONS.length) {
-      shareText = `I Scored a Touchdown! ${squaresNow}\n\nhttps://twillyallen.github.io/FootballTake5/\n\n@TwillysTakes on X!`;
+      shareText = `I Scored a Touchdown! ${squaresNow}\n\nhttps://pigskin5.com\n\n@TwillysTakes on X!`;
     } else {
-      shareText = `I scored ${squaresNow} in Pigskin 5!\n\nhttps://twillyallen.github.io/FootballTake5/\n\n@TwillysTakes on X!`;
+      shareText = `I scored ${squaresNow} in Pigskin 5!\n\nhttps://pigskin5.com\n\n@TwillysTakes on X!`;
     }
     try {
       if (navigator.clipboard && window.isSecureContext) {
