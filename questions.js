@@ -147,6 +147,20 @@ export const CALENDAR = {
     { question: "Which QB has the most pick-sixes thrown all-time?", choices: ["Drew Brees", "Tom Brady", "Vinny Testaverde", "Brett Favre"], answer: 3 },
     { question: "Which coach has the most all-time wins?", choices: ["Bill Belichick", "Don Shula", "George Halas", "Tom Landry"], answer: 1 },
     { question: "Who is the youngest QB to start a Super Bowl?", choices: ["Patrick Mahomes", "Dan Marino", "Ben Roethlisberger", "Jalen Hurts"], answer: 2 }
+  ],
+  "2025-10-01": [
+    { question: "Who leads the league in Passing Yards?", choices: ["Justin Herbert", "Daniel Jones", "Dak Prescott", "Josh Allen"], answer: 2 },
+    { question: "Who was 'The Incredible Bust' taken one pick before Barry Sanders in the 1989 draft?", choices: ["Heath Schuler", "Ryan Leaf", "Jeff George", "Tony Mandarich"], answer: 4 },
+    { question: "Who is the only player to win Super Bowl MVP on a losing team?", choices: ["Chuck Howley", "Terrell Owens", "Larry Fitzgerald", "Patrick Mahomes"], answer: 0 },
+    { question: "Which QB was drafted by the Yankees in baseball?", choices: ["Kyler Murray", "Russell Wilson", "Tom Brady", "Patrick Mahomes"], answer: 1 },
+    { question: "Which team was once called the Portsmouth Spartans?", choices: ["Lions", "Steelers", "Browns", "Colts"], answer: 0 }
+  ],
+  "2025-10-02": [
+    { question: "Which QB led the biggest comeback in NFL history (33 points)?", choices: ["Matt Ryan", "Kirk Cousins", "Tom Brady", "Josh Allen"], answer: 1 },
+    { question: "Leading up to tonight's Thursday Night game, who has more wins vs one another?", choices: ["Sean McVay", "Kyle Shanahan"], answer: 1 },
+    { question: "Which player had the first 'Lambeau Leap'?", choices: ["Robert Brooks", "Donald Driver", "LeRoy Butler", "Sterling Sharpe"], answer: 2 },
+    { question: "Which WR had the 'helmet catch'?", choices: ["Plaxico Burress", "Victor Cruz", "David Tyree", "Mario Manningham"], answer: 2 },
+    { question: "Who leads the league in sacks?", choices: ["Rashan Gary", "Nik Bonito", "Myles Garrett", "Byron Young"], answer: 3 }
   ]
 };
 
