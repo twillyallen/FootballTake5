@@ -130,7 +130,7 @@ export const CALENDAR = {
   "2025-09-28": [
     { question: "Who won the first-ever Super Bowl?", choices: ["Packers", "Chiefs", "Colts", "Jets"], answer: 0 },
     { question: "Which player returned a missed field goal 109 yards for a TD?", choices: ["Cordarrelle Patterson", "Antonio Cromartie", "Devin Hester", "Jamal Agnew"], answer: 1 },
-    { question: "Which player has the most career safeties?", choices: ["Ted Hendricks", "Jared Allen", "Justin Houston", "Dwight Freeney"], answer: 0 },
+    { question: "Which player has the most career safeties?", choices: ["Ted Hendricks", "Jason Taylor", "Justin Houston", "Dwight Freeney"], answer: 0 },
     { question: "All-time NFL Sack Leader?", choices: ["JJ Watt", "Reggie White", "Bruce Smith", "Terrell Suggs"], answer: 2 },
     { question: "Which RB is second all-time in rushing yards?", choices: ["Walter Payton", "Frank Gore", "Barry Sanders", "LaDainian Tomlinson"], answer: 0 },
   ],
