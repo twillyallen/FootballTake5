@@ -150,7 +150,7 @@ export const CALENDAR = {
   ],
   "2025-10-01": [
     { question: "Who leads the league in Passing Yards?", choices: ["Justin Herbert", "Daniel Jones", "Dak Prescott", "Josh Allen"], answer: 2 },
-    { question: "Who was 'The Incredible Bust' taken one pick before Barry Sanders in the 1989 draft?", choices: ["Heath Schuler", "Ryan Leaf", "Jeff George", "Tony Mandarich"], answer: 4 },
+    { question: "Who was 'The Incredible Bust' taken one pick before Barry Sanders in the 1989 draft?", choices: ["Heath Schuler", "Ryan Leaf", "Jeff George", "Tony Mandarich"], answer: 3 },
     { question: "Who is the only player to win Super Bowl MVP on a losing team?", choices: ["Chuck Howley", "Terrell Owens", "Larry Fitzgerald", "Patrick Mahomes"], answer: 0 },
     { question: "Which QB was drafted by the Yankees in baseball?", choices: ["Kyler Murray", "Russell Wilson", "Tom Brady", "Patrick Mahomes"], answer: 1 },
     { question: "Which team was once called the Portsmouth Spartans?", choices: ["Lions", "Steelers", "Browns", "Colts"], answer: 0 }
