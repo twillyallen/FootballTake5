@@ -161,6 +161,20 @@ export const CALENDAR = {
     { question: "Which player had the first 'Lambeau Leap'?", choices: ["Robert Brooks", "Donald Driver", "LeRoy Butler", "Sterling Sharpe"], answer: 2 },
     { question: "Which WR had the 'helmet catch'?", choices: ["Plaxico Burress", "Victor Cruz", "David Tyree", "Mario Manningham"], answer: 2 },
     { question: "Who leads the league in sacks?", choices: ["Rashan Gary", "Nik Bonito", "Myles Garrett", "Byron Young"], answer: 3 }
+  ],
+  "2025-10-03": [
+    { question: "Who has the most Yards from Scrimmage in a single season?", choices: ["Chris Johnson", "Barry Sanders", "Marshall Faulk", "Derrick Henry"], answer: 0 },
+    { question: "Which team drafted Deion Sanders?", choices: ["Falcons", "Cowboys", "49ers", "Ravens"], answer: 0 },
+    { question: "Who has the most receiving yards in a single season?", choices: ["Jerry Rice", "Cooper Kupp", "Calvin Johnson", "Justin Jefferson"], answer: 2 },
+    { question: "Which team did Vince Lombardi coach before the Packers?", choices: ["Browns", "Giants", "Commanders", "Eagles"], answer: 1 },
+    { question: "Which QB holds the record for most Passing TDs as a rookie?", choices: ["Bo Nix", "Peyton Manning", "Justin Herbert", "Baker Mayfield"], answer: 2 }
+  ],
+  "2025-10-04": [
+    { question: "Which WR had the 'helmet catch'?", choices: ["Plaxico Burress", "Victor Cruz", "David Tyree", "Mario Manningham"], answer: 2 },
+    { question: "Which NFL team has the most championships all-time?", choices: ["Packers", "Steelers", "Patriots", "Cowboys"], answer: 0 },
+    { question: "Which kicker has the most career game-winning field goals?", choices: ["Adam Vinatieri", "Justin Tucker", "Morten Andersen", "Gary Anderson"], answer: 0 },
+    { question: "Which NFL player appeared in the movie 'Ace Ventura: Pet Detective'?", choices: ["Joe Montana", "Dan Marino", "Jim Kelly", "Steve Young"], answer: 1 },
+    { question: "Which team had a player retire at halftime of a game?", choices: ["Bills", "Raiders", "Colts", "Dolphins"], answer: 0 }
   ]
 };
 
