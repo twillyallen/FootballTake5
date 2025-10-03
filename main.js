@@ -204,6 +204,7 @@ function showLockedGate(dateStr) {
 // ---------- Screen Switchers ----------
 function showStartScreen() {
   document.body.classList.add("no-scroll");
+  document.body.classList.remove("hide-footer");
 
   const today = getRunDateISO();
   if (hasAttempt(today)) {
@@ -224,6 +225,7 @@ function showStartScreen() {
 
 function startGame() {
   document.body.classList.add("no-scroll");
+  document.body.classList.add("hide-footer");
 
   RUN_DATE = getRunDateISO();
   if (hasAttempt(RUN_DATE)) {
@@ -261,6 +263,7 @@ function startGame() {
 
 function showResult() {
   document.body.classList.remove("no-scroll");
+  document.body.classList.remove("hide-footer");
   cardSec.classList.add("hidden");
   resultSec.classList.remove("hidden");
   headerEl?.classList.add("hidden");
@@ -502,3 +505,48 @@ if (document.readyState === "loading") {
 } else {
   init();
 }
+
+
+// ---- Header controls (help/about) ----
+(function(){
+  const helpBtn = document.getElementById('helpBtn');
+  const howTo = document.getElementById('howTo');
+  const aboutBtn = document.getElementById('aboutBtn');
+  const startScreen = document.getElementById('startScreen');
+  const quizCard = document.getElementById('card');
+  const result = document.getElementById('result');
+  const topbar = document.getElementById('topbar');
+  const restartBtn = document.getElementById('restartBtn');
+
+  function showTopbar(show){
+    if(!topbar) return;
+    topbar.style.display = show ? 'flex' : 'none';
+    // Hide howto when hiding the topbar
+    if(!show && howTo) { howTo.hidden = true; helpBtn?.setAttribute('aria-expanded','false'); }
+  }
+
+  // Toggle How-to panel
+  helpBtn?.addEventListener('click', () => {
+    if(!howTo) return;
+    const isHidden = howTo.hidden;
+    howTo.hidden = !isHidden;
+    helpBtn.setAttribute('aria-expanded', String(isHidden));
+  });
+
+  // Hide header when game starts; show again on results
+  const startBtn = document.getElementById('startBtn');
+  startBtn?.addEventListener('click', () => {
+    showTopbar(false);
+  });
+
+  // If your game swaps screens by toggling 'hidden' class, observe result section
+  const mo = new MutationObserver(() => {
+    if(result && !result.classList.contains('hidden')){
+      showTopbar(true);
+    }
+  });
+  if(result) mo.observe(result, { attributes: true, attributeFilter: ['class'] });
+
+  // On restart, header should be visible (back to start screen)
+  restartBtn?.addEventListener('click', () => showTopbar(true));
+})();

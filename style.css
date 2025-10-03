@@ -71,14 +71,14 @@ body::before{
 /* Start screen */
 .start-screen{
   width: min(900px, 94vw);
-  height: calc(100svh - 32px);
+  min-height: calc(100svh - 160px);
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   text-align: center;
   gap: 10px;
-  padding-top: clamp(18px, 6vh, 48px);
+  .overlay { transform: translateY(-90px); }
 }
 .start-screen h1{
   margin: 0 0 8px;
@@ -229,7 +229,12 @@ body::before{
   margin: 8px 0 12px;
 }
 
-.date-line { font-weight: 800; margin-bottom: 4px; }
+.date-line {
+  font-weight: 800;
+  margin-bottom: 8px;
+  text-align: center;
+  width: 100%;         
+}
 
 .share-left { display: flex; flex-direction: column; gap: 6px; }
 .share-grid { font-size: 22px; letter-spacing: 2px; }
@@ -369,4 +374,149 @@ body::before{
 
 body {
   padding-bottom: 70px; /* prevents content from being hidden behind the ad */
+}
+
+/* ---- Simple page layout for About/Privacy/Contact ---- */
+.page {
+  position: relative;
+  z-index: 1;
+  width: min(900px, 94vw);
+  margin: 24px auto;
+  padding: 16px;
+  background: rgba(0,0,0,0.35);
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 12px;
+  color: #fff;
+  backdrop-filter: blur(3px);
+}
+
+.site-copy {
+  width: min(900px, 94vw);
+  margin: 8px auto 24px;
+  padding: 14px;
+  background: rgba(0,0,0,0.28);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 12px;
+}
+
+.site-copy h3 { margin: 8px 0 6px; }
+.site-copy p, .site-copy ol { margin: 6px 0; }
+
+.site-footer {
+  width: 100%;
+  display: grid;
+  place-items: center;
+  padding: 20px 8px 24px;
+  color: #fff;
+}
+
+.footer-nav {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 6px;
+}
+.footer-nav a { color: #fff; font-weight: 700; text-decoration: underline; }
+.footer-nav a:hover { text-decoration: none; }
+
+/* Sticky ad padding helper */
+body.adpad { padding-bottom: 70px; }
+
+.ad-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #fff;
+  text-align: center;
+  min-height: 60px;
+  z-index: 9999;
+  box-shadow: 0 -2px 6px rgba(0,0,0,0.15);
+}
+
+
+/* ---- Footer visibility + layout helpers (Oct 2025) ---- */
+html, body { height: 100%; }
+body { display: flex; flex-direction: column; min-height: 100vh; }
+.app { flex: 1; }
+
+/* Ensure the start screen doesn't cover the footer */
+.start-screen { 
+  position: relative !important;
+  min-height: calc(100vh - 120px); /* leave space for footer */
+  display: grid;
+  place-items: center;
+  z-index: 1;
+}
+
+.site-footer { 
+  position: relative; 
+  z-index: 5; 
+  background: rgba(0,0,0,0.35);
+  backdrop-filter: blur(3px);
+}
+
+
+/* ---- Top header (help/about) ---- */
+.topbar{
+  position: fixed;
+  top: 8px;
+  left: 8px;
+  right: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 50;
+  pointer-events: none; /* icons handle pointer */
+}
+.topbar .icon-btn{
+  pointer-events: auto;
+  background: rgba(0,0,0,0.5);
+  border: 1px solid rgba(255,255,255,0.4);
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  backdrop-filter: blur(2px);
+}
+.topbar .icon-btn img{ width: 22px; height: 22px; filter: invert(1); }
+
+/* How-to panel */
+.howto{
+  position: fixed;
+  top: 58px;
+  left: 8px;
+  right: 8px;
+  z-index: 40;
+  background: rgba(0,0,0,0.55);
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 12px;
+  color: #fff;
+  padding: 10px 12px;
+  backdrop-filter: blur(3px);
+}
+.howto h3{ margin: 6px 0; }
+.howto ol{ margin: 6px 18px; }
+
+
+/* Hide footer (and sticky ad space) while the game is active */
+.hide-footer .site-footer { 
+  display: none !important;
+}
+.hide-footer #ad-sticky { 
+  display: none !important;
+}
+.hide-footer { 
+  padding-bottom: 0 !important; /* cancel any ad pad */
+}
+
+.page a,
+.page a:visited {
+  color: #ff5bc8;          /* or any hex code you like */
+  text-decoration: underline;
+}
+
+.page a:hover {
+  color: #882a69;       /* lighter cyan hover, matches your theme */
+  text-decoration: none;
 }
