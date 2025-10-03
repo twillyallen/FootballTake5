@@ -520,3 +520,36 @@ body { display: flex; flex-direction: column; min-height: 100vh; }
   color: #882a69;       /* lighter cyan hover, matches your theme */
   text-decoration: none;
 }
+
+.college-edition {
+  font-size: 2.4rem;       /* bigger text */
+  font-weight: 900;        /* extra bold */
+  color: #b7f7ff;          /* your theme cyan */
+  margin-bottom: 10px;     /* space before PIGSKIN 5 */
+  text-transform: uppercase;
+  text-shadow: 0 0 10px rgba(0,0,0,0.6); /* strong glow */
+  letter-spacing: 1px;
+}
+
+
+/* ---- Quiz screen rectangle ad ---- */
+.ad-rect {
+  display: grid;
+  place-items: center;
+  margin: 18px auto 6px;
+  padding: 8px;
+  border-radius: 12px;
+  background: rgba(0,0,0,0.18);
+  border: 1px solid rgba(255,255,255,0.18);
+  width: 100%;
+}
+/* Keep good separation from clickable answers */
+.choices + .ad-rect { margin-top: 22px; }
+
+/* On very small screens, allow responsive width but keep aspect */
+@media (max-width: 380px){
+  .ad-rect ins.adsbygoogle{
+    width: 100% !important;
+    height: auto !important;
+  }
+}

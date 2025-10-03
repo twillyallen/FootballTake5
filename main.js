@@ -206,11 +206,29 @@ function showStartScreen() {
   document.body.classList.add("no-scroll");
   document.body.classList.remove("hide-footer");
 
-  const today = getRunDateISO();
-  if (hasAttempt(today)) {
-    showLockedGate(today);
+  const runDate = getRunDateISO();
+  if (hasAttempt(runDate)) {
+    showLockedGate(runDate);
     return;
   }
+
+  // --- Add College Edition on Saturdays ---
+  const now = new Date();
+  const isSaturday = now.getDay() === 6; // Sunday=0 ... Saturday=6
+  const titleEl = document.querySelector(".game-title");
+
+  // Remove old edition label if switching screens
+  document.querySelector(".college-edition")?.remove();
+
+  if (isSaturday && titleEl) {
+    const edition = document.createElement("div");
+    edition.className = "college-edition";
+    edition.textContent = "College Edition!";
+    titleEl.insertAdjacentElement("beforebegin", edition);
+  }
+
+
+
 
   startScreen.classList.remove("hidden");
   cardSec.classList.add("hidden");
@@ -550,3 +568,11 @@ if (document.readyState === "loading") {
   // On restart, header should be visible (back to start screen)
   restartBtn?.addEventListener('click', () => showTopbar(true));
 })();
+
+// ---- Render quiz rectangle ad after game starts ----
+function renderQuizAd(){
+  try { (window.adsbygoogle = window.adsbygoogle || []).push({}); } catch(e){}
+}
+document.getElementById('startBtn')?.addEventListener('click', () => {
+  setTimeout(renderQuizAd, 250);
+});
