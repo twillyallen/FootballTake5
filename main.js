@@ -212,20 +212,35 @@ function showStartScreen() {
     return;
   }
 
-  // --- Add College Edition on Saturdays ---
-  const now = new Date();
-  const isSaturday = now.getDay() === 6; // Sunday=0 ... Saturday=6
-  const titleEl = document.querySelector(".game-title");
+// --- Add College Edition badge on Saturdays ---
+const now = new Date();                     // (use real date in prod)
+const isSaturday = now.getDay() === 6;      // Sunday=0 ... Saturday=6
+const titleEl = document.querySelector(".game-title");
 
-  // Remove old edition label if switching screens
-  document.querySelector(".college-edition")?.remove();
+// Clean up previous badge if navigating back
+document.querySelector(".college-badge")?.remove();
 
-  if (isSaturday && titleEl) {
-    const edition = document.createElement("div");
-    edition.className = "college-edition";
-    edition.textContent = "College Edition!";
-    titleEl.insertAdjacentElement("beforebegin", edition);
+if (isSaturday && titleEl) {
+  // Ensure the title is in a positioned wrapper
+  let wrap = titleEl.closest(".title-wrap");
+  if (!wrap) {
+    wrap = document.createElement("div");
+    wrap.className = "title-wrap";
+    titleEl.parentNode.insertBefore(wrap, titleEl); // wrap before -> then move title inside
+    wrap.appendChild(titleEl);
+
+    // OPTIONAL: if your subtitle/tagline should stay with the title, move it into wrap:
+    // const tagline = document.querySelector(".tagline"); 
+    // if (tagline) wrap.appendChild(tagline);
   }
+
+  // Insert the image badge
+  const badge = document.createElement("img");
+  badge.className = "college-badge";
+  badge.src = "./college.png";           // <-- your file name (put it in the same folder as index.html)
+  badge.alt = "College Edition";
+  wrap.appendChild(badge);
+}
 
 
 
@@ -242,7 +257,7 @@ function showStartScreen() {
 }
 
 function startGame() {
-  document.body.classList.add("no-scroll");
+  document.body.classList.remove("no-scroll");
   document.body.classList.add("hide-footer");
 
   RUN_DATE = getRunDateISO();

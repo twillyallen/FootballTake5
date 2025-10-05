@@ -35,6 +35,13 @@ export const CALENDAR = {
     { question: "Which kicker has the most career game-winning field goals?", choices: ["Adam Vinatieri", "Justin Tucker", "Morten Andersen", "Gary Anderson"], answer: 0 },
     { question: "Which NFL player appeared in the movie 'Ace Ventura: Pet Detective'?", choices: ["Joe Montana", "Dan Marino", "Jim Kelly", "Steve Young"], answer: 1 },
     { question: "Which team had a player retire at halftime of a game?", choices: ["Bills", "Raiders", "Colts", "Dolphins"], answer: 0 }
+  ],
+  "2025-10-05": [ //Monday
+    { question: "Which WR has the most career playoff TD receptions?", choices: ["Jerry Rice", "Rob Gronkowski", "Randy Moss", "Travis Kelce"], answer: 0 },
+    { question: "Which player was on the cover of Madden 2004?", choices: ["Peyton Manning", "Ray Lewis", "Marshall Faulk", "Michael Vick"], answer: 3 },
+    { question: "Which team was once known as the Decatur Staleys?", choices: ["Packers", "Bears", "Giants", "Lions"], answer: 1 },
+    { question: "Which QB threw a TD pass to himself?", choices: ["Marcus Mariota", "Aaron Rodgers", "Nick Foles", "Tom Brady"], answer: 0 },
+    { question: "Which Bears QB holds the franchise record for passing yards?", choices: ["Jay Cutler", "Mitchell Trubisky", "Jim McMahon", "Erik Kramer"], answer: 0 }
   ]
 };
 

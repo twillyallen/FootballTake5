@@ -553,3 +553,36 @@ body { display: flex; flex-direction: column; min-height: 100vh; }
     height: auto !important;
   }
 }
+
+/* Title wrapper gives us a positioned anchor for the badge */
+.title-wrap {
+  position: relative;
+  display: inline-block; /* shrink-wrap to the title width */
+}
+
+/* Keep title above the background but below the badge */
+.game-title {
+  position: relative;
+  z-index: 1;
+}
+
+/* College badge image */
+.college-badge {
+  position: absolute;
+  left: -60px;             /* nudge horizontally */
+  top: -43px;              /* nudge vertically */
+  transform: rotate(-12deg);
+  width: clamp(140px, 35vw, 220px); 
+  z-index: 2;              
+  pointer-events: none;    
+}
+
+/* Tighter offsets on small screens */
+@media (max-width: 380px){
+  .college-badge {
+    left: -8px;
+    top: -20px;
+    transform: rotate(-10deg);
+    width: 150px;
+  }
+}
