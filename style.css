@@ -12,10 +12,12 @@
 html, body {
   margin: 0;
   height: 100%;
-  body.no-scroll { overflow: hidden; }               
   font-family: 'Arial', sans-serif;
   color: #fff;
 }
+
+body.no-scroll { overflow: hidden; }     /* <-- standalone rule */
+
 
 /* Field background */
 body{
@@ -36,7 +38,6 @@ body::before{
 .app{
   position: relative;
   z-index: 1;
-  height: 100svh;
   width: 100%;
   display: flex;
   flex-direction: column;
