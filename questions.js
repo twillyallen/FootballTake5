@@ -36,12 +36,47 @@ export const CALENDAR = {
     { question: "Which NFL player appeared in the movie 'Ace Ventura: Pet Detective'?", choices: ["Joe Montana", "Dan Marino", "Jim Kelly", "Steve Young"], answer: 1 },
     { question: "Which team had a player retire at halftime of a game?", choices: ["Bills", "Raiders", "Colts", "Dolphins"], answer: 0 }
   ],
-  "2025-10-05": [ //Monday
+  "2025-10-06": [ //Monday
     { question: "Which WR has the most career playoff TD receptions?", choices: ["Jerry Rice", "Rob Gronkowski", "Randy Moss", "Travis Kelce"], answer: 0 },
     { question: "Which player was on the cover of Madden 2004?", choices: ["Peyton Manning", "Ray Lewis", "Marshall Faulk", "Michael Vick"], answer: 3 },
     { question: "Which team was once known as the Decatur Staleys?", choices: ["Packers", "Bears", "Giants", "Lions"], answer: 1 },
     { question: "Which QB threw a TD pass to himself?", choices: ["Marcus Mariota", "Aaron Rodgers", "Nick Foles", "Tom Brady"], answer: 0 },
     { question: "Which Bears QB holds the franchise record for passing yards?", choices: ["Jay Cutler", "Mitchell Trubisky", "Jim McMahon", "Erik Kramer"], answer: 0 }
+  ],
+  "2025-10-07": [ //Tuesday
+    { question: "Jerry Rice has more career receiving yards than any player has rushing yards.", choices: ["True", "False"], answer: 0 },
+    { question: "Who was the Head Coach during the Bills 4 Consecutive Super Bowl Appearances", choices: ["Wade Phillips", "George Seifert", "Mark Levy", "Jim Kelly"], answer: 2 },
+    { question: "Current League Leader in Receptions?", choices: ["Amon-Ra St. Brown", "Christian McCaffrey", "Davante Adams", "*CORRECT ANSWER*"], answer: 3 },
+    { question: "Who was the first player with 4 Super Bowl rings?", choices: ["Terry Bradshaw", "Marv Fleming", "Tom Brady", "Adam Vinatieri"], answer: 1 },
+    { question: "Which Super Bowl Era Head Coach has the highest Career Win Percentage?", choices: ["Matt LaFleur", "Nick Sirianni", "Vince Lombardi", "John Madden"], answer: 3 }
+  ],
+  "2025-10-08": [ //Wednesday
+    { question: "Which defensive back intercepted Russell Wilson at the goal line to clinch Super Bowl XLIX?", choices: ["Darrelle Revis", "Stephon Gilmore", "Malcom Butler", "Devin McCourty"], answer: 2 },
+    { question: "Every team has appeared in the Super Bowl at least once", choices: ["True", "False"], answer: 0 },
+    { question: "Which RB from the 2017 Draft Class has the most Rushing Yards?", choices: ["Aaron Jones", "Christian McCaffrey", "Joe Mixon", "Alvin Kamara"], answer: 2 },
+    { question: "Current 2025 interception leader?", choices: ["Devin Lloyd", "*CORRECT ANSWER*", "Tremaine Edmunds", "Kerby Joseph"], answer: 1 },
+    { question: "Which 49er caught “The Catch” in the NFC Championship Game against the Cowboys?", choices: ["Jimmy Robinson", "Dwight Clark", "Jerry Rice", "John Taylor"], answer: 1 }
+  ],
+  "2025-10-09": [ //Thursday
+    { question: "The Eagles and Giants first met in 1933. Who won that game?", choices: ["Eagles", "Giants"], answer: 1 },
+    { question: "Which QB led the Eagles to their first Super Bowl win?", choices: ["Donovan McNabb", "Jalen Hurts", "Nick Foles", "Carson Wentz"], answer: 2 },
+    { question: "Who was the first Giant with 10,000 Career Rush Yards?", choices: ["Rodney Hampton", "Saquon Barkley", "Ahmad Bradshaw", "Tiki Barber"], answer: 3 },
+    { question: "Who scored the game winning TD in the 2010 'Miracle at the NEW Meadowlands' Week 15 game?", choices: ["Desean Jackson", "Michael Vick", "Brent Celek", "Jeremy Maclin"], answer: 0 },
+    { question: "Before tonight's matchup, which team has more total yards gained in 2025?", choices: ["Giants", "Eagles"], answer: 0 }
+  ],
+  "2025-10-10": [ //Friday
+    { question: "What year did the Colts relocate from Baltimore to Indianapolis?", choices: ["2002", "1964", "1981", "1984"], answer: 3 },
+    { question: "Current 2025 leader in rushing yards?", choices: ["*CORRECT ANSWER*", "*INCORRECT ANSWER*", "*INCORRECT ANSWER*", "*INCORRECT ANSWER*"], answer: 0 },
+    { question: "Where were the Cardinals first located?", choices: ["Phoenix", "Chicago", "St. Louis", "Scottsdale"], answer: 1 },
+    { question: "Most all time Receiving Yards in Seahawks History?", choices: ["DK Metcalf", "Doug Baldwin", "Steve Largent", "Tyler Lockett"], answer: 2 },
+    { question: "What Bengal was famous for his post-TD dance, 'The Ickey Shuffle'?", choices: ["James Brooks", "Elbert Woods", "Cris Colinsworth", "Boomer Esiason"], answer: 1 }
+  ],
+  "2025-10-11": [ //Saturday
+    { question: "Who holds the NCAA record for most career rushing yards?", choices: ["Jonathan Taylor", "Ricky Williams", "Tony Dorsett", "Donnel Pumphrey"], answer: 3 },
+    { question: "Who is currently ranked #4?", choices: ["*INCORRECT ANSWER*", "*INCORRECT ANSWER*", "*CORRECT ANSWER*", "*INCORRECT ANSWER*"], answer: 2 },
+    { question: "Who won the 2022 Heisman Trophy?", choices: ["Caleb Williams", "CJ Stroud", "Stetson Bennett", "Max Duggan"], answer: 0 },
+    { question: "Current league leader in Passing TDs?", choices: ["*CORRECT ANSWER*", "*INCORRECT ANSWER*", "*INCORRECT ANSWER*", "*INCORRECT ANSWER*"], answer: 0 },
+    { question: "Who is the all-time winningest coach in college football history (Career wins)?", choices: ["Nick Saban", "Joe Paterno", "Bear Bryant", "Eddie Robinson"], answer: 1 }
   ]
 };
 
