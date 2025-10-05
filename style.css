@@ -373,9 +373,7 @@ body::before{
   box-shadow: 0 -2px 6px rgba(0,0,0,0.15);
 }
 
-body {
-  padding-bottom: 70px; /* prevents content from being hidden behind the ad */
-}
+
 
 /* ---- Simple page layout for About/Privacy/Contact ---- */
 .page {
