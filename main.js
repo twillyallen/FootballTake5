@@ -203,14 +203,27 @@ function showLockedGate(dateStr) {
 
 // ---------- Screen Switchers ----------
 function showStartScreen() {
-  document.body.classList.remove("no-scroll");
-  document.body.classList.remove("hide-footer");
+  document.body.classList.remove("no-scroll");     // ensure scrolling works
+  document.body.classList.remove("hide-footer");   // show footer
+  document.body.classList.add("start-page");       // mark start screen
 
   const runDate = getRunDateISO();
   if (hasAttempt(runDate)) {
     showLockedGate(runDate);
     return;
   }
+
+  startScreen.classList.remove("hidden");
+  cardSec.classList.add("hidden");
+  resultSec.classList.add("hidden");
+  headerEl?.classList.add("hidden");
+  timerEl.style.display = "none";
+  stopTimer();
+
+  startBtn.disabled = false;
+  startBtn.textContent = "START";
+}
+
 
 // --- Add College Edition badge on Saturdays ---
 const now = new Date();                     // (use real date in prod)
@@ -257,6 +270,7 @@ if (isSaturday && titleEl) {
 }
 
 function startGame() {
+  document.body.classList.remove("start-page");  // leaving start screen
   document.body.classList.remove("no-scroll");
   document.body.classList.add("hide-footer");
 

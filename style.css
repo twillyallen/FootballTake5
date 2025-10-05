@@ -474,6 +474,23 @@ body {
   padding-bottom: 0 !important;
 }
 
+/* ---- Start screen: footer fixed to viewport bottom ---- */
+.start-page .site-footer {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  z-index: 5;
+}
+
+/* Reserve space so start content doesn't sit under the fixed footer */
+.start-page .app {
+  padding-bottom: 96px;         /* match footer height + buffer */
+}
+
+/* Make sure we can scroll on start page */
+.start-page body,
+.start-page {
+  overflow: visible;
+}
 
 
 /* ---- Top header (help/about) ---- */
