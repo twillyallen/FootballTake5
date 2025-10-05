@@ -434,26 +434,47 @@ body.adpad { padding-bottom: 70px; }
 }
 
 
-/* ---- Footer visibility + layout helpers (Oct 2025) ---- */
-html, body { height: 100%; }
-body { display: flex; flex-direction: column; min-height: 100vh; }
-.app { flex: 1; }
-
-/* Ensure the start screen doesn't cover the footer */
-.start-screen { 
-  position: relative !important;
-  min-height: calc(100vh - 120px); /* leave space for footer */
-  display: grid;
-  place-items: center;
-  z-index: 1;
+/* ---- Footer Layout: Always stays at bottom ---- */
+html, body {
+  height: 100%;
+  margin: 0;
 }
 
-.site-footer { 
-  position: relative; 
-  z-index: 5; 
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app {
+  flex: 1; /* pushes footer down */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Footer always at bottom */
+.site-footer {
+  margin-top: auto;
+  width: 100%;
+  text-align: center;
+  padding: 20px 8px 24px;
+  color: #fff;
   background: rgba(0,0,0,0.35);
   backdrop-filter: blur(3px);
+  z-index: 5;
 }
+
+/* Hide footer while game is active */
+.hide-footer .site-footer {
+  display: none !important;
+}
+
+.hide-footer {
+  padding-bottom: 0 !important;
+}
+
 
 
 /* ---- Top header (help/about) ---- */
