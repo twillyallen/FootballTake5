@@ -586,3 +586,12 @@ body { display: flex; flex-direction: column; min-height: 100vh; }
     width: 150px;
   }
 }
+
+/* Make sure results content never sits under the footer */
+.result { padding-bottom: 96px; }
+
+/* If sticky banner adds bottom padding, give results extra room */
+body.adpad .result { padding-bottom: 140px; }
+
+/* Footer should be in normal flow, not fixed */
+.site-footer { position: relative; z-index: 1; }
