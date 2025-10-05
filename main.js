@@ -45,8 +45,8 @@ let progressEl, timerEl, scoreText, reviewEl, restartBtn, headerEl;
 // ---------- Utilities ----------
 function getRunDateISO() {
 
-    // === DEV OVERRIDE ===
-  //return "2025-10-02";   // Change this date to test
+  // === DEV OVERRIDE ===
+  // return "2025-10-02";   // Change this date to test
   // ====================
 
   const p = new URLSearchParams(window.location.search);
@@ -120,6 +120,7 @@ function renderPersistedResult(dateStr, persisted) {
   score = Number.isFinite(persisted?.score) ? persisted.score : picks.filter(p => p && p.pick === p.correct).length;
 
   document.body.classList.remove("no-scroll");
+  document.body.classList.remove("start-page");
   startScreen.classList.add("hidden");
   cardSec.classList.add("hidden");
   resultSec.classList.remove("hidden");
@@ -185,6 +186,7 @@ function showLockedGate(dateStr) {
   }
 
   document.body.classList.remove("no-scroll");
+  document.body.classList.remove("start-page");
   startScreen.classList.add("hidden");
   cardSec.classList.add("hidden");
   resultSec.classList.remove("hidden");
@@ -203,6 +205,7 @@ function showLockedGate(dateStr) {
 
 // ---------- Screen Switchers ----------
 function showStartScreen() {
+  // Start page state
   document.body.classList.remove("no-scroll");     // ensure scrolling works
   document.body.classList.remove("hide-footer");   // show footer
   document.body.classList.add("start-page");       // mark start screen
@@ -213,51 +216,36 @@ function showStartScreen() {
     return;
   }
 
-  startScreen.classList.remove("hidden");
-  cardSec.classList.add("hidden");
-  resultSec.classList.add("hidden");
-  headerEl?.classList.add("hidden");
-  timerEl.style.display = "none";
-  stopTimer();
+  // --- College Edition badge on Saturdays (runs ONLY on start screen) ---
+  const now = new Date();                 // real date in prod
+  const isSaturday = now.getDay() === 6;  // 0=Sun .. 6=Sat
+  const titleEl = document.querySelector(".game-title");
 
-  startBtn.disabled = false;
-  startBtn.textContent = "START";
-}
+  // Clean up any old badge if navigating back
+  document.querySelector(".college-badge")?.remove();
 
+  if (isSaturday && titleEl) {
+    // Ensure the title is in a positioned wrapper
+    let wrap = titleEl.closest(".title-wrap");
+    if (!wrap) {
+      wrap = document.createElement("div");
+      wrap.className = "title-wrap";
+      titleEl.parentNode.insertBefore(wrap, titleEl); // insert wrapper
+      wrap.appendChild(titleEl);                       // move title inside
+      // Optional: move tagline inside wrap if you want it under the badge:
+      // const tagline = document.querySelector(".tagline");
+      // if (tagline) wrap.appendChild(tagline);
+    }
 
-// --- Add College Edition badge on Saturdays ---
-const now = new Date();                     // (use real date in prod)
-const isSaturday = now.getDay() === 6;      // Sunday=0 ... Saturday=6
-const titleEl = document.querySelector(".game-title");
-
-// Clean up previous badge if navigating back
-document.querySelector(".college-badge")?.remove();
-
-if (isSaturday && titleEl) {
-  // Ensure the title is in a positioned wrapper
-  let wrap = titleEl.closest(".title-wrap");
-  if (!wrap) {
-    wrap = document.createElement("div");
-    wrap.className = "title-wrap";
-    titleEl.parentNode.insertBefore(wrap, titleEl); // wrap before -> then move title inside
-    wrap.appendChild(titleEl);
-
-    // OPTIONAL: if your subtitle/tagline should stay with the title, move it into wrap:
-    // const tagline = document.querySelector(".tagline"); 
-    // if (tagline) wrap.appendChild(tagline);
+    // Insert the image badge
+    const badge = document.createElement("img");
+    badge.className = "college-badge";
+    badge.src = "./college.png";           // put this file next to index.html
+    badge.alt = "College Edition";
+    wrap.appendChild(badge);
   }
 
-  // Insert the image badge
-  const badge = document.createElement("img");
-  badge.className = "college-badge";
-  badge.src = "./college.png";           // <-- your file name (put it in the same folder as index.html)
-  badge.alt = "College Edition";
-  wrap.appendChild(badge);
-}
-
-
-
-
+  // Show start screen
   startScreen.classList.remove("hidden");
   cardSec.classList.add("hidden");
   resultSec.classList.add("hidden");
@@ -270,7 +258,8 @@ if (isSaturday && titleEl) {
 }
 
 function startGame() {
-  document.body.classList.remove("start-page");  // leaving start screen
+  // Leaving start screen; hide footer during gameplay
+  document.body.classList.remove("start-page");
   document.body.classList.remove("no-scroll");
   document.body.classList.add("hide-footer");
 
@@ -294,7 +283,7 @@ function startGame() {
     headerEl?.classList.add("hidden");
     timerEl.style.display = "none";
     scoreText.textContent = `No quiz scheduled for ${RUN_DATE}.`;
-    reviewEl.innerHTML = `<div class=\"rev\"><div class=\"q\">Add a set for ${RUN_DATE} in questions.js</div></div>`;
+    reviewEl.innerHTML = `<div class="rev"><div class="q">Add a set for ${RUN_DATE} in questions.js</div></div>`;
     return;
   }
 
@@ -309,17 +298,20 @@ function startGame() {
 }
 
 function showResult() {
+  document.body.classList.remove("start-page");
   document.body.classList.remove("no-scroll");
   document.body.classList.remove("hide-footer");
+
   cardSec.classList.add("hidden");
   resultSec.classList.remove("hidden");
   headerEl?.classList.add("hidden");
   timerEl.style.display = "none";
 
-  
-  // Ensure we start at the top so footer never overlays
+  // Force layout flush, then scroll to top so nothing hides behind footer
+  void resultSec.offsetHeight;
   requestAnimationFrame(() => window.scrollTo(0, 0));
-if (score === QUESTIONS.length) {
+
+  if (score === QUESTIONS.length) {
     scoreText.textContent = `TOUCHDOWN! You got ${score} / ${QUESTIONS.length}!`;
 
     // Save/advance Touchdown Streak (5/5 days)
@@ -446,7 +438,6 @@ function injectShareSummary() {
   const headerWrap = document.createElement("div");
   headerWrap.className = "share-header under-score";
 
-  
   const leftRow = document.createElement("div");
   leftRow.className = "share-left-row";
 
@@ -522,8 +513,6 @@ function injectShareSummary() {
   }
 }
 
-
-
 // ---------- Init ----------
 function init() {
   startScreen = document.getElementById("startScreen");
@@ -556,12 +545,10 @@ if (document.readyState === "loading") {
   init();
 }
 
-
 // ---- Header controls (help/about) ----
 (function(){
   const helpBtn = document.getElementById('helpBtn');
   const howTo = document.getElementById('howTo');
-  const aboutBtn = document.getElementById('aboutBtn');
   const startScreen = document.getElementById('startScreen');
   const quizCard = document.getElementById('card');
   const result = document.getElementById('result');
