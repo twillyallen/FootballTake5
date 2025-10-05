@@ -302,7 +302,10 @@ function showResult() {
   headerEl?.classList.add("hidden");
   timerEl.style.display = "none";
 
-  if (score === QUESTIONS.length) {
+  
+  // Ensure we start at the top so footer never overlays
+  requestAnimationFrame(() => window.scrollTo(0, 0));
+if (score === QUESTIONS.length) {
     scoreText.textContent = `TOUCHDOWN! You got ${score} / ${QUESTIONS.length}!`;
 
     // Save/advance Touchdown Streak (5/5 days)
