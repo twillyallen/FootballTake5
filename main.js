@@ -203,7 +203,7 @@ function showLockedGate(dateStr) {
 
 // ---------- Screen Switchers ----------
 function showStartScreen() {
-  document.body.classList.add("no-scroll");
+  document.body.classList.remove("no-scroll");
   document.body.classList.remove("hide-footer");
 
   const runDate = getRunDateISO();
