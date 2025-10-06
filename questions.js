@@ -37,7 +37,7 @@ export const CALENDAR = {
     { question: "Which team had a player retire at halftime of a game?", choices: ["Bills", "Raiders", "Colts", "Dolphins"], answer: 0 }
   ],
   "2025-10-06": [ //Monday
-    { question: "Which WR has the most career playoff TD receptions?", choices: ["Jerry Rice", "Rob Gronkowski", "Randy Moss", "Travis Kelce"], answer: 0 },
+    { question: "Which pass catcher has the most career playoff TD receptions?", choices: ["Jerry Rice", "Rob Gronkowski", "Randy Moss", "Travis Kelce"], answer: 0 },
     { question: "Which player was on the cover of Madden 2004?", choices: ["Peyton Manning", "Ray Lewis", "Marshall Faulk", "Michael Vick"], answer: 3 },
     { question: "Which team was once known as the Decatur Staleys?", choices: ["Packers", "Bears", "Giants", "Lions"], answer: 1 },
     { question: "Which QB threw a TD pass to himself?", choices: ["Marcus Mariota", "Aaron Rodgers", "Nick Foles", "Tom Brady"], answer: 0 },
