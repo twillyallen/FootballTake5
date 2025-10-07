@@ -46,7 +46,7 @@ export const CALENDAR = {
   "2025-10-07": [ //Tuesday
     { question: "Jerry Rice has more career receiving yards than any player has rushing yards.", choices: ["True", "False"], answer: 0 },
     { question: "Who was the Head Coach during the Bills 4 Consecutive Super Bowl Appearances", choices: ["Wade Phillips", "George Seifert", "Mark Levy", "Jim Kelly"], answer: 2 },
-    { question: "Current League Leader in Receptions?", choices: ["Amon-Ra St. Brown", "Christian McCaffrey", "Davante Adams", "*CORRECT ANSWER*"], answer: 3 },
+    { question: "Current League Leader in Receptions?", choices: ["Amon-Ra St. Brown", "Christian McCaffrey", "Davante Adams", "Puka Nacua"], answer: 3 },
     { question: "Who was the first player with 4 Super Bowl rings?", choices: ["Terry Bradshaw", "Marv Fleming", "Tom Brady", "Adam Vinatieri"], answer: 1 },
     { question: "Which Super Bowl Era Head Coach has the highest Career Win Percentage?", choices: ["Matt LaFleur", "Nick Sirianni", "Vince Lombardi", "John Madden"], answer: 3 }
   ],
