@@ -445,12 +445,13 @@ body {
   min-height: 100vh;
 }
 
-.app {
+.app { /* ACTUAL GAMEPLAY SCREEN*/
   flex: 1; /* pushes footer down */
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  padding-top: 20px;
 }
 
 /* Footer always at bottom */

@@ -54,7 +54,7 @@ export const CALENDAR = {
     { question: "Which defensive back intercepted Russell Wilson at the goal line to clinch Super Bowl XLIX?", choices: ["Darrelle Revis", "Stephon Gilmore", "Malcom Butler", "Devin McCourty"], answer: 2 },
     { question: "Every team has appeared in the Super Bowl at least once", choices: ["True", "False"], answer: 0 },
     { question: "Which RB from the 2017 Draft Class has the most Rushing Yards?", choices: ["Aaron Jones", "Christian McCaffrey", "Joe Mixon", "Alvin Kamara"], answer: 2 },
-    { question: "Current 2025 interception leader?", choices: ["Devin Lloyd", "*CORRECT ANSWER*", "Tremaine Edmunds", "Kerby Joseph"], answer: 1 },
+    { question: "Current 2025 interception leader?", choices: ["Devin Lloyd", "Kevin Byard III", "Tremaine Edmunds", "Kerby Joseph"], answer: 0 },
     { question: "Which 49er caught “The Catch” in the NFC Championship Game against the Cowboys?", choices: ["Jimmy Robinson", "Dwight Clark", "Jerry Rice", "John Taylor"], answer: 1 }
   ],
   "2025-10-09": [ //Thursday
@@ -66,16 +66,16 @@ export const CALENDAR = {
   ],
   "2025-10-10": [ //Friday
     { question: "What year did the Colts relocate from Baltimore to Indianapolis?", choices: ["2002", "1964", "1981", "1984"], answer: 3 },
-    { question: "Current 2025 leader in rushing yards?", choices: ["*CORRECT ANSWER*", "*INCORRECT ANSWER*", "*INCORRECT ANSWER*", "*INCORRECT ANSWER*"], answer: 0 },
+    { question: "Current 2025 leader in rushing yards?", choices: ["Jonathan Taylor", "Saquon Barkley", "Javonte Williams", "James Cook"], answer: 0 },
     { question: "Where were the Cardinals first located?", choices: ["Phoenix", "Chicago", "St. Louis", "Scottsdale"], answer: 1 },
     { question: "Most all time Receiving Yards in Seahawks History?", choices: ["DK Metcalf", "Doug Baldwin", "Steve Largent", "Tyler Lockett"], answer: 2 },
     { question: "What Bengal was famous for his post-TD dance, 'The Ickey Shuffle'?", choices: ["James Brooks", "Elbert Woods", "Cris Colinsworth", "Boomer Esiason"], answer: 1 }
   ],
   "2025-10-11": [ //Saturday
     { question: "Who holds the NCAA record for most career rushing yards?", choices: ["Jonathan Taylor", "Ricky Williams", "Tony Dorsett", "Donnel Pumphrey"], answer: 3 },
-    { question: "Who is currently ranked #4?", choices: ["*INCORRECT ANSWER*", "*INCORRECT ANSWER*", "*CORRECT ANSWER*", "*INCORRECT ANSWER*"], answer: 2 },
+    { question: "Who is currently ranked #4 in the AP Top 25?", choices: ["Oklahoma", "Oregon", "Ole Miss", "Texas A&M"], answer: 2 },
     { question: "Who won the 2022 Heisman Trophy?", choices: ["Caleb Williams", "CJ Stroud", "Stetson Bennett", "Max Duggan"], answer: 0 },
-    { question: "Current league leader in Passing TDs?", choices: ["*CORRECT ANSWER*", "*INCORRECT ANSWER*", "*INCORRECT ANSWER*", "*INCORRECT ANSWER*"], answer: 0 },
+    { question: "Current league leader in Passing TDs?", choices: ["Sawyer Robertson", "Jalon Daniels", "Dante Moore", "Carson Beck"], answer: 0 },
     { question: "Who is the all-time winningest coach in college football history (Career wins)?", choices: ["Nick Saban", "Joe Paterno", "Bear Bryant", "Eddie Robinson"], answer: 1 }
   ]
 };
