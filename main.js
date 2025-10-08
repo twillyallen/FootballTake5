@@ -431,7 +431,7 @@ function injectShareSummary() {
 
   const dateLine = document.createElement("div");
   dateLine.className = "date-line";
-  dateLine.textContent = `Pigskin 5 â€” ${RUN_DATE}`;
+  dateLine.textContent = `Pigskin 5 - ${RUN_DATE}`;
   resultTop.insertBefore(dateLine, resultTop.firstChild);
 
   // Build header (sits under "Your Score")
@@ -594,4 +594,37 @@ function renderQuizAd(){
 }
 document.getElementById('startBtn')?.addEventListener('click', () => {
   setTimeout(renderQuizAd, 250);
+});
+
+// --- Pop-up Ad Logic (robust) ---
+function openAdPopup() {
+  const popup = document.getElementById("adPopup");
+  if (!popup) return;
+  popup.classList.add("open");
+  popup.setAttribute("aria-hidden", "false");
+  document.body.classList.add("no-scroll");
+  try { (window.adsbygoogle = window.adsbygoogle || []).push({}); } catch {}
+}
+function closeAdPopup() {
+  const popup = document.getElementById("adPopup");
+  if (!popup) return;
+  popup.classList.remove("open");
+  popup.setAttribute("aria-hidden", "true");
+  document.body.classList.remove("no-scroll");
+}
+function _scheduleHomePopup(){
+  const tryOpen = () => openAdPopup();
+  requestAnimationFrame(tryOpen);
+  setTimeout(tryOpen, 120);
+  setTimeout(tryOpen, 320);
+}
+document.addEventListener("DOMContentLoaded", () => {
+  const popup = document.getElementById("adPopup");
+  const closeBtn = document.getElementById("adModalClose");
+  const backdrop = popup?.querySelector(".modal-backdrop");
+  const esc = (e) => { if (e.key === "Escape") closeAdPopup(); };
+  closeBtn?.addEventListener("click", closeAdPopup);
+  backdrop?.addEventListener("click", closeAdPopup);
+  document.addEventListener("keydown", esc);
+  _scheduleHomePopup();
 });
