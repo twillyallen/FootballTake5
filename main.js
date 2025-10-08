@@ -206,7 +206,7 @@ function showLockedGate(dateStr) {
 // ---------- Screen Switchers ----------
 function showStartScreen() {
   // Start page state
-  document.body.classList.add("no-scroll");     // scroll?
+  document.body.classList.add("no-scroll");     // ensure scrolling works
   document.body.classList.remove("hide-footer");   // show footer
   document.body.classList.add("start-page");       // mark start screen
 

@@ -633,3 +633,4 @@ body.adpad .result { padding-bottom: 140px; }
 
 /* Footer should be in normal flow, not fixed */
 .site-footer { position: relative; z-index: 1; }
+
