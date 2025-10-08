@@ -6,15 +6,11 @@
   <title>Pigskin 5</title>
   <link rel="stylesheet" href="./style.css" />
   <script type="module" src="./main.js"></script>
-
-  <!-- Global AdSense Script -->
-  <script async 
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8430547369793861"
-          crossorigin="anonymous"></script>
+  <!-- Global AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8430547369793861" crossorigin="anonymous"></script>
 </head>
-
 <body>
-  <!-- Top Header with Help (?) toggle and About (i) -->
+  <!-- Top Header -->
   <header class="topbar" id="topbar">
     <button id="helpBtn" class="icon-btn" aria-expanded="false" aria-controls="howTo" title="How to play">
       <img src="./question-logo.png" alt="Help" width="24" height="24" />
@@ -36,59 +32,70 @@
   </aside>
 
   <main class="app">
-    <!-- Start Screen -->
+    <!-- HOME (Start screen) -->
     <section id="startScreen" class="start-screen">
       <div class="overlay">
         <h1 class="game-title">PIGSKIN 5</h1>
-
         <p>5 QUESTIONS. 15 SECONDS EACH.</p>
+
+        <!-- POP-UP AD (open on home load; user closes with X) -->
+        <div id="adPopup" class="modal" aria-hidden="true" role="dialog" aria-labelledby="adModalTitle">
+          <div class="modal-backdrop"></div>
+          <div class="modal-card ad-modal-card">
+            <button id="adModalClose" class="modal-close" aria-label="Close">✕</button>
+            <h2 id="adModalTitle" class="visually-hidden">Advertisement</h2>
+            <div class="ad-wrap ad-popup">
+              <ins id="adPopupIns" class="adsbygoogle"
+                   style="display:inline-block;width:336px;height:280px"
+                   data-ad-client="ca-pub-8430547369793861"
+                   data-ad-slot="2057016496"
+                   data-full-width-responsive="false"></ins>
+            </div>
+          </div>
+        </div>
+
         <button id="startBtn" class="btn">START</button>
         <div class="byline">BY TWILLYALLEN</div>
+
+        <!-- HOME BANNER (initially hidden; appears after closing the pop-up) -->
+        <div id="ad-home-banner" class="ad-wrap ad-home-banner" aria-label="Advertisement" hidden>
+          <ins id="adHomeIns" class="adsbygoogle"
+               style="display:block"
+               data-ad-client="ca-pub-8430547369793861"
+               data-ad-slot="2057016496"
+               data-ad-format="auto"
+               data-full-width-responsive="true"></ins>
+        </div>
       </div>
     </section>
 
-    <!-- Main Quiz -->
+    <!-- PLAY (NO ADS) -->
     <section id="card" class="card hidden">
       <header class="header">
         <h2 id="question" class="question">Loading…</h2>
         <div id="progress" class="progress">Question 1 / 5</div>
-        <div id="timer" class="timer" aria-live="polite">12s</div>
+        <div id="timer" class="timer" aria-live="polite">15s</div>
       </header>
       <div id="choices" class="choices"></div>
-      <!-- In-content Rectangle Ad on Quiz Screen (policy: on content screen, below choices) -->
-      <div id="ad-quiz" class="ad-wrap ad-rect">
-        <ins class="adsbygoogle"
-             style="display:inline-block;width:300px;height:250px"
-             data-ad-client="ca-pub-8430547369793861"
-             data-ad-slot="2057016496"
-             data-full-width-responsive="false"
-             data-adtest="on"></ins>
-      </div>
-
     </section>
 
-    <!-- Results -->
+    <!-- RESULTS -->
     <section id="result" class="result hidden">
-      <h2>Your Score</h2>
+      <h2><br>Your Score</h2>
       <p id="scoreText"></p>
       <div id="review" class="review"></div>
       <button id="restartBtn" class="btn">Restart</button>
 
-      <!-- Results Screen Ad (allowed: appears on a page with clear publisher content) -->
-      <div class="ad-wrap">
-        <ins class="adsbygoogle"
-             style="display:block"
+      <!-- Square ad BELOW questions, ABOVE footer -->
+      <div id="ad-results" class="ad-wrap ad-square" aria-label="Advertisement">
+        <ins id="adResultsIns" class="adsbygoogle"
+             style="display:inline-block;width:336px;height:280px"
              data-ad-client="ca-pub-8430547369793861"
              data-ad-slot="9640719395"
-             data-ad-format="auto"
-             data-full-width-responsive="true"
-             data-adtest="on"></ins>
+             data-full-width-responsive="false"></ins>
       </div>
-      <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
-      </script>
     </section>
-</main>
+  </main>
 
   <footer class="site-footer">
     <nav class="footer-nav">
@@ -99,45 +106,6 @@
     <small>&copy; 2025 Pigskin 5 — All rights reserved.</small>
   </footer>
 
-  <!-- Optional: Sticky Bottom Banner Ad (kept off until after load) -->
-  <div id="ad-sticky" class="ad-banner" style="display:none"></div>
-  <script>
-    // Mount sticky banner only after page has meaningful content loaded
-    function mountSticky(slotId, { test = true } = {}) {
-      const wrap = document.getElementById('ad-sticky');
-      if (!wrap) return;
-      wrap.innerHTML = '';
-
-      const ins = document.createElement('ins');
-      ins.className = 'adsbygoogle';
-      ins.style.display = 'block';
-      ins.setAttribute('data-ad-client', 'ca-pub-8430547369793861');
-      ins.setAttribute('data-ad-slot', slotId);
-      ins.setAttribute('data-ad-format', 'auto');
-      ins.setAttribute('data-full-width-responsive', 'true');
-      if (test) ins.setAttribute('data-adtest', 'on');
-      wrap.appendChild(ins);
-
-      try { (window.adsbygoogle = window.adsbygoogle || []).push({}); } catch (e){}
-
-      // Reveal once an iframe is present (ad rendered)
-      const mo = new MutationObserver(() => {
-        if (wrap.querySelector('iframe')) {
-          wrap.style.display = 'block';
-          document.body.classList.add('adpad');
-          mo.disconnect();
-        }
-      });
-      mo.observe(wrap, { childList: true, subtree: true });
-      setTimeout(() => mo.disconnect(), 5000);
-    }
-    document.addEventListener('DOMContentLoaded', () => {
-      // Use a real slot you configure for banners in AdSense; this reuses the start-slot id
-      mountSticky('2057016496', { test: true });
-    });
-  </script>
-
-  <!-- Confetti library for perfect scores -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 </body>
 </html>
