@@ -6,15 +6,10 @@
   <title>Pigskin 5</title>
   <link rel="stylesheet" href="./style.css" />
   <script type="module" src="./main.js"></script>
-
-  <!-- Global AdSense Script -->
-  <script async 
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8430547369793861"
-          crossorigin="anonymous"></script>
+  <!-- Global AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8430547369793861" crossorigin="anonymous"></script>
 </head>
-
 <body>
-  <!-- Top Header with Help (?) toggle and About (i) -->
   <header class="topbar" id="topbar">
     <button id="helpBtn" class="icon-btn" aria-expanded="false" aria-controls="howTo" title="How to play">
       <img src="./question-logo.png" alt="Help" width="24" height="24" />
@@ -24,25 +19,23 @@
     </a>
   </header>
 
-  <!-- Collapsible instructions panel -->
   <aside id="howTo" class="howto" hidden>
     <h3>How to Play</h3>
     <ol>
       <li>Tap “Start” to begin today’s quiz.</li>
       <li>Pick one of the choices before the timer runs out. (15 seconds)</li>
-      <li>See your score and review answers at the end. Perfect 5/5? That’s a Touchdown.</li>
-      <li>Come back tomorrow for a new set and keep your Daily Streak alive.</li>
+      <li>See your score and review answers at the end.</li>
     </ol>
   </aside>
 
   <main class="app">
-    <!-- Start Screen (HOME) -->
+    <!-- START SCREEN -->
     <section id="startScreen" class="start-screen">
       <div class="overlay">
         <h1 class="game-title">PIGSKIN 5</h1>
         <p>5 QUESTIONS. 15 SECONDS EACH.</p>
 
-        <!-- POP-UP AD (shows automatically on home; user must click X) -->
+        <!-- POP-UP AD (appears on load; user closes with X/backdrop/Esc) -->
         <div id="adPopup" class="modal" aria-hidden="true" role="dialog" aria-labelledby="adModalTitle">
           <div class="modal-backdrop"></div>
           <div class="modal-card ad-modal-card">
@@ -60,20 +53,10 @@
 
         <button id="startBtn" class="btn">START</button>
         <div class="byline">BY TWILLYALLEN</div>
-
-        <!-- HOME BANNER (hidden until popup closed) -->
-        <div id="ad-home-banner" class="ad-wrap ad-home-banner" aria-label="Advertisement" hidden>
-          <ins id="adHomeIns" class="adsbygoogle"
-               style="display:block"
-               data-ad-client="ca-pub-8430547369793861"
-               data-ad-slot="2057016496"
-               data-ad-format="auto"
-               data-full-width-responsive="true"></ins>
-        </div>
       </div>
     </section>
 
-    <!-- Play Screen (NO ADS) -->
+    <!-- PLAY (NO ADS) -->
     <section id="card" class="card hidden">
       <header class="header">
         <h2 id="question" class="question">Loading…</h2>
@@ -83,14 +66,14 @@
       <div id="choices" class="choices"></div>
     </section>
 
-    <!-- Results Screen -->
+    <!-- RESULTS -->
     <section id="result" class="result hidden">
       <h2>Your Score</h2>
       <p id="scoreText"></p>
       <div id="review" class="review"></div>
       <button id="restartBtn" class="btn">Restart</button>
 
-      <!-- Big square ad BELOW questions, ABOVE footer -->
+      <!-- Square ad BELOW questions, ABOVE footer -->
       <div id="ad-results" class="ad-wrap ad-square" aria-label="Advertisement">
         <ins id="adResultsIns" class="adsbygoogle"
              style="display:inline-block;width:336px;height:280px"
@@ -110,7 +93,6 @@
     <small>&copy; 2025 Pigskin 5 — All rights reserved.</small>
   </footer>
 
-  <!-- Confetti library for perfect scores -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 </body>
 </html>
