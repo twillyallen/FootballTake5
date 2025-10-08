@@ -286,7 +286,7 @@ body{ display:flex; flex-direction:column; min-height:100vh; }
 /* Works with: <main class="page"> in about.html / privacy.html / contact.html */
 .page{
   width:min(900px,94vw);
-  margin: 100px auto 120px;
+  margin: 30px auto 120px;
   padding: 24px 22px;
   background: rgba(0,0,0,0.35);
   border: 1px solid rgba(255,255,255,0.18);
@@ -299,13 +299,13 @@ body{ display:flex; flex-direction:column; min-height:100vh; }
   margin:0 0 14px;
   font-size: clamp(24px, 4.6vw, 40px);
   font-weight:900;
-  -webkit-text-stroke: 4px #000;
+  
   paint-order: stroke fill;
   text-shadow: 0 4px 18px rgba(0,0,0,.4);
 }
 .page h2{ margin-top:20px; font-size:1.3rem; }
 .page p, .page li{ line-height:1.6; opacity:.96; }
-.page a{ color:#b7f7ff; text-decoration:underline; }
+.page a{ color:#fa63ff; text-decoration:underline; }
 .page .back-link{
   display:inline-block;
   margin-top:18px;
