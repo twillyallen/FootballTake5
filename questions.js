@@ -65,7 +65,7 @@ export const CALENDAR = {
     { question: "Before tonight's matchup, which team has more total yards gained in 2025?", choices: ["Giants", "Eagles"], answer: 0 }
   ],
   "2025-10-10": [ //Friday
-    { question: "What year did the Colts relocate from Baltimore to Indianapolis?", choices: ["2002", "1964", "1981", "1984"], answer: 3 },
+    { question: "Who led the league in TD Receptions in 2016?", choices: ["Odell Beckham Jr.", "Antonio Brown", "Davante Adams", "Jordy Nelson"], answer: 3 },
     { question: "Current 2025 leader in rushing yards?", choices: ["Jonathan Taylor", "Saquon Barkley", "Javonte Williams", "James Cook"], answer: 0 },
     { question: "Where were the Cardinals first located?", choices: ["Phoenix", "Chicago", "St. Louis", "Scottsdale"], answer: 1 },
     { question: "Most all time Receiving Yards in Seahawks History?", choices: ["DK Metcalf", "Doug Baldwin", "Steve Largent", "Tyler Lockett"], answer: 2 },
@@ -86,7 +86,7 @@ export const CALENDAR = {
     { question: "Before today's games, who leads the league in Receiving TDs?", choices: ["Amon-Ra St Brown", "Dallas Goedert", "George Pickens", "Emeka Edgbuka"], answer: 0 }
   ],
   "2025-10-13": [ //Monday
-    { question: "Who is the 49ers All-Time leading rusher?", choices: ["Joe Perry", "Steve Young", "Frank Gore", "Christian McCaffrey"], answer: 2 },
+    { question: "What year did the Colts relocate from Baltimore to Indianapolis?", choices: ["2002", "1964", "1981", "1984"], answer: 3 },
     { question: "Who is the current #1 seed in the AFC?", choices: ["Bills", "Colts", "Steelers", "Eagles"], answer: 1 },
     { question: "True or False: No kicker has ever been selected in the first round of the NFL Draft", choices: ["True", "False"], answer: 1 },
     { question: "Who was the last Giants player to win MVP?", choices: ["Y.A. Tittle", "Eli Manning", "Michael Strahan", "Lawrence Taylor"], answer: 3 },
