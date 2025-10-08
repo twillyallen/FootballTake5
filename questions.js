@@ -75,8 +75,22 @@ export const CALENDAR = {
     { question: "Who holds the NCAA record for most career rushing yards?", choices: ["Jonathan Taylor", "Ricky Williams", "Tony Dorsett", "Donnel Pumphrey"], answer: 3 },
     { question: "Who is currently ranked #4 in the AP Top 25?", choices: ["Oklahoma", "Oregon", "Ole Miss", "Texas A&M"], answer: 2 },
     { question: "Who won the 2022 Heisman Trophy?", choices: ["Caleb Williams", "CJ Stroud", "Stetson Bennett", "Max Duggan"], answer: 0 },
-    { question: "Current league leader in Passing TDs?", choices: ["Sawyer Robertson", "Jalon Daniels", "Dante Moore", "Carson Beck"], answer: 0 },
+    { question: "Current leader in Passing TDs?", choices: ["Sawyer Robertson", "Jalon Daniels", "Dante Moore", "Carson Beck"], answer: 0 },
     { question: "Who is the all-time winningest coach in college football history (Career wins)?", choices: ["Nick Saban", "Joe Paterno", "Bear Bryant", "Eddie Robinson"], answer: 1 }
+  ],
+  "2025-10-12": [ //Sunday
+    { question: "Who is the 49ers All-Time leading rusher?", choices: ["Joe Perry", "Steve Young", "Frank Gore", "Christian McCaffrey"], answer: 2 },
+    { question: "Who is the current #1 seed in the AFC?", choices: ["Bills", "Colts", "Steelers", "Eagles"], answer: 1 },
+    { question: "True or False: No kicker has ever been selected in the first round of the NFL Draft", choices: ["True", "False"], answer: 1 },
+    { question: "Who was the last Giants player to win MVP?", choices: ["Y.A. Tittle", "Eli Manning", "Michael Strahan", "Lawrence Taylor"], answer: 3 },
+    { question: "Before today's games, who leads the league in Receiving TDs?", choices: ["Amon-Ra St Brown", "Dallas Goedert", "George Pickens", "Emeka Edgbuka"], answer: 0 }
+  ],
+  "2025-10-13": [ //Monday
+    { question: "Who is the 49ers All-Time leading rusher?", choices: ["Joe Perry", "Steve Young", "Frank Gore", "Christian McCaffrey"], answer: 2 },
+    { question: "Who is the current #1 seed in the AFC?", choices: ["Bills", "Colts", "Steelers", "Eagles"], answer: 1 },
+    { question: "True or False: No kicker has ever been selected in the first round of the NFL Draft", choices: ["True", "False"], answer: 1 },
+    { question: "Who was the last Giants player to win MVP?", choices: ["Y.A. Tittle", "Eli Manning", "Michael Strahan", "Lawrence Taylor"], answer: 3 },
+    { question: "Before today's games, who leads the league in Receiving TDs?", choices: ["Amon-Ra St Brown", "Dallas Goedert", "George Pickens", "Emeka Edgbuka"], answer: 0 }
   ]
 };
 
