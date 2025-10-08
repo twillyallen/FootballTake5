@@ -67,3 +67,39 @@ body{display:flex; flex-direction:column; min-height:100vh;}
 .modal-card{position:relative; background:#101418; border:1px solid rgba(255,255,255,0.18); border-radius:14px; padding:12px; width:min(520px,94vw); box-shadow:0 12px 42px rgba(0,0,0,0.5); z-index:1;}
 .modal-close{position:absolute; top:8px; right:8px; background:rgba(255,255,255,0.9); color:#111; border:0; border-radius:10px; width:32px; height:32px; cursor:pointer; font-weight:900;}
 .visually-hidden{position:absolute; left:-10000px; top:auto; width:1px; height:1px; overflow:hidden;}
+
+
+/* Static pages frame (About / Privacy / Contact) */
+.static-page {
+  width: min(900px, 94vw);
+  margin: 96px auto 120px;   /* breathe under topbar & above footer */
+  padding: 20px 18px;
+  background: rgba(0,0,0,0.35);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 12px;
+  backdrop-filter: blur(3px);
+  box-shadow: 0 12px 42px rgba(0,0,0,0.35);
+  color: #fff;
+}
+
+.static-page h1 {
+  margin: 0 0 12px;
+  font-size: clamp(24px, 4.8vw, 40px);
+  font-weight: 900;
+  -webkit-text-stroke: 4px #000;
+  paint-order: stroke fill;
+  text-shadow: 0 4px 18px rgba(0,0,0,.4);
+}
+
+.static-page h2 { margin-top: 18px; font-size: 1.3rem; }
+.static-page p, .static-page li { line-height: 1.6; opacity: .96; }
+.static-page a { color: #b7f7ff; text-decoration: underline; }
+
+.static-page .back-link {
+  display: inline-block;
+  margin-top: 18px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.18);
+}
