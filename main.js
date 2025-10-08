@@ -431,7 +431,7 @@ function injectShareSummary() {
 
   const dateLine = document.createElement("div");
   dateLine.className = "date-line";
-  dateLine.textContent = `Pigskin 5 — ${RUN_DATE}`;
+  dateLine.textContent = `Pigskin 5 â€” ${RUN_DATE}`;
   resultTop.insertBefore(dateLine, resultTop.firstChild);
 
   // Build header (sits under "Your Score")
