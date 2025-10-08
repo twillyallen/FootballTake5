@@ -52,7 +52,7 @@ export const CALENDAR = {
   ],
   "2025-10-08": [ //Wednesday
     { question: "Which defensive back intercepted Russell Wilson at the goal line to clinch Super Bowl XLIX?", choices: ["Darrelle Revis", "Stephon Gilmore", "Malcom Butler", "Devin McCourty"], answer: 2 },
-    { question: "Every team has appeared in the Super Bowl at least once", choices: ["True", "False"], answer: 0 },
+    { question: "Every team has appeared in the Super Bowl at least once", choices: ["True", "False"], answer: 1 },
     { question: "Which RB from the 2017 Draft Class has the most career Rushing Yards?", choices: ["Aaron Jones", "Christian McCaffrey", "Joe Mixon", "Alvin Kamara"], answer: 2 },
     { question: "Current 2025 interception leader?", choices: ["Devin Lloyd", "Kevin Byard III", "Tremaine Edmunds", "Kerby Joseph"], answer: 0 },
     { question: "Which 49er caught “The Catch” in the NFC Championship Game against the Cowboys?", choices: ["Jimmy Robinson", "Dwight Clark", "Jerry Rice", "John Taylor"], answer: 1 }
