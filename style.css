@@ -107,7 +107,7 @@ body{ display:flex; flex-direction:column; min-height:100vh; }
 /* Ensure the home banner area is visible even before AdSense fills */
 .start-page #ad-home-banner.ad-home-banner .adsbygoogle {
   display: block !important;
-  min-height: 90px;   /* standard responsive banner fallback height */
+  min-height: 60px !important;   /* standard responsive banner fallback height */
   width: 100%;
   background: rgba(255,255,255,0.06);
   border: 2px solid rgba(255,255,255,0.18);
