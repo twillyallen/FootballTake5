@@ -15,6 +15,7 @@ function saveResult(dateStr, payload){ try { localStorage.setItem(KEY_RESULT_PRE
 function loadResult(dateStr){ try { const raw = localStorage.getItem(KEY_RESULT_PREFIX + dateStr); return raw ? JSON.parse(raw) : null; } catch { return null; } }
 
 // --- State
+
 let RUN_DATE = null;
 let QUESTIONS = [];
 let current = 0;
