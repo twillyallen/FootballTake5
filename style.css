@@ -1,22 +1,31 @@
+/* Background */
 :root{
-  --bg-dim: 0.45;
+  --bg-dim: 0.45;          
   --btn-cyan: #b7f7ff;
   --btn-cyan-hover: #a3f1ff;
   --ink: #0b1116;
-  --title-stroke: 6px;
+  --title-stroke: 6px;     
 }
 
 * { box-sizing: border-box; }
-html, body { margin: 0; height: 100%; font-family: 'Arial', sans-serif; color: #fff; }
-body.no-scroll { overflow: hidden; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+  font-family: 'Arial', sans-serif;
+  color: #fff;
+}
+
+body.no-scroll { overflow: hidden; }     /* <-- standalone rule */
+
 
 /* Field background */
 body{
   background: url("./field.jpg") center/cover no-repeat fixed;
   position: relative;
 }
+
 body::before{
-  
   content: "";
   position: fixed;
   inset: 0;
@@ -25,92 +34,637 @@ body::before{
   z-index: 0;
 }
 
-/* Layout */
-.app{ position: relative; z-index: 1; width: 100%; display: flex; flex-direction: column; align-items: center; padding: 16px 16px 20px; gap: 14px; }
+/* App layout = full viewport */
+.app{
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px 16px 20px;
+  gap: 14px;
+}
+
+/* Utility */
 .hidden { display: none !important; }
 
 /* Header during quiz */
-.header{ width: min(900px, 94vw); display:flex; justify-content:space-between; align-items:center; gap:12px; }
+.header{
+  width: min(900px, 94vw);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
 .header.hidden { display: none !important; }
 .progress { opacity: .92; font-weight: 800; }
-.timer{ padding: 6px 10px; border-radius: 8px; background: rgba(255,255,255,.08); display:inline-block; min-width:3.5ch; text-align:center; font-variant-numeric: tabular-nums; font-feature-settings: "tnum" 1, "lnum" 1; }
+.timer{ padding: 6px 10px; border-radius: 8px; background: rgba(255,255,255,.08); }
+.timer.warning{ background: rgba(255,0,0,.14); }
+.timer{
+  display: inline-block;
+  min-width: 3.5ch;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1, "lnum" 1;
+}
 
 /* Start screen */
-.start-screen{ width:min(900px,94vw); min-height:calc(100svh - 160px); display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:10px; }
-.start-screen .overlay { transform: none; }
-.start-screen h1{ margin:0 0 8px; font-size: clamp(38px, 11vw, 92px); font-weight:900; color:#fff; -webkit-text-stroke: var(--title-stroke) #000; paint-order: stroke fill; text-shadow: 0 6px 22px rgba(0,0,0,.35); }
-.start-screen p{ margin:0 0 14px; font-size: clamp(14px,2.6vw,22px); font-weight:800; letter-spacing:.08em; text-shadow: 0 2px 0 #000, 0 8px 20px rgba(0,0,0,.35); }
-.start-screen .btn{ background: var(--btn-cyan); color: var(--ink); font-size: clamp(18px,4.2vw,32px); font-weight:900; padding:14px 36px; border:0; border-radius:14px; cursor:pointer; box-shadow:0 12px 30px rgba(0,0,0,.28), inset 0 -3px 0 rgba(0,0,0,.08); transition: transform .12s ease, background-color .12s ease, box-shadow .12s ease; }
+.start-screen{
+  width: min(900px, 94vw);
+  min-height: calc(100svh - 160px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 10px;
+  .overlay { transform: translateY(-90px); }
+}
+.start-screen h1{
+  margin: 0 0 8px;
+  font-size: clamp(38px, 11vw, 92px);
+  font-weight: 900;
+  color: #fff;
+  -webkit-text-stroke: var(--title-stroke) #000;  
+  paint-order: stroke fill;
+  text-shadow: 0 6px 22px rgba(0,0,0,.35);
+}
+.start-screen p{
+  margin: 0 0 14px;
+  font-size: clamp(14px, 2.6vw, 22px);
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-shadow: 0 2px 0 #000, 0 8px 20px rgba(0,0,0,.35);
+}
+.start-screen .btn{
+  background: var(--btn-cyan);
+  color: var(--ink);
+  font-size: clamp(18px, 4.2vw, 32px);
+  font-weight: 900;
+  padding: 14px 36px;
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  box-shadow: 0 12px 30px rgba(0,0,0,.28), inset 0 -3px 0 rgba(0,0,0,.08);
+  transition: transform .12s ease, background-color .12s ease, box-shadow .12s ease;
+}
 .start-screen .btn:hover { background: var(--btn-cyan-hover); transform: translateY(-1px); }
-.start-screen .btn:active { transform: translateY(1px); box-shadow:0 8px 20px rgba(0,0,0,.28), inset 0 2px 0 rgba(0,0,0,.10); }
-.start-screen .byline{ margin-top:8px; font-size:clamp(10px,2.4vw,14px); opacity:.96; text-shadow: 0 2px 8px rgba(0,0,0,.6); letter-spacing:.04em; }
+.start-screen .btn:active { transform: translateY(1px); box-shadow: 0 8px 20px rgba(0,0,0,.28), inset 0 2px 0 rgba(0,0,0,.10); }
+.start-screen .byline{
+  margin-top: 8px;
+  font-size: clamp(10px, 2.4vw, 14px);
+  opacity: .96;
+  text-shadow: 0 2px 8px rgba(0,0,0,.6);
+  letter-spacing: .04em;
+}
 
-/* Quiz & Results containers */
-.card, .result{ width:min(900px,94vw); background:transparent; padding:0; margin:0; }
-.question{ font-size:clamp(20px,2.6vw,28px); font-weight:900; margin:4px 0 10px; }
-.choices{ display:grid; gap:10px; }
-.choices button{ width:100%; padding:12px 14px; border:0; border-radius:10px; background:rgba(255,255,255,.94); color:var(--ink); font-weight:800; font-size:1.05rem; text-align:left; cursor:pointer; }
-.choices button:hover{ filter:brightness(.97); }
-.choices button[disabled]{ opacity:.9; cursor:default; }
-.correct{ background:#c7f5d8 !important; outline:2px solid #36c46a; }
-.wrong{ background:#ffd2d9 !important; outline:2px solid #ff4b6b; }
+/* Quiz & Results */
+.card, .result{
+  width: min(900px, 94vw);
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+  border-radius: 0;
+  padding: 0;
+  margin: 0;
+}
+.question{
+  font-size: clamp(20px, 2.6vw, 28px);
+  font-weight: 900;
+  margin: 4px 0 10px;
+}
+.choices{ display: grid; gap: 10px; }
+.choices button{
+  width: 100%;
+  padding: 12px 14px;
+  border: 0;
+  border-radius: 10px;
+  background: rgba(255,255,255,.94);
+  color: var(--ink);
+  font-weight: 800;
+  font-size: 1.05rem;
+  text-align: left;
+  cursor: pointer;
+}
+.choices button:hover{ filter: brightness(.97); }
+.choices button[disabled]{ opacity: .9; cursor: default; }
+.correct{ background: #c7f5d8 !important; outline: 2px solid #36c46a; }
+.wrong  { background: #ffd2d9 !important; outline: 2px solid #ff4b6b; }
+.actions{ margin-top: 8px; display:flex; justify-content:flex-end; }
 
-.review{ display:grid; gap:10px; margin-top:10px; }
-.rev{ background:rgba(0,0,0,.22); border-radius:10px; padding:10px; }
-.rev .q{ font-weight:900; margin-bottom:4px; }
-.rev .ex{ opacity:.85; margin-top:4px; }
+.review{ display:grid; gap:10px; margin-top: 10px; }
+.rev{ background: rgba(0,0,0,.22); border-radius: 10px; padding: 10px; }
+.rev .q{ font-weight: 900; margin-bottom: 4px; }
+.rev .ex{ opacity:.85; margin-top: 4px; }
 
-#restartBtn { background: var(--btn-cyan); color: var(--ink); font-size:1.2rem; font-weight:800; padding:10px 24px; border:0; border-radius:10px; margin-top:16px; cursor:pointer; box-shadow:0 6px 16px rgba(0,0,0,.25); transition: transform .12s ease, background-color .12s ease; }
+#restartBtn {
+  background: var(--btn-cyan);
+  color: var(--ink);
+  font-size: 1.2rem;
+  font-weight: 800;
+  padding: 10px 24px;
+  border: none;
+  border-radius: 10px;
+  margin-top: 16px;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(0,0,0,.25);
+  transition: transform .12s ease, background-color .12s ease;
+}
 #restartBtn:hover { background: var(--btn-cyan-hover); transform: translateY(-1px); }
 #restartBtn:active { transform: translateY(1px); box-shadow: 0 3px 10px rgba(0,0,0,.3); }
 
-/* Ad wrappers */
-.ad-wrap{ display:grid; place-items:center; margin:18px auto; padding:8px; border-radius:12px; background:rgba(0,0,0,0.18); border:1px solid rgba(255,255,255,0.18); width:100%; }
-.ad-square ins.adsbygoogle{ width:336px !important; height:280px !important; }
-@media (max-width: 360px){ .ad-square ins.adsbygoogle{ width:300px !important; height:250px !important; } }
+/* Toast */
+.toast {
+  position: fixed;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%) translateY(12px);
+  background: #111;
+  color: #fff;
+  font-weight: 800;
+  padding: 10px 14px;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0,0,0,.35);
+  opacity: 0;
+  transition: opacity .15s ease, transform .15s ease;
+  z-index: 9999;
+}
+.toast.show {
+  opacity: 0.95;
+  transform: translateX(-50%) translateY(0);
+}
 
-/* Footer */
-body{ display:flex; flex-direction:column; min-height:100vh; }
-.app{ flex:1; display:flex; flex-direction:column; align-items:center; justify-content:flex-start; padding-top:20px; }
-.site-footer{ margin-top:auto; width:100%; text-align:center; padding:20px 8px 24px; color:#fff; background:rgba(0,0,0,0.35); backdrop-filter:blur(3px); z-index:5; }
-.hide-footer .site-footer{ display:none !important; }
-.hide-footer { padding-bottom:0 !important; }
+/* Hamburger button */
+.menu-btn {
+  background: none;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+  color: #fff;
+  margin-right: 12px;
+}
+.menu {
+  position: absolute;
+  top: 60px;
+  left: 0;
+  background: #0b1116;
+  width: 200px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-radius: 0 0 8px 0;
+  z-index: 1000;
+}
+.menu a { color: #fff; text-decoration: none; font-weight: 600; }
+.menu a:hover { text-decoration: underline; }
+.hidden { display: none; }
 
-/* Start page: footer fixed; keep space */
-.start-page .site-footer{ position:fixed; left:0; right:0; bottom:0; z-index:5; }
-.start-page .app{ padding-bottom:96px; }
-.start-page, .start-page body{ overflow: visible; }
+/* Results header layout */
+.share-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 8px 0 12px;
+}
 
-/* Topbar */
-.topbar{ position:fixed; top:8px; left:8px; right:8px; display:flex; justify-content:space-between; align-items:center; z-index:50; pointer-events:none; }
-.topbar .icon-btn{ pointer-events:auto; background:rgba(0,0,0,0.5); border:1px solid rgba(255,255,255,0.4); width:42px; height:42px; display:grid; place-items:center; border-radius:999px; backdrop-filter:blur(2px); }
-.topbar .icon-btn img{ width:22px; height:22px; filter: invert(1); }
+.date-line {
+  font-weight: 800;
+  margin-bottom: 8px;
+  text-align: center;
+  width: 100%;         
+}
+
+.share-left { display: flex; flex-direction: column; gap: 6px; }
+.share-grid { font-size: 22px; letter-spacing: 2px; }
+
+/* Middle (share) */
+.share-btn {
+  display: inline-block;   
+  padding: 6px 10px;
+  border: 0;
+  border-radius: 8px;
+  background: #b7f7ff;
+  color: #0b1116;
+  font-weight: 800;
+  font-size: 14px;
+  cursor: pointer;
+  white-space: nowrap;     
+  max-width: fit-content;  
+}
+
+
+.share-right {
+  margin-left: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+}
+
+.pill {
+  font-size: 12px;
+  background: rgba(255,255,255,0.2);
+  border: 1px solid rgba(255,255,255,0.35);
+  backdrop-filter: blur(2px);
+  padding: 4px 8px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+/* ---------- Mobile SHIT ---------- */
+@media (max-width: 520px) {
+  .share-btn {
+    font-size: 13px;
+    padding: 5px 9px;
+    align-self: flex-start;  /* sits under squares, left aligned */
+  }
+}
+
+  .share-grid { font-size: 18px; letter-spacing: 1px; }
+
+  /* Share button smaller, under squares */
+  .share-btn {
+    width: auto;
+    align-self: flex-start;
+    font-size: 14px;
+    padding: 6px 10px;
+  }
+
+  /* Streaks stacked vertically under button */
+  .share-right {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .pill {
+    font-size: 12px;
+    padding: 3px 8px;
+  }
+
+/* new helper so the under-score header lays out nicely */
+.share-header.under-score {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 8px 0 12px;
+}
+
+.share-left-row {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* space between squares and Share button */
+}
+
+/* Keep the Share button compact on all site sizes */
+.share-btn {
+  display: inline-block;
+  padding: 6px 10px;
+  border: 0;
+  border-radius: 8px;
+  background: #b7f7ff;
+  color: #0b1116;
+  font-weight: 800;
+  font-size: 14px;
+  cursor: pointer;
+  white-space: nowrap;
+  max-width: fit-content;
+}
+
+/* mobile tweaks still apply */
+@media (max-width: 520px) {
+.share-header.under-score {
+  display: grid;
+  grid-template-columns: 1fr auto;  
+  align-items: start;               
+  gap: 10px;
+  margin: 8px 0 12px;
+}
+
+  .share-left-row {
+    gap: 8px;
+  }
+  .share-btn {
+    font-size: 13px;
+    padding: 5px 9px;
+  }
+  
+  /* Share button position */
+  .share-right {
+    align-items: flex-start;    
+    flex-direction: column;
+    gap: 6px;
+  }
+}
+
+
+.ad-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #fff;
+  text-align: center;
+  min-height: 60px; /* reserve space so it doesnâ€™t collapse */
+  z-index: 9999;
+  box-shadow: 0 -2px 6px rgba(0,0,0,0.15);
+}
+
+
+
+/* ---- Simple page layout for About/Privacy/Contact ---- */
+.page {
+  position: relative;
+  z-index: 1;
+  width: min(900px, 94vw);
+  margin: 24px auto;
+  padding: 16px;
+  background: rgba(0,0,0,0.35);
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 12px;
+  color: #fff;
+  backdrop-filter: blur(3px);
+}
+
+.site-copy {
+  width: min(900px, 94vw);
+  margin: 8px auto 24px;
+  padding: 14px;
+  background: rgba(0,0,0,0.28);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 12px;
+}
+
+.site-copy h3 { margin: 8px 0 6px; }
+.site-copy p, .site-copy ol { margin: 6px 0; }
+
+.site-footer {
+  width: 100%;
+  display: grid;
+  place-items: center;
+  padding: 20px 8px 24px;
+  color: #fff;
+}
+
+.footer-nav {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 6px;
+}
+.footer-nav a { color: #fff; font-weight: 700; text-decoration: underline; }
+.footer-nav a:hover { text-decoration: none; }
+
+/* Sticky ad padding helper */
+body.adpad { padding-bottom: 70px; }
+
+.ad-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #fff;
+  text-align: center;
+  min-height: 60px;
+  z-index: 9999;
+  box-shadow: 0 -2px 6px rgba(0,0,0,0.15);
+}
+
+
+/* ---- Footer Layout: Always stays at bottom ---- */
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app { /* ACTUAL GAMEPLAY SCREEN*/
+  flex: 1; /* pushes footer down */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 20px;
+}
+
+/* Footer always at bottom */
+.site-footer {
+  margin-top: auto;
+  width: 100%;
+  text-align: center;
+  padding: 20px 8px 24px;
+  color: #fff;
+  background: rgba(0,0,0,0.35);
+  backdrop-filter: blur(3px);
+  z-index: 5;
+}
+
+/* Hide footer while game is active */
+.hide-footer .site-footer {
+  display: none !important;
+}
+
+.hide-footer {
+  padding-bottom: 0 !important;
+}
+
+/* ---- Start screen: footer fixed to viewport bottom ---- */
+.start-page .site-footer {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  z-index: 5;
+}
+
+/* Reserve space so start content doesn't sit under the fixed footer */
+.start-page .app {
+  padding-bottom: 96px;         /* match footer height + buffer */
+}
+
+/* Make sure we can scroll on start page */
+.start-page body,
+.start-page {
+  overflow: visible;
+}
+
+
+/* ---- Top header (help/about) ---- */
+.topbar{
+  position: fixed;
+  top: 8px;
+  left: 8px;
+  right: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 50;
+  pointer-events: none; /* icons handle pointer */
+}
+.topbar .icon-btn{
+  pointer-events: auto;
+  background: rgba(0,0,0,0.5);
+  border: 1px solid rgba(255,255,255,0.4);
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  backdrop-filter: blur(2px);
+}
+.topbar .icon-btn img{ width: 22px; height: 22px; filter: invert(1); }
 
 /* How-to panel */
-.howto{ position:fixed; top:58px; left:8px; right:8px; z-index:40; background:rgba(0,0,0,0.55); border:1px solid rgba(255,255,255,0.25); border-radius:12px; color:#fff; padding:10px 12px; backdrop-filter:blur(3px); }
-.howto h3{ margin:6px 0; }
-.howto ol{ margin:6px 18px; }
-
-/* Modal (pop-up) */
-.modal{ position:fixed; inset:0; display:none; align-items:center; justify-content:center; z-index:60; }
-.modal.open{ display:flex; }
-.modal-backdrop{ position:absolute; inset:0; background:rgba(0,0,0,0.6); }
-.modal-card{ position:relative; background:#101418; border:1px solid rgba(255,255,255,0.18); border-radius:14px; padding:12px; width:min(520px,94vw); box-shadow:0 12px 42px rgba(0,0,0,0.5); z-index:1; }
-.modal-close{ position:absolute; top:8px; right:8px; background:rgba(255,255,255,0.9); color:#111; border:0; border-radius:10px; width:32px; height:32px; cursor:pointer; font-weight:900; }
-.visually-hidden{ position:absolute; left:-10000px; top:auto; width:1px; height:1px; overflow:hidden; }
-
-/* Home banner placement: hidden initially; shown after closing pop-up. It sits above the fixed footer on home. */
-#ad-home-banner[hidden]{ display:none !important; }
-.start-page #ad-home-banner.ad-home-banner{ position:fixed; left:8px; right:8px; bottom:80px; z-index:55; margin:0; padding:0; background:transparent; border:0; }
-.hide-footer #ad-home-banner{ display:none !important; }  /* ensure no ad during gameplay */
-
-
-/* Ensure the home banner area is visible even before AdSense fills */
-.start-page #ad-home-banner.ad-home-banner .adsbygoogle {
-  display: block !important;
-  min-height: 60px !important;   /* standard responsive banner fallback height */
-  width: 100%;
-  background: rgba(255,255,255,0.06);
-  border: 2px solid rgba(255,255,255,0.18);
+.howto{
+  position: fixed;
+  top: 58px;
+  left: 8px;
+  right: 8px;
+  z-index: 40;
+  background: rgba(0,0,0,0.55);
+  border: 1px solid rgba(255,255,255,0.25);
   border-radius: 12px;
+  color: #fff;
+  padding: 10px 12px;
+  backdrop-filter: blur(3px);
+}
+.howto h3{ margin: 6px 0; }
+.howto ol{ margin: 6px 18px; }
+
+
+/* Hide footer (and sticky ad space) while the game is active */
+.hide-footer .site-footer { 
+  display: none !important;
+}
+.hide-footer #ad-sticky { 
+  display: none !important;
+}
+.hide-footer { 
+  padding-bottom: 0 !important; /* cancel any ad pad */
+}
+
+.page a,
+.page a:visited {
+  color: #ff5bc8;          /* or any hex code you like */
+  text-decoration: underline;
+}
+
+.page a:hover {
+  color: #882a69;       /* lighter cyan hover, matches your theme */
+  text-decoration: none;
+}
+
+.college-edition {
+  font-size: 2.4rem;       /* bigger text */
+  font-weight: 900;        /* extra bold */
+  color: #b7f7ff;          /* your theme cyan */
+  margin-bottom: 10px;     /* space before PIGSKIN 5 */
+  text-transform: uppercase;
+  text-shadow: 0 0 10px rgba(0,0,0,0.6); /* strong glow */
+  letter-spacing: 1px;
+}
+
+
+/* ---- Quiz screen rectangle ad ---- */
+.ad-rect {
+  display: grid;
+  place-items: center;
+  margin: 18px auto 6px;
+  padding: 8px;
+  border-radius: 12px;
+  background: rgba(0,0,0,0.18);
+  border: 1px solid rgba(255,255,255,0.18);
+  width: 100%;
+}
+/* Keep good separation from clickable answers */
+.choices + .ad-rect { margin-top: 22px; }
+
+/* On very small screens, allow responsive width but keep aspect */
+@media (max-width: 380px){
+  .ad-rect ins.adsbygoogle{
+    width: 100% !important;
+    height: auto !important;
+  }
+}
+
+/* Title wrapper gives us a positioned anchor for the badge */
+.title-wrap {
+  position: relative;
+  display: inline-block; /* shrink-wrap to the title width */
+}
+
+/* Keep title above the background but below the badge */
+.game-title {
+  position: relative;
+  z-index: 1;
+}
+
+/* College badge image */
+.college-badge {
+  position: absolute;
+  left: -60px;             /* nudge horizontally */
+  top: -43px;              /* nudge vertically */
+  transform: rotate(-12deg);
+  width: clamp(140px, 35vw, 220px); 
+  z-index: 2;              
+  pointer-events: none;    
+}
+
+/* Tighter offsets on small screens */
+@media (max-width: 380px){
+  .college-badge {
+    left: -8px;
+    top: -20px;
+    transform: rotate(-10deg);
+    width: 150px;
+  }
+}
+
+/* Make sure results content never sits under the footer */
+.result { padding-bottom: 96px; }
+
+/* If sticky banner adds bottom padding, give results extra room */
+body.adpad .result { padding-bottom: 140px; }
+
+/* Footer should be in normal flow, not fixed */
+.site-footer { position: relative; z-index: 1; }
+
+/* --- FIXED, CLEANER HOME BANNER (60px height globally) --- */
+#ad-home-banner.ad-home-banner {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 80px;
+  z-index: 55;
+  background: transparent;
+  border: none;
+  margin: 0;
+  padding: 0;
+  height: 60px !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#ad-home-banner.ad-home-banner .adsbygoogle {
+  display: block !important;
+  height: 60px !important;
+  width: 100%;
+  max-width: 728px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 6px;
+}
+
+.ad-wrap.ad-home-banner {
+  display: block;
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: none;
 }
