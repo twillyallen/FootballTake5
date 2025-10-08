@@ -1,21 +1,34 @@
 import { CALENDAR } from "./questions.js?v=20250914c";
 
 // ==============================
-// Config
+// Config 
 // ==============================
-const TIME_LIMIT = 15;
+const TIME_LIMIT = 15; // seconds per question
 const KEY_ATTEMPT_PREFIX = "ft5_attempt_";
-const KEY_RESULT_PREFIX  = "ft5_result_";
-const PROD_HOSTS = ["twillyallen.github.io", "pigskin5.com"];
+const KEY_RESULT_PREFIX  = "ft5_result_"; // stores {score, picks}
+const PROD_HOSTS = ["twillyallen.github.io", "pigskin5.com"]; 
 
-function isProd() { return PROD_HOSTS.includes(location.hostname); }
-function hasAttempt(dateStr) { return localStorage.getItem(KEY_ATTEMPT_PREFIX + dateStr) === "1"; }
-function setAttempt(dateStr) { localStorage.setItem(KEY_ATTEMPT_PREFIX + dateStr, "1"); }
-function saveResult(dateStr, payload){ try { localStorage.setItem(KEY_RESULT_PREFIX + dateStr, JSON.stringify(payload)); } catch {} }
-function loadResult(dateStr){ try { const raw = localStorage.getItem(KEY_RESULT_PREFIX + dateStr); return raw ? JSON.parse(raw) : null; } catch { return null; } }
+function isProd() {
+  return PROD_HOSTS.includes(location.hostname);
+}
+function hasAttempt(dateStr) {
+  return localStorage.getItem(KEY_ATTEMPT_PREFIX + dateStr) === "1";
+}
+function setAttempt(dateStr) {
+  localStorage.setItem(KEY_ATTEMPT_PREFIX + dateStr, "1");
+}
+function saveResult(dateStr, payload) {
+  try { localStorage.setItem(KEY_RESULT_PREFIX + dateStr, JSON.stringify(payload)); } catch {}
+}
+function loadResult(dateStr) {
+  try {
+    const raw = localStorage.getItem(KEY_RESULT_PREFIX + dateStr);
+    if (!raw) return null;
+    return JSON.parse(raw);
+  } catch { return null; }
+}
 
 // --- State
-
 let RUN_DATE = null;
 let QUESTIONS = [];
 let current = 0;
@@ -29,21 +42,17 @@ let timeLeft = TIME_LIMIT;
 let startScreen, startBtn, cardSec, resultSec, questionEl, choicesEl;
 let progressEl, timerEl, scoreText, reviewEl, restartBtn, headerEl;
 
-// ---------- Ad helper ----------
-function fillAdById(insId){
-  const el = document.getElementById(insId);
-  if (!el || el.dataset.filled === "1") return;
-  try {
-    (window.adsbygoogle = window.adsbygoogle || []).push({});
-    el.dataset.filled = "1";
-  } catch {}
-}
-
 // ---------- Utilities ----------
 function getRunDateISO() {
+
+  // === DEV OVERRIDE ===
+  // return "2025-10-02";   // Change this date to test
+  // ====================
+
   const p = new URLSearchParams(window.location.search);
   const allowOverride = !isProd();
   if (allowOverride && p.has("date")) return p.get("date");
+
   const d = new Date();
   const y = d.getFullYear();
   const m = String(d.getMonth() + 1).padStart(2, "0");
@@ -51,9 +60,12 @@ function getRunDateISO() {
   return `${y}-${m}-${day}`;
 }
 
-function stopTimer(){ if (timerId) clearInterval(timerId); timerId = null; }
+function stopTimer() {
+  if (timerId) clearInterval(timerId);
+  timerId = null;
+}
 
-function startTimer(seconds){
+function startTimer(seconds) {
   stopTimer();
   timeLeft = seconds;
   timerEl.textContent = `${timeLeft}s`;
@@ -67,13 +79,173 @@ function startTimer(seconds){
   }, 1000);
 }
 
-// ---------- Screens ----------
-function showStartScreen(){
-  document.body.classList.add("start-page");
-  document.body.classList.remove("hide-footer");
-  const runDate = getRunDateISO();
-  if (hasAttempt(runDate)) { showLockedGate(runDate); return; }
+// ---------- Streak Counter ----------
+function computeAndSaveStreak(dateStr) {
+  const KEY_STREAK = "dailyStreak";
+  const KEY_LAST = "dailyLastDate";
 
+  let streak = parseInt(localStorage.getItem(KEY_STREAK) || "0", 10);
+  const last = localStorage.getItem(KEY_LAST);
+
+  if (last !== dateStr) {
+    streak = streak + 1; 
+    localStorage.setItem(KEY_STREAK, String(streak));
+    localStorage.setItem(KEY_LAST, dateStr);
+  }
+  return streak;
+}
+
+// ---------- Touchdown Streak (5/5 days) ----------
+function computeAndSaveTouchdownStreak(dateStr) {
+  const KEY_TD_STREAK = "tdStreak";
+  const KEY_TD_LAST   = "tdLastDate";
+
+  let streak = parseInt(localStorage.getItem(KEY_TD_STREAK) || "0", 10);
+  const last = localStorage.getItem(KEY_TD_LAST);
+
+  // Only increment once per date when you actually hit a perfect score
+  if (last !== dateStr) {
+    streak = streak + 1;
+    localStorage.setItem(KEY_TD_STREAK, String(streak));
+    localStorage.setItem(KEY_TD_LAST, dateStr);
+  }
+  return streak;
+}
+
+// ---------- Locked Result ----------
+function renderPersistedResult(dateStr, persisted) {
+  RUN_DATE = dateStr;
+  QUESTIONS = CALENDAR[RUN_DATE] || [];
+  picks = Array.isArray(persisted?.picks) ? persisted.picks : [];
+  score = Number.isFinite(persisted?.score) ? persisted.score : picks.filter(p => p && p.pick === p.correct).length;
+
+  document.body.classList.remove("no-scroll");
+  document.body.classList.remove("start-page");
+  startScreen.classList.add("hidden");
+  cardSec.classList.add("hidden");
+  resultSec.classList.remove("hidden");
+  headerEl?.classList.add("hidden");
+  timerEl.style.display = "none";
+
+  scoreText.textContent = `You got ${score} / ${QUESTIONS.length || 5} correct.`;
+
+  reviewEl.innerHTML = "";
+  picks.forEach(({ idx, pick, correct }) => {
+    const q = QUESTIONS[idx] || { question: `Question ${idx + 1}`, choices: ["A","B","C","D"], explanation: "" };
+
+    const div = document.createElement("div");
+    div.className = "rev";
+
+    const qEl = document.createElement("div");
+    qEl.className = "q";
+    qEl.textContent = q.question;
+
+    const yourAnswerText = pick === null ? "No answer" : q.choices?.[pick] ?? `Choice ${pick + 1}`;
+    const you = document.createElement("div");
+    you.innerHTML = `Your answer: <strong>${yourAnswerText}</strong>`;
+
+    const cor = document.createElement("div");
+    const correctText = q.choices?.[correct] ?? `Choice ${correct + 1}`;
+    cor.innerHTML = `Correct: <strong>${correctText}</strong>`;
+
+    const ex = document.createElement("div");
+    ex.className = "ex";
+    ex.textContent = q.explanation ?? "";
+
+    if (pick === correct) {
+      you.style.color = "#28a745";
+      div.style.background = "rgba(40, 167, 69, 0.22)";
+      div.style.border = "1px solid rgba(40, 167, 69, 0.45)";
+    } else {
+      you.style.color = "#ff4b6b";
+      div.style.background = "rgba(255, 75, 107, 0.13)";
+      div.style.border = "1px solid rgba(255, 75, 107, 0.4)";
+    }
+
+    div.append(qEl, you, cor, ex);
+    reviewEl.appendChild(div);
+  });
+
+  if (restartBtn) {
+    restartBtn.style.display = "inline-block";
+    restartBtn.textContent = "COME BACK TOMORROW!";
+    restartBtn.disabled = true;
+    restartBtn.style.cursor = "default";
+    restartBtn.style.opacity = "0.7";
+  }
+
+  injectShareSummary();
+}
+
+// ---------- Locked Gate ----------
+function showLockedGate(dateStr) {
+  const persisted = loadResult(dateStr);
+  if (persisted) {
+    renderPersistedResult(dateStr, persisted);
+    return;
+  }
+
+  document.body.classList.remove("no-scroll");
+  document.body.classList.remove("start-page");
+  startScreen.classList.add("hidden");
+  cardSec.classList.add("hidden");
+  resultSec.classList.remove("hidden");
+  headerEl?.classList.add("hidden");
+  timerEl.style.display = "none";
+  scoreText.textContent = `You already played ${dateStr}. Come back tomorrow!`;
+  reviewEl.innerHTML = "";
+  if (restartBtn) {
+    restartBtn.style.display = "inline-block";
+    restartBtn.textContent = "COME BACK TOMORROW";
+    restartBtn.disabled = true;
+    restartBtn.style.cursor = "default";
+    restartBtn.style.opacity = "0.7";
+  }
+}
+
+// ---------- Screen Switchers ----------
+function showStartScreen() {
+  // Start page state
+  document.body.classList.add("no-scroll");     // ensure scrolling works
+  document.body.classList.remove("hide-footer");   // show footer
+  document.body.classList.add("start-page");       // mark start screen
+
+  const runDate = getRunDateISO();
+  if (hasAttempt(runDate)) {
+    showLockedGate(runDate);
+    return;
+  }
+
+  // --- College Edition badge on Saturdays (runs ONLY on start screen) ---
+  const now = new Date();                 // real date in prod
+  const isSaturday = now.getDay() === 6;  // 0=Sun .. 6=Sat
+  const titleEl = document.querySelector(".game-title");
+
+  // Clean up any old badge if navigating back
+  document.querySelector(".college-badge")?.remove();
+
+  if (isSaturday && titleEl) {
+    // Ensure the title is in a positioned wrapper
+    let wrap = titleEl.closest(".title-wrap");
+    if (!wrap) {
+      wrap = document.createElement("div");
+      wrap.className = "title-wrap";
+      titleEl.parentNode.insertBefore(wrap, titleEl); // insert wrapper
+      wrap.appendChild(titleEl);                       // move title inside
+      // Optional: move tagline inside wrap if you want it under the badge:
+      // const tagline = document.querySelector(".tagline");
+      // if (tagline) wrap.appendChild(tagline);
+    }
+
+    // Insert the image badge
+    const badge = document.createElement("img");
+    badge.className = "college-badge";
+    badge.src = "./college.png";           // put this file next to index.html
+    badge.alt = "College Edition";
+    wrap.appendChild(badge);
+  }
+
+  // Show start screen
   startScreen.classList.remove("hidden");
   cardSec.classList.add("hidden");
   resultSec.classList.add("hidden");
@@ -83,28 +255,26 @@ function showStartScreen(){
 
   startBtn.disabled = false;
   startBtn.textContent = "START";
-
-  // Hide banner until popup is closed
-  const hb = document.getElementById("ad-home-banner");
-  if (hb) hb.hidden = true;
-
-  openAdPopup(); // show the popup immediately on home
 }
 
-function startGame(){
-  closeAdPopup(); // ensure popup is gone
-  // Hide banner during gameplay
-  const hb = document.getElementById("ad-home-banner");
-  if (hb) hb.hidden = true;
-
+function startGame() {
+  // Leaving start screen; hide footer during gameplay
   document.body.classList.remove("start-page");
+  document.body.classList.remove("no-scroll");
   document.body.classList.add("hide-footer");
 
   RUN_DATE = getRunDateISO();
-  if (hasAttempt(RUN_DATE)) { showLockedGate(RUN_DATE); return; }
+  if (hasAttempt(RUN_DATE)) {
+    showLockedGate(RUN_DATE);
+    return;
+  }
 
   QUESTIONS = CALENDAR[RUN_DATE];
-  current = 0; score = 0; answered = false; picks = [];
+
+  current = 0;
+  score = 0;
+  answered = false;
+  picks = [];
 
   if (!Array.isArray(QUESTIONS) || QUESTIONS.length !== 5) {
     startScreen.classList.add("hidden");
@@ -127,49 +297,89 @@ function startGame(){
   renderQuestion();
 }
 
-function showResult(){
+function showResult() {
+  document.body.classList.remove("start-page");
+  document.body.classList.remove("no-scroll");
   document.body.classList.remove("hide-footer");
+
   cardSec.classList.add("hidden");
   resultSec.classList.remove("hidden");
   headerEl?.classList.add("hidden");
   timerEl.style.display = "none";
 
-  // Scroll to top for cleanliness
+  // Force layout flush, then scroll to top so nothing hides behind footer
   void resultSec.offsetHeight;
   requestAnimationFrame(() => window.scrollTo(0, 0));
 
-  scoreText.textContent = `You got ${score} / ${QUESTIONS.length} correct.`;
+  if (score === QUESTIONS.length) {
+    scoreText.textContent = `TOUCHDOWN! You got ${score} / ${QUESTIONS.length}!`;
 
-  // Celebrate perfect score
-  if (score === QUESTIONS.length && typeof confetti === 'function') {
-    confetti({ particleCount: 160, spread: 70, origin: { y: 0.6 } });
+    // Save/advance Touchdown Streak (5/5 days)
+    computeAndSaveTouchdownStreak(RUN_DATE);
+
+    // Confetti (requires canvas-confetti script on the page)
+    if (typeof confetti === "function") {
+      confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+    }
+  } else {
+    scoreText.textContent = `You got ${score} / ${QUESTIONS.length} correct.`;
   }
 
   reviewEl.innerHTML = "";
   picks.forEach(({ idx, pick, correct }) => {
     const q = QUESTIONS[idx];
-    const div = document.createElement("div"); div.className = "rev";
-    const qEl = document.createElement("div"); qEl.className = "q"; qEl.textContent = q.question;
+
+    const div = document.createElement("div");
+    div.className = "rev";
+
+    const qEl = document.createElement("div");
+    qEl.className = "q";
+    qEl.textContent = q.question;
+
     const yourAnswerText = pick === null ? "No answer" : q.choices[pick];
-    const you = document.createElement("div"); you.innerHTML = `Your answer: <strong>${yourAnswerText}</strong>`;
-    const cor = document.createElement("div"); cor.innerHTML = `Correct: <strong>${q.choices[correct]}</strong>`;
-    const ex = document.createElement("div"); ex.className = "ex"; ex.textContent = q.explanation ?? "";
-    if (pick === correct) { you.style.color = "#28a745"; div.style.background = "rgba(40,167,69,0.22)"; div.style.border = "1px solid rgba(40,167,69,0.45)"; }
-    else { you.style.color = "#ff4b6b"; div.style.background = "rgba(255,75,107,0.13)"; div.style.border = "1px solid rgba(255,75,107,0.4)"; }
+    const you = document.createElement("div");
+    you.innerHTML = `Your answer: <strong>${yourAnswerText}</strong>`;
+
+    const cor = document.createElement("div");
+    cor.innerHTML = `Correct: <strong>${q.choices[correct]}</strong>`;
+
+    const ex = document.createElement("div");
+    ex.className = "ex";
+    ex.textContent = q.explanation ?? "";
+
+    if (pick === correct) {
+      you.style.color = "#28a745";
+      div.style.background = "rgba(40, 167, 69, 0.22)";
+      div.style.border = "1px solid rgba(40, 167, 69, 0.45)";
+    } else {
+      you.style.color = "#ff4b6b";
+      div.style.background = "rgba(255, 75, 107, 0.13)";
+      div.style.border = "1px solid rgba(255, 75, 107, 0.4)";
+    }
+
     div.append(qEl, you, cor, ex);
     reviewEl.appendChild(div);
   });
 
-  // Fill the results ad now
-  fillAdById("adResultsIns");
+  saveResult(RUN_DATE, { score, picks });
+
+  if (restartBtn) {
+    restartBtn.style.display = "inline-block";
+    restartBtn.textContent = "COME BACK TOMORROW";
+    restartBtn.disabled = true;
+    restartBtn.style.cursor = "default";
+    restartBtn.style.opacity = "0.7";
+  }
+
+  injectShareSummary();
 }
 
-// ---------- Quiz ----------
-function renderQuestion(){
+// ---------- Quiz Shit ----------
+function renderQuestion() {
   answered = false;
   const q = QUESTIONS[current];
   questionEl.textContent = q.question;
-  progressEl.textContent = `Question ${current + 1} / ${QUESTIONS.length}`;
+  progressEl.textContent = `Question\n ${current + 1} / ${QUESTIONS.length}`;
   choicesEl.innerHTML = "";
   q.choices.forEach((choice, i) => {
     const btn = document.createElement("button");
@@ -180,7 +390,7 @@ function renderQuestion(){
   startTimer(TIME_LIMIT);
 }
 
-function pickAnswer(i, correct){
+function pickAnswer(i, correct) {
   if (answered) return;
   answered = true;
   stopTimer();
@@ -192,38 +402,119 @@ function pickAnswer(i, correct){
   picks.push({ idx: current, pick: i, correct });
   setTimeout(() => {
     current++;
-    if (current < QUESTIONS.length) renderQuestion();
-    else showResult();
+    if (current < QUESTIONS.length) {
+      renderQuestion();
+    } else {
+      showResult();
+    }
   }, 700);
 }
 
-// ---------- Pop-up controls ----------
-function openAdPopup(){
-  const modal = document.getElementById("adPopup");
-  if (!modal) return;
-  modal.setAttribute("aria-hidden", "false");
-  modal.classList.add("open");
-  document.body.classList.add("no-scroll");
-  // Fill popup ad
-  fillAdById("adPopupIns");
+function showToast(msg) {
+  const t = document.createElement("div");
+  t.className = "toast";
+  t.textContent = msg;
+  document.body.appendChild(t);
+  requestAnimationFrame(() => t.classList.add("show"));
+  setTimeout(() => {
+    t.classList.remove("show");
+    setTimeout(() => t.remove(), 200);
+  }, 1600);
 }
-function closeAdPopup(){
-  const modal = document.getElementById("adPopup");
-  if (!modal) return;
-  modal.classList.remove("open");
-  modal.setAttribute("aria-hidden", "true");
-  document.body.classList.remove("no-scroll");
-  // Reveal and fill home banner
-  const hb = document.getElementById("ad-home-banner");
-  if (hb) {
-    hb.hidden = false;
-    fillAdById("adHomeIns");
+
+// ---------- Share + Streak ----------
+function injectShareSummary() {
+  const resultTop = document.getElementById("result");
+  if (!resultTop) return;
+
+  resultTop.querySelectorAll(".share-header,.date-line").forEach(n => n.remove());
+
+  const dateLine = document.createElement("div");
+  dateLine.className = "date-line";
+  dateLine.textContent = `Pigskin 5 — ${RUN_DATE}`;
+  resultTop.insertBefore(dateLine, resultTop.firstChild);
+
+  // Build header (sits under "Your Score")
+  const headerWrap = document.createElement("div");
+  headerWrap.className = "share-header under-score";
+
+  const leftRow = document.createElement("div");
+  leftRow.className = "share-left-row";
+
+  const squares = picks.map(p => (p.pick === p.correct ? "🟩" : "⬜")).join("");
+  const grid = document.createElement("div");
+  grid.className = "share-grid";
+  grid.textContent = squares;
+
+  const shareBtn = document.createElement("button");
+  shareBtn.id = "shareBtn";
+  shareBtn.className = "share-btn";
+  shareBtn.textContent = "Share";
+  shareBtn.addEventListener("click", async () => {
+    const squaresNow = picks.map(p => (p.pick === p.correct ? "🟩" : "⬜")).join("");
+    // Check for 5/5
+    let shareText;
+    if (score === QUESTIONS.length) {
+      shareText = `I Scored a Touchdown! ${squaresNow}\n\nhttps://pigskin5.com\n\n@TwillysTakes on X!`;
+    } else {
+      shareText = `I scored ${squaresNow} in Pigskin 5!\n\nhttps://pigskin5.com\n\n@TwillysTakes on X!`;
+    }
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(shareText);
+      } else {
+        const ta = document.createElement("textarea");
+        ta.value = shareText;
+        ta.setAttribute("readonly", "");
+        ta.style.position = "fixed";
+        ta.style.opacity = "0";
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        ta.remove();
+      }
+      showToast("Copied to clipboard");
+      if (navigator.share) navigator.share({ text: shareText }).catch(() => {});
+    } catch (e) {
+      console.error("Share failed:", e);
+      showToast("Could not copy. Try manual paste.");
+    }
+  });
+
+  leftRow.append(grid, shareBtn);
+
+  // Streaks Tags
+  const rightCol = document.createElement("div");
+  rightCol.className = "share-right";
+
+  const daily = document.createElement("div");
+  daily.className = "pill";
+  daily.textContent = `Daily Streak: ${computeAndSaveStreak(RUN_DATE)}`;
+
+  const td = document.createElement("div");
+  td.className = "pill";
+  td.textContent = `Touchdown Streak: ${localStorage.getItem("tdStreak") || 0}`;
+
+  rightCol.append(daily, td);
+
+  headerWrap.append(leftRow, rightCol);
+
+  // ---- Insert header directly under the "Your Score" line ----
+  const anchor = document.getElementById("scoreText");
+  if (anchor && anchor.parentNode) {
+    anchor.parentNode.insertBefore(headerWrap, anchor.nextSibling);
+  } else {
+    const review = document.getElementById("review");
+    if (review && review.parentNode) {
+      review.parentNode.insertBefore(headerWrap, review);
+    } else {
+      resultTop.appendChild(headerWrap);
+    }
   }
-  document.getElementById("startBtn")?.focus();
 }
 
 // ---------- Init ----------
-function init(){
+function init() {
   startScreen = document.getElementById("startScreen");
   startBtn     = document.getElementById("startBtn");
   cardSec      = document.getElementById("card");
@@ -241,73 +532,66 @@ function init(){
   restartBtn?.addEventListener("click", showStartScreen);
   showStartScreen();
 
-  // Header controls
-  const helpBtn = document.getElementById("helpBtn");
-  const howTo = document.getElementById("howTo");
-  const topbar = document.getElementById("topbar");
+  const menuBtn = document.getElementById("menu-toggle");
+  const menu = document.getElementById("menu");
+  menuBtn?.addEventListener("click", () => {
+    menu.classList.toggle("hidden");
+  });
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", init);
+} else {
+  init();
+}
+
+// ---- Header controls (help/about) ----
+(function(){
+  const helpBtn = document.getElementById('helpBtn');
+  const howTo = document.getElementById('howTo');
+  const startScreen = document.getElementById('startScreen');
+  const quizCard = document.getElementById('card');
+  const result = document.getElementById('result');
+  const topbar = document.getElementById('topbar');
+  const restartBtn = document.getElementById('restartBtn');
+
   function showTopbar(show){
     if(!topbar) return;
-    topbar.style.display = show ? "flex" : "none";
-    if(!show && howTo) { howTo.hidden = true; helpBtn?.setAttribute("aria-expanded","false"); }
+    topbar.style.display = show ? 'flex' : 'none';
+    // Hide howto when hiding the topbar
+    if(!show && howTo) { howTo.hidden = true; helpBtn?.setAttribute('aria-expanded','false'); }
   }
-  helpBtn?.addEventListener("click", () => {
+
+  // Toggle How-to panel
+  helpBtn?.addEventListener('click', () => {
     if(!howTo) return;
     const isHidden = howTo.hidden;
     howTo.hidden = !isHidden;
-    helpBtn.setAttribute("aria-expanded", String(isHidden));
+    helpBtn.setAttribute('aria-expanded', String(isHidden));
   });
-  startBtn?.addEventListener("click", () => { showTopbar(false); });
+
+  // Hide header when game starts; show again on results
+  const startBtn = document.getElementById('startBtn');
+  startBtn?.addEventListener('click', () => {
+    showTopbar(false);
+  });
+
+  // If your game swaps screens by toggling 'hidden' class, observe result section
   const mo = new MutationObserver(() => {
-    if(resultSec && !resultSec.classList.contains('hidden')) showTopbar(true);
+    if(result && !result.classList.contains('hidden')){
+      showTopbar(true);
+    }
   });
-  if(resultSec) mo.observe(resultSec, { attributes: true, attributeFilter: ['class'] });
+  if(result) mo.observe(result, { attributes: true, attributeFilter: ['class'] });
+
+  // On restart, header should be visible (back to start screen)
   restartBtn?.addEventListener('click', () => showTopbar(true));
+})();
 
-  // Modal close: X, backdrop, Esc
-  const modalEl = document.getElementById("adPopup");
-  const modalCloseBtn = document.getElementById("adModalClose");
-  const modalBackdrop = modalEl?.querySelector(".modal-backdrop");
-  const close = () => closeAdPopup();
-  modalCloseBtn?.addEventListener("click", close);
-  modalBackdrop?.addEventListener("click", close);
-  document.addEventListener("keydown", (e) => { if(e.key === "Escape") close(); });
+// ---- Render quiz rectangle ad after game starts ----
+function renderQuizAd(){
+  try { (window.adsbygoogle = window.adsbygoogle || []).push({}); } catch(e){}
 }
-
-if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
-else init();
-
-// ---------- Locked result path ----------
-function renderPersistedResult(dateStr, persisted){
-  RUN_DATE = dateStr;
-  QUESTIONS = CALENDAR[RUN_DATE] || [];
-  picks = Array.isArray(persisted?.picks) ? persisted.picks : [];
-  score = Number.isFinite(persisted?.score) ? persisted.score : picks.filter(p => p && p.pick === p.correct).length;
-
-  document.body.classList.remove("no-scroll", "start-page", "hide-footer");
-  startScreen.classList.add("hidden");
-  cardSec.classList.add("hidden");
-  resultSec.classList.remove("hidden");
-  headerEl?.classList.add("hidden");
-  timerEl.style.display = "none";
-
-  scoreText.textContent = `You got ${score} / ${QUESTIONS.length || 5} correct.`;
-
-  reviewEl.innerHTML = "";
-  picks.forEach(({ idx, pick, correct }) => {
-    const q = QUESTIONS[idx] || { question: `Question ${idx + 1}`, choices: ["A","B","C","D"], explanation: "" };
-    const div = document.createElement("div"); div.className = "rev";
-    const qEl = document.createElement("div"); qEl.className = "q"; qEl.textContent = q.question;
-    const yourAnswerText = pick === null ? "No answer" : q.choices?.[pick] ?? `Choice ${pick + 1}`;
-    const you = document.createElement("div"); you.innerHTML = `Your answer: <strong>${yourAnswerText}</strong>`;
-    const cor = document.createElement("div"); const correctText = q.choices?.[correct] ?? `Choice ${correct + 1}`;
-    cor.innerHTML = `Correct: <strong>${correctText}</strong>`;
-    const ex = document.createElement("div"); ex.className = "ex"; ex.textContent = q.explanation ?? "";
-    if (pick === correct) { you.style.color = "#28a745"; div.style.background = "rgba(40,167,69,0.22)"; div.style.border = "1px solid rgba(40,167,69,0.45)"; }
-    else { you.style.color = "#ff4b6b"; div.style.background = "rgba(255,75,107,0.13)"; div.style.border = "1px solid rgba(255,75,107,0.4)"; }
-    div.append(qEl, you, cor, ex);
-    reviewEl.appendChild(div);
-  });
-
-  // Fill results ad
-  fillAdById("adResultsIns");
-}
+document.getElementById('startBtn')?.addEventListener('click', () => {
+  setTimeout(renderQuizAd, 250);
+});
