@@ -206,9 +206,9 @@ function showLockedGate(dateStr) {
 // ---------- Screen Switchers ----------
 function showStartScreen() {
   // Start page state
-  document.body.classList.add("no-scroll");     // ensure scrolling works
-  document.body.classList.remove("hide-footer");   // show footer
-  document.body.classList.add("start-page");       // mark start screen
+  document.body.classList.add("no-scroll");
+  document.body.classList.remove("hide-footer");
+  document.body.classList.add("start-page");
 
   const runDate = getRunDateISO();
   if (hasAttempt(runDate)) {
@@ -232,9 +232,6 @@ function showStartScreen() {
       wrap.className = "title-wrap";
       titleEl.parentNode.insertBefore(wrap, titleEl); // insert wrapper
       wrap.appendChild(titleEl);                       // move title inside
-      // Optional: move tagline inside wrap if you want it under the badge:
-      // const tagline = document.querySelector(".tagline");
-      // if (tagline) wrap.appendChild(tagline);
     }
 
     // Insert the image badge
@@ -374,7 +371,7 @@ function showResult() {
   injectShareSummary();
 }
 
-// ---------- Quiz Shit ----------
+// ---------- Quiz ----------
 function renderQuestion() {
   answered = false;
   const q = QUESTIONS[current];
@@ -549,8 +546,6 @@ if (document.readyState === "loading") {
 (function(){
   const helpBtn = document.getElementById('helpBtn');
   const howTo = document.getElementById('howTo');
-  const startScreen = document.getElementById('startScreen');
-  const quizCard = document.getElementById('card');
   const result = document.getElementById('result');
   const topbar = document.getElementById('topbar');
   const restartBtn = document.getElementById('restartBtn');
@@ -576,7 +571,7 @@ if (document.readyState === "loading") {
     showTopbar(false);
   });
 
-  // If your game swaps screens by toggling 'hidden' class, observe result section
+  // Observe result section to re-show topbar
   const mo = new MutationObserver(() => {
     if(result && !result.classList.contains('hidden')){
       showTopbar(true);
@@ -588,43 +583,10 @@ if (document.readyState === "loading") {
   restartBtn?.addEventListener('click', () => showTopbar(true));
 })();
 
-// ---- Render quiz rectangle ad after game starts ----
-function renderQuizAd(){
-  try { (window.adsbygoogle = window.adsbygoogle || []).push({}); } catch(e){}
-}
-document.getElementById('startBtn')?.addEventListener('click', () => {
-  setTimeout(renderQuizAd, 250);
-});
-
-// --- Pop-up Ad Logic (robust) ---
-function openAdPopup() {
-  const popup = document.getElementById("adPopup");
-  if (!popup) return;
-  popup.classList.add("open");
-  popup.setAttribute("aria-hidden", "false");
-  document.body.classList.add("no-scroll");
-  try { (window.adsbygoogle = window.adsbygoogle || []).push({}); } catch {}
-}
-function closeAdPopup() {
-  const popup = document.getElementById("adPopup");
-  if (!popup) return;
-  popup.classList.remove("open");
-  popup.setAttribute("aria-hidden", "true");
-  document.body.classList.remove("no-scroll");
-}
-function _scheduleHomePopup(){
-  const tryOpen = () => openAdPopup();
-  requestAnimationFrame(tryOpen);
-  setTimeout(tryOpen, 120);
-  setTimeout(tryOpen, 320);
-}
-document.addEventListener("DOMContentLoaded", () => {
-  const popup = document.getElementById("adPopup");
-  const closeBtn = document.getElementById("adModalClose");
-  const backdrop = popup?.querySelector(".modal-backdrop");
-  const esc = (e) => { if (e.key === "Escape") closeAdPopup(); };
-  closeBtn?.addEventListener("click", closeAdPopup);
-  backdrop?.addEventListener("click", closeAdPopup);
-  document.addEventListener("keydown", esc);
-  _scheduleHomePopup();
+// --- Safety: ensure no stray scroll locks on non-start screens (e.g., Results refresh)
+window.addEventListener("pageshow", () => {
+  const onStartScreen = !document.getElementById("startScreen")?.classList.contains("hidden");
+  if (!onStartScreen) {
+    document.body.classList.remove("no-scroll");
+  }
 });
