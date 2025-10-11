@@ -216,43 +216,47 @@ function showStartScreen() {
     return;
   }
 
-  // --- College Edition badge on Saturdays (runs ONLY on start screen) ---
-  const now = new Date();                 // real date in prod
-  const isSaturday = now.getDay() === 6;  // 0=Sun .. 6=Sat
-  const titleEl = document.querySelector(".game-title");
+// --- Add College Edition badge on Saturdays ---
+var now = new Date();                     // use actual date
+var isSaturday = now.getDay() === 6;      // Sunday=0 ... Saturday=6
+var titleEl = document.querySelector(".game-title");
 
-  // Clean up any old badge if navigating back
-  document.querySelector(".college-badge")?.remove();
+// Clean up any previous badge safely
+var oldBadge = document.querySelector(".college-badge");
+if (oldBadge && oldBadge.parentNode) {
+  oldBadge.parentNode.removeChild(oldBadge);
+}
 
-  if (isSaturday && titleEl) {
-    // Ensure the title is in a positioned wrapper
-    let wrap = titleEl.closest(".title-wrap");
-    if (!wrap) {
-      wrap = document.createElement("div");
-      wrap.className = "title-wrap";
-      titleEl.parentNode.insertBefore(wrap, titleEl); // insert wrapper
-      wrap.appendChild(titleEl);                       // move title inside
-    }
-
-    // Insert the image badge
-    const badge = document.createElement("img");
-    badge.className = "college-badge";
-    badge.src = "./college.png";           // put this file next to index.html
-    badge.alt = "College Edition";
-    wrap.appendChild(badge);
+if (isSaturday && titleEl) {
+  // Wrap the title so badge can be positioned relative to it
+  var wrap = titleEl.closest(".title-wrap");
+  if (!wrap) {
+    wrap = document.createElement("div");
+    wrap.className = "title-wrap";
+    titleEl.parentNode.insertBefore(wrap, titleEl);
+    wrap.appendChild(titleEl);
   }
 
-  // Show start screen
-  startScreen.classList.remove("hidden");
-  cardSec.classList.add("hidden");
-  resultSec.classList.add("hidden");
-  headerEl?.classList.add("hidden");
-  timerEl.style.display = "none";
-  stopTimer();
-
-  startBtn.disabled = false;
-  startBtn.textContent = "START";
+  // Create and attach badge image
+  var badge = document.createElement("img");
+  badge.className = "college-badge";
+  badge.src = "./college.png";      // ensure college.png is in same folder as index.html
+  badge.alt = "College Edition";
+  wrap.appendChild(badge);
 }
+
+// --- Show Start Screen ---
+startScreen.classList.remove("hidden");
+cardSec.classList.add("hidden");
+resultSec.classList.add("hidden");
+if (headerEl) headerEl.classList.add("hidden");
+timerEl.style.display = "none";
+stopTimer();
+
+startBtn.disabled = false;
+startBtn.textContent = "START";
+}
+
 
 function startGame() {
   // Leaving start screen; hide footer during gameplay

@@ -115,42 +115,36 @@ body::before{
   letter-spacing:.04em;
 }
 
-/* ===== College Edition Badge Controls =====
-   Tune these defaults; you can also override them from JS.
-*/
-:root {
-  --badge-scale: 0.35;       /* unitless   */
-  --badge-rotate: -12deg;   /* e.g. -5deg */
-  --badge-x: -90px;         /* translateX */
-  --badge-y: -100px;         /* translateY */
-  --badge-maxw: 88vw;     /* fluid cap  */
-  --badge-cap: 720px;     /* desktop cap */
-}
-
+/* --- College Edition badge overlay fix --- */
 .title-wrap {
   position: relative;
-  display: grid;
-  place-items: center;
+  display: inline-block;
+  text-align: center;
 }
 
 .college-badge {
-  display: block;
-  width: min(var(--badge-cap), var(--badge-maxw));
+  position: absolute;
+  top: -50px;
+  left: -35px;
+  transform: rotate(-12deg);
+  width: clamp(140px, 35vw, 220px);
   height: auto;
-  margin: 6px auto;
-  transform:
-    translate(var(--badge-x), var(--badge-y))
-    rotate(var(--badge-rotate))
-    scale(var(--badge-scale));
-  transform-origin: center;
-  transition: transform 180ms ease, width 180ms ease;
+  z-index: 2;
+  pointer-events: none;
+  margin: 0;
 }
 
-/* Example: slightly smaller on tiny phones (override any vars you want) */
-@media (max-width: 420px) {
-  :root {
-    --badge-scale: 0.92;
-    --badge-maxw: 82vw;
+.game-title {
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 420px){
+  .college-badge {
+    top: -20px;
+    left: -8px;
+    transform: rotate(-10deg);
+    width: 180px;
   }
 }
 
