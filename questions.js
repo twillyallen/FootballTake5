@@ -91,7 +91,14 @@ export const CALENDAR = {
     { question: "True or False: No kicker has ever been selected in the first round of the NFL Draft", choices: ["True", "False"], answer: 1 },
     { question: "Who was the last Giants player to win MVP?", choices: ["Y.A. Tittle", "Eli Manning", "Michael Strahan", "Lawrence Taylor"], answer: 3 },
     { question: "Before today's games, who leads the league in Receiving TDs?", choices: ["Amon-Ra St Brown", "Dallas Goedert", "George Pickens", "Emeka Edgbuka"], answer: 0 }
-  ]
+  ],
+  "2025-10-14": [ //Tuesday
+    { question: "Who led the league in TD Passes in 2019?", choices: ["Aaron Rodgers", "Jameis Winston", "Lamar Jackson", "Russell Wilson"], answer: 2 },
+    { question: "Who is second (to Jerry Rice) in all-time Career Receptions?", choices: ["Jason Witten", "Cris Carter", "Marvin Harrison", "Larry Fitzgerald"], answer: 3 },
+    { question: "Which Kicker has attempted the most Field Goals this season?", choices: ["Chase McLaughlin", "Blake Grupe", "Jason Myers", "Cameron Dicker"], answer: 1 },
+    { question: "Who is the Head Coach of the 0-6 Jets?", choices: ["Brian Daboll", "Robert Salah", "Mike Vrabel", "Aaron Glenn"], answer: 3 },
+    { question: "Which team has won a Super Bowl more recently?", choices: ["Cowboys", "Commanders/Redskins", "49ers", "Panthers"], answer: 0 }
+  ],
 };
 
 
