@@ -99,6 +99,20 @@ export const CALENDAR = {
     { question: "Who is the Head Coach of the 0-6 Jets?", choices: ["Brian Daboll", "Robert Salah", "Mike Vrabel", "Aaron Glenn"], answer: 3 },
     { question: "Which team has won a Super Bowl more recently?", choices: ["Cowboys", "Commanders/Redskins", "49ers", "Panthers"], answer: 0 }
   ],
+  "2025-10-15": [ //Wednesday
+    { question: "Who won League MVP in 2018?", choices: ["Tom Brady", "Lamar Jackson", "Drew Brees", "Patrick Mahomes"], answer: 3 },
+    { question: "Current league leader in Tackles?", choices: ["Jordyn Brooks", "Nick Bonito", "Bobby Wagner", "Jamien Sherwood"], answer: 0 },
+    { question: "Who has more Career Passing TDs?", choices: ["Dan Marino", "Philip Rivers", "Ben Roethlisberger"], answer: 1 },
+    { question: "Current league leader in Rushing TDs?", choices: ["Jalen Hurts", "James Cook", "Jonathan Taylor", "Josh Jacobs"], answer: 2 },
+    { question: "2022 First Overall Pick?", choices: ["Zack Wilson", "Trayvon Walker", "Trevor Lawrence", "Bryce Young"], answer: 1 }
+  ],
+  "2025-10-16": [ //Thursday
+    { question: "Who has won more playoff games since 2015?", choices: ["Bengals", "Steelers"], answer: 0 },
+    { question: "Before tonight's TNF Matchup, who has more Passing Yards this season?", choices: ["Aaron Rodgers", "Joe Flacco"], answer: 1 },
+    { question: "Which QB from the 2004 Draft has the most Passing Yards?", choices: ["Matt Schaub", "Philip Rivers", "Ben Roethlisberger", "Eli Manning"], answer: 2 },
+    { question: "The Steelers and Bengals first played each other in 1970. Who won?", choices: ["Steelers", "Bengals"], answer: 0 },
+    { question: "Which QB from the 2020 Draft has the most Career Pass TDs?", choices: ["Joe Burrow", "Jalen Hurts", "Tua Tagovailoa", "Justin Herbert"], answer: 3 }
+  ]
 };
 
 
