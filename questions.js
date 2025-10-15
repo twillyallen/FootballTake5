@@ -104,7 +104,7 @@ export const CALENDAR = {
     { question: "Current league leader in Tackles?", choices: ["Jordyn Brooks", "Nick Bonito", "Bobby Wagner", "Jamien Sherwood"], answer: 0 },
     { question: "Who has more Career Passing TDs?", choices: ["Dan Marino", "Philip Rivers", "Ben Roethlisberger"], answer: 1 },
     { question: "Current league leader in Rushing TDs?", choices: ["Jalen Hurts", "James Cook", "Jonathan Taylor", "Josh Jacobs"], answer: 2 },
-    { question: "2022 First Overall Pick?", choices: ["Zack Wilson", "Trayvon Walker", "Trevor Lawrence", "Bryce Young"], answer: 1 }
+    { question: "2022 First Overall Pick?", choices: ["Zack Wilson", "Travon Walker", "Trevor Lawrence", "Bryce Young"], answer: 1 }
   ],
   "2025-10-16": [ //Thursday
     { question: "Who has won more playoff games since 2015?", choices: ["Bengals", "Steelers"], answer: 0 },
