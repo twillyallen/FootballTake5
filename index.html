@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="./style.css" />
   <script type="module" src="./main.js"></script>
 
-  <!-- Enable Google AdSense -->
+  <!-- Enable Google AdSense globally; ad renders only where <ins class="adsbygoogle"> exists -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8430547369793861" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -30,7 +30,7 @@
   </aside>
 
   <main class="app">
-    <!-- START SCREEN -->
+    <!-- START SCREEN (no ads here) -->
     <section id="startScreen" class="start-screen">
       <div class="overlay">
         <h1 class="game-title">PIGSKIN 5</h1>
@@ -40,7 +40,7 @@
       </div>
     </section>
 
-    <!-- PLAY -->
+    <!-- PLAY (no ads here) -->
     <section id="card" class="card hidden">
       <header class="header">
         <h2 id="question" class="question">Loading…</h2>
@@ -50,22 +50,35 @@
       <div id="choices" class="choices"></div>
     </section>
 
-    <!-- RESULTS -->
+    <!-- RESULTS (ONLY place where ad is rendered) -->
     <section id="result" class="result hidden">
       <h2>Your Score</h2>
       <p id="scoreText"></p>
       <div id="review" class="review"></div>
       <button id="restartBtn" class="btn">Restart</button>
 
-      <!--  ENABLE ONLY THIS AD -->
+      <!-- Ad transparency label (optional but recommended) -->
+      <p class="ad-label" style="text-align:center;opacity:.85;margin:10px 0 0;">Sponsored</p>
+
       <div id="ad-results" class="ad-wrap ad-square" aria-label="Advertisement">
         <ins class="adsbygoogle"
              style="display:inline-block;width:336px;height:280px"
              data-ad-client="ca-pub-8430547369793861"
              data-ad-slot="9640719395"
              data-full-width-responsive="false"></ins>
-        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
       </div>
+      <script>
+        // Only push once the results section is visible
+        document.addEventListener('DOMContentLoaded', function () {
+          const result = document.getElementById('result');
+          const mo = new MutationObserver(() => {
+            if (!result.classList.contains('hidden')) {
+              try { (adsbygoogle = window.adsbygoogle || []).push({}); } catch(e) {}
+            }
+          });
+          mo.observe(result, { attributes: true, attributeFilter: ['class'] });
+        });
+      </script>
     </section>
   </main>
 
