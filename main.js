@@ -96,7 +96,7 @@ function yesterdayOf(dateStr) {
   return formatYMD(d);
 }
 
-// ---------- Streak Counter ----------
+// ---------- Streak Counter (consecutive days) ----------
 function computeAndSaveStreak(dateStr) {
   const KEY_STREAK = "dailyStreak";
   const KEY_LAST   = "dailyLastDate";
@@ -150,7 +150,6 @@ function updateTouchdownStreak(dateStr, didPerfect) {
   return streak;
 }
 
-
 // ---------- Locked Result ----------
 function renderPersistedResult(dateStr, persisted) {
   RUN_DATE = dateStr;
@@ -168,23 +167,24 @@ function renderPersistedResult(dateStr, persisted) {
 
   scoreText.textContent = `You got ${score} / ${QUESTIONS.length || 5} correct.`;
 
+  // Safe review rendering
   reviewEl.innerHTML = "";
   picks.forEach(({ idx, pick, correct }) => {
-    const q = QUESTIONS[idx] || { question: `Question ${idx + 1}`, choices: ["A","B","C","D"], explanation: "" };
+    const q = (QUESTIONS && QUESTIONS[idx]) || { question: `Question ${idx + 1}`, choices: ["A","B","C","D"], explanation: "" };
 
     const div = document.createElement("div");
     div.className = "rev";
 
     const qEl = document.createElement("div");
     qEl.className = "q";
-    qEl.textContent = q.question;
+    qEl.textContent = q.question ?? `Question ${idx + 1}`;
 
-    const yourAnswerText = pick === null ? "No answer" : q.choices?.[pick] ?? `Choice ${pick + 1}`;
+    const yourAnswerText = (pick === null || pick === undefined) ? "No answer" : (q.choices?.[pick] ?? `Choice ${Number(pick) + 1}`);
     const you = document.createElement("div");
     you.innerHTML = `Your answer: <strong>${yourAnswerText}</strong>`;
 
+    const correctText = q.choices?.[correct] ?? `Choice ${Number(correct) + 1}`;
     const cor = document.createElement("div");
-    const correctText = q.choices?.[correct] ?? `Choice ${correct + 1}`;
     cor.innerHTML = `Correct: <strong>${correctText}</strong>`;
 
     const ex = document.createElement("div");
@@ -255,47 +255,43 @@ function showStartScreen() {
     return;
   }
 
-// --- Add College Edition badge on Saturdays ---
-var now = new Date();                     // use actual date
-var isSaturday = now.getDay() === 6;      // Sunday=0 ... Saturday=6
-var titleEl = document.querySelector(".game-title");
+  // --- Add College Edition badge on Saturdays ---
+  const now = new Date();                     // use actual date
+  const isSaturday = now.getDay() === 6;      // Sunday=0 ... Saturday=6
+  const titleEl = document.querySelector(".game-title");
 
-// Clean up any previous badge safely
-var oldBadge = document.querySelector(".college-badge");
-if (oldBadge && oldBadge.parentNode) {
-  oldBadge.parentNode.removeChild(oldBadge);
-}
+  // Clean up any previous badge safely
+  document.querySelector(".college-badge")?.remove();
 
-if (isSaturday && titleEl) {
-  // Wrap the title so badge can be positioned relative to it
-  var wrap = titleEl.closest(".title-wrap");
-  if (!wrap) {
-    wrap = document.createElement("div");
-    wrap.className = "title-wrap";
-    titleEl.parentNode.insertBefore(wrap, titleEl);
-    wrap.appendChild(titleEl);
+  if (isSaturday && titleEl) {
+    // Wrap the title so badge can be positioned relative to it
+    let wrap = titleEl.closest(".title-wrap");
+    if (!wrap) {
+      wrap = document.createElement("div");
+      wrap.className = "title-wrap";
+      titleEl.parentNode.insertBefore(wrap, titleEl);
+      wrap.appendChild(titleEl);
+    }
+
+    // Create and attach badge image
+    const badge = document.createElement("img");
+    badge.className = "college-badge";
+    badge.src = "./college.png";      // ensure college.png is in same folder as index.html
+    badge.alt = "College Edition";
+    wrap.appendChild(badge);
   }
 
-  // Create and attach badge image
-  var badge = document.createElement("img");
-  badge.className = "college-badge";
-  badge.src = "./college.png";      // ensure college.png is in same folder as index.html
-  badge.alt = "College Edition";
-  wrap.appendChild(badge);
+  // --- Show Start Screen ---
+  startScreen.classList.remove("hidden");
+  cardSec.classList.add("hidden");
+  resultSec.classList.add("hidden");
+  if (headerEl) headerEl.classList.add("hidden");
+  timerEl.style.display = "none";
+  stopTimer();
+
+  startBtn.disabled = false;
+  startBtn.textContent = "START";
 }
-
-// --- Show Start Screen ---
-startScreen.classList.remove("hidden");
-cardSec.classList.add("hidden");
-resultSec.classList.add("hidden");
-if (headerEl) headerEl.classList.add("hidden");
-timerEl.style.display = "none";
-stopTimer();
-
-startBtn.disabled = false;
-startBtn.textContent = "START";
-}
-
 
 function startGame() {
   // Leaving start screen; hide footer during gameplay
@@ -335,9 +331,7 @@ function startGame() {
 
   setAttempt(RUN_DATE);
   renderQuestion();
-  window.scrollTo({ top: 0, behavior: "instant" }); //auto scroll fix
-
-
+  window.scrollTo({ top: 0, behavior: "instant" }); // auto scroll fix
 }
 
 function showResult() {
@@ -356,36 +350,36 @@ function showResult() {
 
   if (score === QUESTIONS.length) {
     scoreText.textContent = `TOUCHDOWN! You got ${score} / ${QUESTIONS.length}!`;
-
-    // Save/advance Touchdown Streak (5/5 days)
-    computeAndSaveTouchdownStreak(RUN_DATE);
+    updateTouchdownStreak(RUN_DATE, true);
 
     // Confetti (requires canvas-confetti script on the page)
     if (typeof confetti === "function") {
       confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
     }
   } else {
-  scoreText.textContent = `You got ${score} / ${QUESTIONS.length} correct.`;
-  updateTouchdownStreak(RUN_DATE, false);
-}
+    scoreText.textContent = `You got ${score} / ${QUESTIONS.length} correct.`;
+    updateTouchdownStreak(RUN_DATE, false);
+  }
 
+  // Safe review rendering
   reviewEl.innerHTML = "";
   picks.forEach(({ idx, pick, correct }) => {
-    const q = QUESTIONS[idx];
+    const q = (QUESTIONS && QUESTIONS[idx]) || { question: `Question ${idx + 1}`, choices: ["A","B","C","D"], explanation: "" };
 
     const div = document.createElement("div");
     div.className = "rev";
 
     const qEl = document.createElement("div");
     qEl.className = "q";
-    qEl.textContent = q.question;
+    qEl.textContent = q.question ?? `Question ${idx + 1}`;
 
-    const yourAnswerText = pick === null ? "No answer" : q.choices[pick];
+    const yourAnswerText = (pick === null || pick === undefined) ? "No answer" : (q.choices?.[pick] ?? `Choice ${Number(pick) + 1}`);
     const you = document.createElement("div");
     you.innerHTML = `Your answer: <strong>${yourAnswerText}</strong>`;
 
+    const correctText = q.choices?.[correct] ?? `Choice ${Number(correct) + 1}`;
     const cor = document.createElement("div");
-    cor.innerHTML = `Correct: <strong>${q.choices[correct]}</strong>`;
+    cor.innerHTML = `Correct: <strong>${correctText}</strong>`;
 
     const ex = document.createElement("div");
     ex.className = "ex";
@@ -423,7 +417,7 @@ function renderQuestion() {
   answered = false;
   const q = QUESTIONS[current];
   questionEl.textContent = q.question;
-  progressEl.textContent = `Question\n ${current + 1} / ${QUESTIONS.length}`;
+  progressEl.textContent = `Question ${current + 1} / ${QUESTIONS.length}`;
   choicesEl.innerHTML = "";
   q.choices.forEach((choice, i) => {
     const btn = document.createElement("button");
