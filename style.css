@@ -357,3 +357,14 @@ body{ display:flex; flex-direction:column; min-height:100vh; }
   }
 }
 
+/* Force footer link colors */
+.site-footer a,
+footer a {
+  color: #ffffff !important;      /* always white before being clicked */
+  text-decoration: none;
+}
+
+.site-footer a:visited,
+footer a:visited {
+  color: #fa63ff !important;      /* purple after being clicked */
+}
