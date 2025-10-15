@@ -79,38 +79,77 @@ function startTimer(seconds) {
   }, 1000);
 }
 
+// ---------- Date helpers ----------
+function parseYMD(s) {
+  const [y,m,d] = s.split("-").map(Number);
+  return new Date(y, m - 1, d);
+}
+function formatYMD(d) {
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${y}-${m}-${day}`;
+}
+function yesterdayOf(dateStr) {
+  const d = parseYMD(dateStr);
+  d.setDate(d.getDate() - 1);
+  return formatYMD(d);
+}
+
 // ---------- Streak Counter ----------
 function computeAndSaveStreak(dateStr) {
   const KEY_STREAK = "dailyStreak";
-  const KEY_LAST = "dailyLastDate";
+  const KEY_LAST   = "dailyLastDate";
 
-  let streak = parseInt(localStorage.getItem(KEY_STREAK) || "0", 10);
   const last = localStorage.getItem(KEY_LAST);
+  let streak = parseInt(localStorage.getItem(KEY_STREAK) || "0", 10);
 
-  if (last !== dateStr) {
-    streak = streak + 1; 
-    localStorage.setItem(KEY_STREAK, String(streak));
-    localStorage.setItem(KEY_LAST, dateStr);
+  // Prevent double-count if results re-render the same day
+  if (last === dateStr) return streak;
+
+  const yest = yesterdayOf(dateStr);
+  if (!last) {
+    streak = 1;
+  } else if (last === yest) {
+    streak = streak + 1;
+  } else {
+    streak = 1; // missed at least one day
   }
+
+  localStorage.setItem(KEY_STREAK, String(streak));
+  localStorage.setItem(KEY_LAST, dateStr);
   return streak;
 }
 
-// ---------- Touchdown Streak (5/5 days) ----------
-function computeAndSaveTouchdownStreak(dateStr) {
+// ---------- Touchdown Streak (5/5 only, consecutive days) ----------
+function updateTouchdownStreak(dateStr, didPerfect) {
   const KEY_TD_STREAK = "tdStreak";
   const KEY_TD_LAST   = "tdLastDate";
 
   let streak = parseInt(localStorage.getItem(KEY_TD_STREAK) || "0", 10);
   const last = localStorage.getItem(KEY_TD_LAST);
 
-  // Only increment once per date when you actually hit a perfect score
-  if (last !== dateStr) {
-    streak = streak + 1;
-    localStorage.setItem(KEY_TD_STREAK, String(streak));
-    localStorage.setItem(KEY_TD_LAST, dateStr);
+  if (!didPerfect) {
+    localStorage.setItem(KEY_TD_STREAK, "0");
+    return 0;
   }
+
+  if (last === dateStr) return streak; // already counted today
+
+  const yest = yesterdayOf(dateStr);
+  if (!last) {
+    streak = 1;
+  } else if (last === yest) {
+    streak = streak + 1;
+  } else {
+    streak = 1; // missed day(s)
+  }
+
+  localStorage.setItem(KEY_TD_STREAK, String(streak));
+  localStorage.setItem(KEY_TD_LAST, dateStr);
   return streak;
 }
+
 
 // ---------- Locked Result ----------
 function renderPersistedResult(dateStr, persisted) {
@@ -326,8 +365,9 @@ function showResult() {
       confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
     }
   } else {
-    scoreText.textContent = `You got ${score} / ${QUESTIONS.length} correct.`;
-  }
+  scoreText.textContent = `You got ${score} / ${QUESTIONS.length} correct.`;
+  updateTouchdownStreak(RUN_DATE, false);
+}
 
   reviewEl.innerHTML = "";
   picks.forEach(({ idx, pick, correct }) => {
