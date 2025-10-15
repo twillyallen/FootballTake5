@@ -234,7 +234,7 @@ body{ display:flex; flex-direction:column; min-height:100vh; }
 .hide-footer{ padding-bottom:0 !important; }
 
 /* Start page fixes footer to bottom of viewport for nice hero */
-.start-page .site-footer{ position:fixed; left:0; right:0; bottom:0; z-index:5; }
+.start-page .site-footer{ position:sticky; bottom:0; z-index:5; }
 .start-page .app{ padding-bottom:96px; }
 
 /* ---------------- Topbar & How-to ---------------- */
