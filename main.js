@@ -296,6 +296,9 @@ function startGame() {
 
   setAttempt(RUN_DATE);
   renderQuestion();
+  window.scrollTo({ top: 0, behavior: "instant" }); //auto scroll fix
+
+
 }
 
 function showResult() {
