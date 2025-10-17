@@ -112,6 +112,20 @@ export const CALENDAR = {
     { question: "Which QB from the 2004 Draft has the most Passing Yards?", choices: ["Matt Schaub", "Philip Rivers", "Ben Roethlisberger", "Eli Manning"], answer: 2 },
     { question: "The Steelers and Bengals first played each other in 1970. Who won?", choices: ["Steelers", "Bengals"], answer: 0 },
     { question: "Which QB from the 2020 Draft has the most Career Pass TDs?", choices: ["Joe Burrow", "Jalen Hurts", "Tua Tagovailoa", "Justin Herbert"], answer: 3 }
+  ],
+  "2025-10-17": [ //Friday
+    { question: "Who was the first quarterback in NFL history to throw for 40 touchdowns in three different seasons?", choices: ["Dan Marino", "Tom Brady", "Patrick Mahomes", "Aaron Rodgers"], answer: 3 },
+    { question: "Which quarterback led the Buccaneers to their first Super Bowl win in 2003?", choices: ["Brad Johnson", "Trent Dilfer", "Rich Gannon", "John Gruden"], answer: 0 },
+    { question: "True or False: Adam Vinatieri is the NFL’s all-time leader in points scored.", choices: ["True", "False"], answer: 0 },
+    { question: "Current League Leader in Rush Yards per Game?", choices: ["Bijan Robinson", "Javonte Williams", "Jonathan Taylor", "James Cook"], answer: 2 },
+    { question: "Which player NEVER won League MVP AND the Super Bowl in the same season?", choices: ["Patrick Mahomes", "Tom Brady", "Emmitt Smith", "Joe Montana"], answer: 3 }
+  ],
+  "2025-10-18": [ //Saturday
+    { question: "What college team plays its home games in “The Big House”?", choices: ["THE Ohio State", "Alabama", "Michigan", "Colorado State"], answer: 2 },
+    { question: "Which player leads the College Football in Rushing TDs?", choices: ["Cam Cook", "Jonah Coleman", "Ahmad Hardy", "Justice Haynes"], answer: 1 },
+    { question: "Which rivalry game is known as the 'Red River Showdown'?", choices: ["Texas vs. Texas A&M", "Texas vs. Oklahoma", "Oklahoma vs. Oklahoma State", "Texas vs. Baylor"], answer: 1 },
+    { question: "Who was the last STRICTLY defensive player to win the Heisman Trophy?", choices: ["Charles Woodson", "JJ Watt", "Reggie White", "Hugh Green"], answer: 0 },
+    { question: "Actor Burt Reynolds played sparingly for what college football program?", choices: ["UCLA", "USC", "Florida State", "Ole Miss"], answer: 2 }
   ]
 };
 
