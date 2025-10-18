@@ -118,7 +118,7 @@ export const CALENDAR = {
     { question: "Which quarterback led the Buccaneers to their first Super Bowl win in 2003?", choices: ["Brad Johnson", "Trent Dilfer", "Rich Gannon", "John Gruden"], answer: 0 },
     { question: "True or False: Adam Vinatieri is the NFL’s all-time leader in points scored.", choices: ["True", "False"], answer: 0 },
     { question: "Current League Leader in Rush Yards per Game?", choices: ["Bijan Robinson", "Javonte Williams", "Jonathan Taylor", "James Cook"], answer: 2 },
-    { question: "Which player NEVER won League MVP AND the Super Bowl in the same season?", choices: ["Patrick Mahomes", "Tom Brady", "Emmitt Smith", "Joe Montana"], answer: 3 }
+    { question: "Which player NEVER won League MVP AND the Super Bowl in the same season?", choices: ["Patrick Mahomes", "Tom Brady", "Emmitt Smith", "Joe Montana"], answer: 1 }
   ],
   "2025-10-18": [ //Saturday
     { question: "What college team plays its home games in “The Big House”?", choices: ["THE Ohio State", "Alabama", "Michigan", "Colorado State"], answer: 2 },
