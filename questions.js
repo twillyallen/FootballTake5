@@ -134,7 +134,13 @@ export const CALENDAR = {
     { question: "How many career TD Passes does Ryan Fitzpatrick have?", choices: ["189", "342", "223", "96"], answer: 2 },
     { question: "How many different starting QBs have the Browns had since 1999", choices: ["32", "17", "41", "11"], answer: 2 }
   ],
-
+  "2025-10-20": [
+    { question: "Which franchise was *formerly* a part of the AFC West?", choices: ["Seahawks", "Chiefs", "Rams", "Raiders"], answer: 0 },
+    { question: "Which team has had the most 1st Overall Draft Picks?", choices: ["Colts", "Browns", "Buccaneers", "Bengals"], answer: 0 },
+    { question: "Who is the only player to win Super Bowl MVP on a losing team?", choices: ["Chuck Howley", "Terrell Owens", "Larry Fitzgerald", "Patrick Mahomes"], answer: 0 },
+    { question: "What year did the Lions last win an NFL Championship before the Super Bowl era?", choices: ["1965", "1957", "1935", "1962"], answer: 1 },
+    { question: "True or False: The “Butt Fumble” happened on Christmas Day.", choices: ["True", "False"], answer: 1 }
+  ]
 };
 
 
