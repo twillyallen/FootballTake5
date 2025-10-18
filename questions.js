@@ -126,7 +126,15 @@ export const CALENDAR = {
     { question: "Which rivalry game is known as the 'Red River Showdown'?", choices: ["Texas vs. Texas A&M", "Texas vs. Oklahoma", "Oklahoma vs. Oklahoma State", "Texas vs. Baylor"], answer: 1 },
     { question: "Who was the last STRICTLY defensive player to win the Heisman Trophy?", choices: ["Charles Woodson", "JJ Watt", "Reggie White", "Hugh Green"], answer: 0 },
     { question: "Actor Burt Reynolds played sparingly for what college football program?", choices: ["UCLA", "USC", "Florida State", "Ole Miss"], answer: 2 }
-  ]
+  ],
+  "2025-10-19": [
+    { question: "Which is the oldest active NFL Franchise", choices: ["Bears", "Packers", "Cardinals", "Lions"], answer: 2 },
+    { question: "Most Super Bowl losses?", choices: ["Broncos", "Vikings", "Bills", "Chiefs"], answer: 0 },
+    { question: "Brett Favre played for how many NFL teams?", choices: ["2", "5", "3", "4"], answer: 3 },
+    { question: "How many career TD Passes does Ryan Fitzpatrick have?", choices: ["189", "342", "223", "96"], answer: 2 },
+    { question: "How many different starting QBs have the Browns had since 1999", choices: ["32", "17", "41", "11"], answer: 2 }
+  ],
+
 };
 
 
