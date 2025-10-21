@@ -140,7 +140,15 @@ export const CALENDAR = {
     { question: "Who is the only player to win Super Bowl MVP on a losing team?", choices: ["Chuck Howley", "Terrell Owens", "Larry Fitzgerald", "Patrick Mahomes"], answer: 0 },
     { question: "What year did the Lions last win an NFL Championship before the Super Bowl era?", choices: ["1965", "1957", "1935", "1962"], answer: 1 },
     { question: "True or False: The “Butt Fumble” happened on Christmas Day.", choices: ["True", "False"], answer: 1 }
-  ]
+  ],
+  "2025-10-21": [
+    { question: "Who was the Steelers Head Coach before Mike Tomlin?", choices: ["Bill Belichik", "Mike Shanahan", "Tony Dungy", "Bill Cowher"], answer: 3 },
+    { question: "Which city is hosting Super Bowl LX", choices: ["Los Angeles", "Santa Clara", "Glendale", "Las Vegas"], answer: 1 },
+    { question: "Who ran the fastest 40yd Dash in Combine History?", choices: ["Xavier Worthy", "John Ross III", "Tyreek Hill", "Chris Johnson"], answer: 0 },
+    { question: "Who won Super Bowl XXXI MVP?", choices: ["Brett Favre", "Terrell Davis", "Desmond Howard", "Steve Young"], answer: 2 },
+    { question: "All-time NFL Sack Leader?", choices: ["Bruce Smith", "Reggie White", "JJ Watt", "Terrell Suggs"], answer: 0 }
+  ],
+
 };
 
 
