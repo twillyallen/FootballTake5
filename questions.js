@@ -127,28 +127,41 @@ export const CALENDAR = {
     { question: "Who was the last STRICTLY defensive player to win the Heisman Trophy?", choices: ["Charles Woodson", "JJ Watt", "Reggie White", "Hugh Green"], answer: 0 },
     { question: "Actor Burt Reynolds played sparingly for what college football program?", choices: ["UCLA", "USC", "Florida State", "Ole Miss"], answer: 2 }
   ],
-  "2025-10-19": [
+  "2025-10-19": [ //Sunday
     { question: "Which is the oldest active NFL Franchise", choices: ["Bears", "Packers", "Cardinals", "Lions"], answer: 2 },
     { question: "Most Super Bowl losses?", choices: ["Broncos", "Vikings", "Bills", "Chiefs"], answer: 0 },
     { question: "Brett Favre played for how many NFL teams?", choices: ["2", "5", "3", "4"], answer: 3 },
     { question: "How many career TD Passes does Ryan Fitzpatrick have?", choices: ["189", "342", "223", "96"], answer: 2 },
     { question: "How many different starting QBs have the Browns had since 1999", choices: ["32", "17", "41", "11"], answer: 2 }
   ],
-  "2025-10-20": [
+  "2025-10-20": [ //Monday
     { question: "Which franchise was *formerly* a part of the AFC West?", choices: ["Seahawks", "Chiefs", "Rams", "Raiders"], answer: 0 },
     { question: "Which team has had the most 1st Overall Draft Picks?", choices: ["Colts", "Browns", "Buccaneers", "Bengals"], answer: 0 },
     { question: "Who is the only player to win Super Bowl MVP on a losing team?", choices: ["Chuck Howley", "Terrell Owens", "Larry Fitzgerald", "Patrick Mahomes"], answer: 0 },
     { question: "What year did the Lions last win an NFL Championship before the Super Bowl era?", choices: ["1965", "1957", "1935", "1962"], answer: 1 },
     { question: "True or False: The “Butt Fumble” happened on Christmas Day.", choices: ["True", "False"], answer: 1 }
   ],
-  "2025-10-21": [
+  "2025-10-21": [ //Tuesday
     { question: "Who was the Steelers Head Coach before Mike Tomlin?", choices: ["Bill Belichik", "Mike Shanahan", "Tony Dungy", "Bill Cowher"], answer: 3 },
     { question: "Which city is hosting Super Bowl LX", choices: ["Los Angeles", "Santa Clara", "Glendale", "Las Vegas"], answer: 1 },
     { question: "Who ran the fastest 40yd Dash in Combine History?", choices: ["Xavier Worthy", "John Ross III", "Tyreek Hill", "Chris Johnson"], answer: 0 },
     { question: "Who won Super Bowl XXXI MVP?", choices: ["Brett Favre", "Terrell Davis", "Desmond Howard", "Steve Young"], answer: 2 },
     { question: "All-time NFL Sack Leader?", choices: ["Bruce Smith", "Reggie White", "JJ Watt", "Terrell Suggs"], answer: 0 }
   ],
-
+  "2025-10-22": [ //Wednesday
+    { question: "Who leads the league in passing yards?", choices: ["Justin Herbert", "Daniel Jones", "Matthew Stafford", "Patrick Mahomes"], answer: 0 },
+    { question: "Who is the Steeler's all-time leader in sacks?", choices: ["James Harrison", "Joey Porter", "TJ Watt", "Cam Heyward"], answer: 2 },
+    { question: "Who caught Brett Favres first ever pass completion?", choices: ["Sterling Sharpe", "The Buccaneers' Defense", "Brett Favre", "Vince Workman"], answer: 2 },
+    { question: "Which team has the most yards of offense per game in 2025?", choices: ["Colts", "Cowboys", "Chargers", "Chiefs"], answer: 1 },
+    { question: "Which defense has the most Takeaways this season?", choices: ["Steelers", "Lions", "Texans", "Bears"], answer: 3 }
+  ],
+  "2025-10-23": [ //Thursday
+    { question: "The Chargers and the Vikings have played each other 15 times in their history. Who has more wins?", choices: ["Chargers", "Vikings"], answer: 1 },
+    { question: "Which Chargers running back once broke the single-season touchdown record?", choices: ["Austin Ekeler", "Darren Sproles", "Paul Lowe", "LaDainian Tomlinson"], answer: 3 },
+    { question: "What was the nickname of the Vikings’ legendary defensive line from the 1970s?", choices: ["Norse Myth", "Purple People Eaters", "Purple Rain", "Thor's Lightning"], answer: 1 },
+    { question: "Which coach has coached both JJ McCarthy AND Justin Herbert at any point in their football life?", choices: ["Anthony Lynn", "Jim Harbaugh", "Wink Martindale", "Brandon Staley"], answer: 1 },
+    { question: "Who is the betting favorite to win tonight?", choices: ["Chargers", "Vikings"], answer: 0 }
+  ],
 };
 
 
