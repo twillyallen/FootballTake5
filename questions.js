@@ -162,6 +162,34 @@ export const CALENDAR = {
     { question: "Which coach has coached both JJ McCarthy AND Justin Herbert at any point in their football life?", choices: ["Anthony Lynn", "Jim Harbaugh", "Wink Martindale", "Brandon Staley"], answer: 1 },
     { question: "Who is the betting favorite to win tonight?", choices: ["Chargers", "Vikings"], answer: 0 }
   ],
+  "2025-10-24": [ //Friday
+    { question: "Which WR leads the league in total Yards After Catch?", choices: ["DK Metcalf", "Justin Jefferson", "Ja'Marr Chase", "Puka Nacua"], answer: 2 },
+    { question: "Which dirty ass Lion's player once stomped on Aaron Rodgers", choices: ["Cliff Avril", "Ezekiel Ansah", "DeAndre Levy", "Ndamukong Suh"], answer: 3 },
+    { question: "Who was the first player in the Super Bowl Era to have 300 Receiving Yards in a single game?", choices: ["Julio Jones", "Stephone Paige", "Calvin Johnson", "Flipper Anderson"], answer: 1 },
+    { question: "Which franchise was founded in 1898 as the 'Morgan Athletic Club'?", choices: ["Cardinals", "Giants", "Bears", "Lions"], answer: 0 },
+    { question: "Which wide receiver caught the “Mile-High Miracle” in the 2012 playoffs?", choices: ["Torrey Smith", "Demaryius Thomas", "Anquan Boldin", "Jacoby Jones"], answer: 3 }
+  ],
+  "2025-10-25": [ //Saturday
+    { question: "Which university has won the most national championships in college football history?", choices: ["Alabama", "Notre Dame", "Yale", "USC"], answer: 2 },
+    { question: "Which university’s fans perform the “Jump Around” tradition between the 3rd and 4th quarters?", choices: ["Michigan", "Wisconsin", "Iowa St.", "Texas Tech"], answer: 1 },
+    { question: "Who leads the Big 10 in Receiving Yards", choices: ["Makai Lemon", "Carnell Tate", "Jeremiah Smith", "Denzel Boston"], answer: 0 },
+    { question: "Who was the only player to win the Heisman twice?", choices: ["Tim Tebow", "OJ Simpson", "Reggie Bush", "Archie Griffin"], answer: 3 },
+    { question: "Which Confernce has more Football National Championship since 2010?", choices: ["ACC", "Big Ten", "SEC", "Big 12"], answer: 2 }
+  ],
+  "2025-10-26": [ //Sunday
+    { question: "Ahead of tonight's matchup, who has more Pass TDs this season?", choices: ["Aaron Rodgers", "Jordan Love"], answer: 0 },
+    { question: "Who leads the AFC in defensive interceptions?", choices: ["Jalen Pitre", "Tony Jefferson", "Jordan Battle", "Devin Lloyd"], answer: 3 },
+    { question: "Who leads the Panthers in Receiving Yards?", choices: ["Tommy Tremble", "Xavier Legette", "Tetairoa McMillan", "Hunter Renfrow"], answer: 2 },
+    { question: "Which team has the least amount of giveaways in 2025?", choices: ["Packers", "Chiefs", "Colts", "Eagles"], answer: 3 },
+    { question: "Who has the least Points Per Game scored in 2025?", choices: ["Jets", "Raiders", "Browns", "Titans"], answer: 3 }
+  ],
+  "2025-10-27": [ //Monday
+    { question: "Ahead of tonight's matchup, who has more Pass TDs this season?", choices: ["Aaron Rodgers", "Jordan", "Yale", "USC"], answer: 2 },
+    { question: "Who leads the AFC in defensive interceptions?", choices: ["Jalen Pitre", "Tony Jefferson", "Jordan Battle", "Devin Lloyd"], answer: 3 },
+    { question: "Who leads the Panthers in Receiving Yards?", choices: ["Tommy Tremble", "Xavier Legette", "Tetairoa McMillan", "Hunter Renfrow"], answer: 2 },
+    { question: "Which team has the least amount of giveaways in 2025?", choices: ["Packers", "Chiefs", "Colts", "Eagles"], answer: 3 },
+    { question: "Which Confernce has more Football National Championship since 2010?", choices: ["ACC", "Big Ten", "SEC", "Big 12"], answer: 2 }
+  ],
 };
 
 
