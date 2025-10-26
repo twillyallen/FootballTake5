@@ -184,12 +184,13 @@ export const CALENDAR = {
     { question: "Who has the least Points Per Game scored in 2025?", choices: ["Jets", "Raiders", "Browns", "Titans"], answer: 3 }
   ],
   "2025-10-27": [ //Monday
-    { question: "Ahead of tonight's matchup, who has more Pass TDs this season?", choices: ["Aaron Rodgers", "Jordan", "Yale", "USC"], answer: 2 },
-    { question: "Who leads the AFC in defensive interceptions?", choices: ["Jalen Pitre", "Tony Jefferson", "Jordan Battle", "Devin Lloyd"], answer: 3 },
-    { question: "Who leads the Panthers in Receiving Yards?", choices: ["Tommy Tremble", "Xavier Legette", "Tetairoa McMillan", "Hunter Renfrow"], answer: 2 },
-    { question: "Which team has the least amount of giveaways in 2025?", choices: ["Packers", "Chiefs", "Colts", "Eagles"], answer: 3 },
-    { question: "Which Confernce has more Football National Championship since 2010?", choices: ["ACC", "Big Ten", "SEC", "Big 12"], answer: 2 }
+    { question: "Which running back was the NFL’s all-time rushing leader before Walter Payton broke his record?", choices: ["Jim Brown", "Gale Sayers", "OJ Simpson", "Franco Harris"], answer: 0 },
+    { question: "Who is the Chiefs’ all-time leader in sacks?", choices: ["Justin Houston", "Derrick Thomas", "Chris Jones", "Tamba Hali"], answer: 1 },
+    { question: "Which quarterback led the Raiders to their first Super Bowl win?", choices: ["Jim Plunkett", "Marc Wilson", "John Madden", "Ken Stabler"], answer: 3 },
+    { question: "True or False: Brett Favre threw an interception on his first-ever NFL pass attempt (as a Falcon).", choices: ["True", "False"], answer: 0 },
+    { question: "Who leads the league in Passer Rating?", choices: ["Matthew Stafford", "Drake Maye", "Lamar Jackson", "Jared Goff"], answer: 2 }
   ],
+
 };
 
 
