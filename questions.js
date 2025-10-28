@@ -197,6 +197,34 @@ export const CALENDAR = {
     { question: "True or False: Daniel Jones leads the NFL in QBR", choices: ["True", "False"], answer: 1 },
     { question: "What Hall of Fame quarterback was known as “The Dutchman”?", choices: ["Bart Starr", "Norm Van Brocklin", "Fran Tarkenton", "Joe Montana"], answer: 1 }
   ],
+  "2025-10-29": [ //Wednesday
+    { question: "Which player recorded a 100-yard pick-six in Super Bowl XLIII?", choices: ["James Harrison", "Karlos Dansby", "Troy Polamalu", "Dominique Rodgers-Cromartie"], answer: 0 },
+    { question: "Which QB Leads the league in Rushing Yards?", choices: ["Josh Allen", "Patrick Mahomes", "Justin Herbert", "Justin Fields"], answer: 3 },
+    { question: "Who leads the league in Net Average Punt yards?", choices: ["Daniel Whelan", "Tress Way", "Jake Bailey", "Jordan Stout"], answer: 2 },
+    { question: "Which team is LAST in Team Sacks Per Game in 2025?", choices: ["Ravens", "Jets", "Bengals", "49ers"], answer: 3 },
+    { question: "Which player had the first 'Lambeau Leap'?", choices: ["Robert Brooks", "Donald Driver", "LeRoy Butler", "Sterling Sharpe"], answer: 2 },
+  ],
+  "2025-10-30": [ //Thursday
+    { question: "Which Dolphins quarterback led the team to a perfect 17-0 season in 1972?", choices: ["Craig Morton", "Greg Landry", "Dan Marino", "Bob Griese"], answer: 3 },
+    { question: "The leader Ravens and Dolphins all-time series has 9-8 advantage. Who leads the series?", choices: ["Dolphins", "Ravens"], answer: 1 },
+    { question: "Which team is the only one in NFL history to complete a perfect season, winning every game including the Super Bowl?", choices: ["Ravens", "Patriots", "Dolphins", "Packers"], answer: 2 },
+    { question: "When Baltimore and Miami first met in 1997, which QB started for Miami?", choices: ["Dan Marino", "Jay Fielder", "Chad Pennington", "Scott Mitchell"], answer: 0 },
+    { question: "Which team has the longest playoff win drought in the NFL?", choices: ["Raiders", "Jets", "Dolphins", "Vikings"], answer: 2 },
+  ],
+  "2025-10-31": [ //Friday
+    { question: "True or False: Patrick Mahomes was a Top 5 Draft pick", choices: ["True", "False"], answer: 1 },
+    { question: "Who leads the league in Passing Yards?", choices: ["Patrick Mahomes", "Daniel Jones", "Dak Prescott", "Justin Herbert"], answer: 3 },
+    { question: "Who was 'The Incredible Bust' taken one pick before Barry Sanders in the 1989 draft?", choices: ["Tony Mandarich", "Ryan Leaf", "Jeff George", "Heath Schuler"], answer: 0 },
+    { question: "Which RB has the longest run so far of 2025?", choices: ["Jonathan Taylor", "David Montgomery", "Jahmyr Gibbs", "Bijan Robinson"], answer: 3 },
+    { question: "Who has the most Kicking Points this season?", choices: ["Cameron Dicker", "Chase McLaughlin", "Jason Myers", "Brandon Aubrey"], answer: 3 },
+  ],
+  "2025-11-01": [ //Saturday
+    { question: "True or False: Patrick Mahomes was a Top 5 Draft pick", choices: ["True", "False"], answer: 1 },
+    { question: "Who leads the league in Passing Yards?", choices: ["Patrick Mahomes", "Daniel Jones", "Dak Prescott", "Justin Herbert"], answer: 3 },
+    { question: "Who was 'The Incredible Bust' taken one pick before Barry Sanders in the 1989 draft?", choices: ["Tony Mandarich", "Ryan Leaf", "Jeff George", "Heath Schuler"], answer: 0 },
+    { question: "Which RB has the longest run so far of 2025?", choices: ["Jonathan Taylor", "David Montgomery", "Jahmyr Gibbs", "Bijan Robinson"], answer: 3 },
+    { question: "Who has the most Kicking Points this season?", choices: ["Cameron Dicker", "Chase McLaughlin", "Jason Myers", "Brandon Aubrey"], answer: 3 },
+  ],
 };
 
 
