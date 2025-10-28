@@ -190,7 +190,13 @@ export const CALENDAR = {
     { question: "True or False: Brett Favre threw an interception on his first-ever NFL pass attempt (as a Falcon).", choices: ["True", "False"], answer: 0 },
     { question: "Who leads the league in Passer Rating?", choices: ["Matthew Stafford", "Drake Maye", "Lamar Jackson", "Jared Goff"], answer: 2 }
   ],
-
+  "2025-10-28": [ //Tuesday
+    { question: "Which Running Back leads the league in Receiving Yards?", choices: ["DeVon Achane", "Jonathan Taylor", "Christian McCaffrey", "Alvin Kamara"], answer: 2 },
+    { question: "Which kicker has the most career game-winning field goals?", choices: ["Adam Vinatieri", "Justin Tucker", "Morten Andersen", "Gary Anderson"], answer: 0 },
+    { question: "Which WR performed a DISGUSTING act and pretended to moon the crowd in Green Bay?", choices: ["Randy Moss", "Terrell Owens", "Antonio Brown", "Chad Johnson"], answer: 0 },
+    { question: "True or False: Daniel Jones leads the NFL in QBR", choices: ["True", "False"], answer: 1 },
+    { question: "What Hall of Fame quarterback was known as “The Dutchman”?", choices: ["Bart Starr", "Norm Van Brocklin", "Fran Tarkenton", "Joe Montana"], answer: 1 }
+  ],
 };
 
 
