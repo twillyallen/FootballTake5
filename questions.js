@@ -219,11 +219,18 @@ export const CALENDAR = {
     { question: "Who has the most Kicking Points this season?", choices: ["Cameron Dicker", "Chase McLaughlin", "Jason Myers", "Brandon Aubrey"], answer: 3 },
   ],
   "2025-11-01": [ //Saturday
-    { question: "True or False: Patrick Mahomes was a Top 5 Draft pick", choices: ["True", "False"], answer: 1 },
-    { question: "Who leads the league in Passing Yards?", choices: ["Patrick Mahomes", "Daniel Jones", "Dak Prescott", "Justin Herbert"], answer: 3 },
-    { question: "Who was 'The Incredible Bust' taken one pick before Barry Sanders in the 1989 draft?", choices: ["Tony Mandarich", "Ryan Leaf", "Jeff George", "Heath Schuler"], answer: 0 },
-    { question: "Which RB has the longest run so far of 2025?", choices: ["Jonathan Taylor", "David Montgomery", "Jahmyr Gibbs", "Bijan Robinson"], answer: 3 },
-    { question: "Who has the most Kicking Points this season?", choices: ["Cameron Dicker", "Chase McLaughlin", "Jason Myers", "Brandon Aubrey"], answer: 3 },
+    { question: "True or False: Iowa is ranked in the Top 25", choices: ["True", "False"], answer: 1 },
+    { question: "Who leads the SEC in Passing TDs?", choices: ["Arch Manning", "Taylen Green", "Ty Simpson", "Joey Aguilar"], answer: 2 },
+    { question: "Which team won the 2019 National Championship", choices: ["Clemson", "LSU", "Alabama", "Ohio State"], answer: 1 },
+    { question: "Who leads the Big Ten in Rushing TDs?", choices: ["Jonah Coleman", "Justice Haynes", "Jordan Davison", "CJ Donaldson"], answer: 0 },
+    { question: "Which bowl game is known as the 'Granddaddy of Them All?", choices: ["Cotton Bowl", "Rose Bowl", "Sugar Bowl", "Orange Bowl"], answer: 1 },
+  ],
+  "2025-11-02": [ //Sunday
+    { question: "What is the most touchdown passes Aaron Rodgers has thrown in a single season?", choices: ["42", "45", "48", "50"], answer: 2 },
+    { question: "Which player holds the record for most sacks in a single NFL game?", choices: ["Michael Strahan", "Derrick Thomas", "Lawrence Taylor", "Khalil Mack"], answer: 1 },
+    { question: "Who is the only NFL player to have won three consecutive MVPs?", choices: ["Aaron Rodgers", "Peyton Manning", "Joe Montana", "Brett Favre"], answer: 3 },
+    { question: "Which QB was NOT selected in the famous 1983 NFL Draft Class?", choices: ["John Elway", "Troy Aikman", "Jim Kelly", "Dan Marino"], answer: 1 },
+    { question: "Who is the New England Patriots all all-time leader in Receiving Yards?", choices: ["Rob Gronkowski", "Wes Welker", "Julian Edelman", "Stanley Morgan"], answer: 3 },
   ],
 };
 
